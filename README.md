@@ -1,6 +1,6 @@
 # README
 
-## Modèle conceptuel (à mettre dans le compte rendu):
+## Modèle logique (à mettre dans le compte rendu):
 
 ### Utilisateur
 #### rôle (visiteur, membre, rédacteur et admin)
