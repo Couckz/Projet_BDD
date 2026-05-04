@@ -1,11 +1,13 @@
 # README
 
-## Modèle logique (à mettre dans le compte rendu):
+## Modèle conceptuel (à mettre dans le compte rendu):
 
 ### Utilisateur
 #### rôle (visiteur, membre, rédacteur et admin)
 #### login
 #### mot de passe
+#### date de création du compte
+#### date de dernière connexion
 
 ### Article
 #### titre
