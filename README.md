@@ -11,6 +11,7 @@ https://docs.google.com/document/d/11Rs8FXg4p0PTv4m47My8gA62EvcT3XuXxQMypmwrOeA/
 #### mot de passe
 #### date de création du compte
 #### date de dernière connexion
+#### photo de profil
 
 ### Article
 #### titre
