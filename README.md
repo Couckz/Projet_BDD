@@ -2,4 +2,4 @@
 
 ##Grande étapes:
 
-- [ ] crer
+- [ ] creer la structure
