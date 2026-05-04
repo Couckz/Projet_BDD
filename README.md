@@ -1,1 +1,5 @@
 # README
+
+##Grande étapes:
+
+- [ ] crer
