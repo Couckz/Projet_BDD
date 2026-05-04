@@ -1,5 +1,8 @@
 # README
 
+rapport lien : 
+https://docs.google.com/document/d/11Rs8FXg4p0PTv4m47My8gA62EvcT3XuXxQMypmwrOeA/edit?usp=sharing
+
 ## Modèle conceptuel (à mettre dans le compte rendu):
 
 ### Utilisateur
