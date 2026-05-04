@@ -1,5 +1,13 @@
 # README
 
-##Grande étapes:
+## BDD:
 
-- [ ] creer la structure
+### Client
+
+### Article
+
+### Jeu
+
+###
+
+
