@@ -8,12 +8,17 @@ Create Table Utilisateur (
     prenom VARCHAR(20),
     date_naissance DATE,
     adresse_email VARCHAR(320),
-    chemin_pdp VARCHAR(50);
+    chemin_pdp VARCHAR(50)
+    PRIMARY KEY(login);
 )
 
 Create Table Administre (
     login VARCHAR(30),
-    id_article BIGINT;
+    id_article BIGINT,
+    PRIMARY KEY (login),
+    FOREIGN KEY(login) References Utilisateur(login),
+    PRIMARY KEY (id_article),
+    FOREIGN KEY(id_article) References Article(id_article);
 )
 
 Create Table Article (
@@ -24,7 +29,10 @@ Create Table Article (
     date_creation DATEtIME,
     date_modification DATETIME,
     id_article SERIAL,
-    id_jeu BIGINT;
+    id_jeu BIGINT,
+    PRIMARY KEY (id_article),
+    PRIMARY KEY (id_jeu),
+    FOREIGN KEY(id_jeu) References Jeu(id_jeu);
 )
 
 Create Table Avis (
@@ -34,35 +42,53 @@ Create Table Avis (
     date_creation DATETIME,
     id_avis SERIAL,
     id_article BIGINT,
-    login VARCHAR(30);
+    login VARCHAR(30),
+    PRIMARY KEY (id_article),
+    FOREIGN KEY(id_article) References Article(id_article),
+    PRIMARY KEY (login),
+    FOREIGN KEY(login) References Utilisateur(login);
 )
 
 Create Table Jeu (
     nom VARCHAR(30),
     prix DECIMAL(5,2),
     synopsis VARCHAR(40),
-    id_jeu SERIAL; 
+    id_jeu SERIAL,
+    PRIMARY KEY (id_jeu); 
 )
 
 Create Table Image (
     chemin_image VARCHAR(50),
-    id_article BIGINT;
+    id_article BIGINT
+    PRIMARY KEY (chemin_image),
+    PRIMARY KEY (id_article),
+    FOREIGN KEY(id_article) References Article(id_article);
 )
 
 Create Table Est_jouable_sur (
     id_jeu BIGINT,
-    nom_support BIGINT;
+    nom_support BIGINT,
+    PRIMARY KEY (id_jeu),
+    FOREIGN KEY(id_jeu) References Jeu(id_jeu),
+    PRIMARY KEY (nom_support),
+    FOREIGN KEY(nom_support) References Support(nom_support);
 )
 
 Create Table Est_categorise_par (
     id_jeu BIGINT,
-    nom_categorie BIGINT;
+    nom_categorie BIGINT,
+    PRIMARY KEY (id_jeu),
+    FOREIGN KEY(id_jeu) References Jeu(id_jeu),
+    PRIMARY KEY (nom_categorie),
+    FOREIGN KEY(nom_categorie) References Categorie(nom_categorie);
 )
 
 Create Table Support (
-    nom_support VARCHAR(30);
+    nom_support VARCHAR(30),
+    PRIMARY KEY (nom_support);
 )
 
 Create Table Categorie (
-    nom_categorie VARCHAR(30);
+    nom_categorie VARCHAR(30)
+    PRIMARY KEY (nom_categorie);
 )
