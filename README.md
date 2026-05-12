@@ -15,6 +15,7 @@ https://lucid.app/lucidchart/f6ce4f63-d3b4-47dd-9249-d926336b7897/edit?invitatio
 #### mot de passe
 #### date de création du compte
 #### date de dernière connexion
+#### photo de profil
 
 ### Article
 #### titre
