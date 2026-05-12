@@ -1,0 +1,68 @@
+Create Table Utilisateur (
+    Role,
+    login,
+    mdp,
+    date_inscription,
+    date_derniere_connexion,
+    nom,
+    prenom,
+    date_naissance,
+    adresse_email,
+    chemin_pdp;
+)
+
+Create Table Administre (
+    login,
+    id_article;
+)
+
+Create Table Article (
+    titre,
+    contenu,
+    note,
+    caracteristiques,
+    date_creation,
+    date_modification,
+    id_article,
+    id_jeu;
+)
+
+Create Table Avis (
+    titre,
+    texte,
+    note,
+    date_creation,
+    id_avis,
+    id_article,
+    login;
+)
+
+Create Table Jeu (
+    nom,
+    prix,
+    synopsis,
+    id_jeu;
+)
+
+Create Table Image (
+    chemin_image,
+    id_article;
+)
+
+Create Table Est_jouable_sur (
+    id_jeu,
+    nom_support;
+)
+
+Create Table Est_categorise_par (
+    id_jeu,
+    nom_categorie;
+)
+
+Create Table Support (
+    nom_support;
+)
+
+Create Table Categorie (
+    nom_categorie;
+)
