@@ -8,7 +8,6 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 require_once("./includes/constantes.php");      //constantes du site
 require_once("./includes/config-bdd.php");
 require_once("./php/functions-DB.php");
-
 $sql_connection = connectionDB();
 ?>
 <!DOCTYPE html>
