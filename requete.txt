@@ -38,8 +38,8 @@ Create Table Article (
     date_creation DATETIME,
     date_modification DATETIME,
     id_article BIGINT AUTO_INCREMENT,
-    id_jeu BIGINT AUTO_INCREMENT,
-    PRIMARY KEY (id_article, id_jeu),
+    id_jeu BIGINT,
+    PRIMARY KEY (id_article),
     FOREIGN KEY(id_jeu) References Jeu(id_jeu)
 );
 
@@ -51,20 +51,20 @@ Create Table Avis (
     id_avis BIGINT AUTO_INCREMENT,
     id_article BIGINT,
     login VARCHAR(30),
-    PRIMARY KEY (id_article, login),
+    PRIMARY KEY (id_avis),
     FOREIGN KEY(id_article) References Article(id_article),
     FOREIGN KEY(login) References Utilisateur(login)
 );
 
 Create Table Image (
     chemin_image VARCHAR(50),
-    id_article BIGINT AUTO_INCREMENT,
-    PRIMARY KEY (chemin_image, id_article),
+    id_article BIGINT,
+    PRIMARY KEY (chemin_image),
     FOREIGN KEY(id_article) References Article(id_article)
 );
 
 Create Table Est_jouable_sur (
-    id_jeu BIGINT AUTO_INCREMENT,
+    id_jeu BIGINT,
     nom_support VARCHAR(50),
     PRIMARY KEY (id_jeu, nom_support),
     FOREIGN KEY(id_jeu) References Jeu(id_jeu),
@@ -72,7 +72,7 @@ Create Table Est_jouable_sur (
 );
 
 Create Table Est_categorise_par (
-    id_jeu BIGINT AUTO_INCREMENT,
+    id_jeu BIGINT,
     nom_categorie VARCHAR(50),
     PRIMARY KEY (id_jeu, nom_categorie),
     FOREIGN KEY(id_jeu) References Jeu(id_jeu),
@@ -81,7 +81,7 @@ Create Table Est_categorise_par (
 
 Create Table Administre (
     login VARCHAR(30),
-    id_article BIGINT AUTO_INCREMENT,
+    id_article BIGINT,
     PRIMARY KEY (login, id_article),
     FOREIGN KEY(login) References Utilisateur(login),
     FOREIGN KEY(id_article) References Article(id_article)
