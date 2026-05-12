@@ -2,5 +2,5 @@
     <a href="index.php">
         <img src="images/pokeball.png" alt="logo">
     </a>
-    <h1>Pokédex de Kanto en ligne</h1>
+    <h1>Site du JV</h1>
 </header>
