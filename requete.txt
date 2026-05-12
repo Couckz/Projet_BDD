@@ -1,3 +1,21 @@
+Create Table Support (
+    nom_support VARCHAR(30),
+    PRIMARY KEY (nom_support)
+);
+
+Create Table Categorie (
+    nom_categorie VARCHAR(30),
+    PRIMARY KEY (nom_categorie)
+);
+
+Create Table Jeu (
+    nom VARCHAR(30),
+    prix DECIMAL(5,2),
+    synopsis VARCHAR(40),
+    id_jeu SERIAL,
+    PRIMARY KEY (id_jeu)
+);
+
 Create Table Utilisateur (
     Role VARCHAR(10),
     login VARCHAR(30),
@@ -8,18 +26,9 @@ Create Table Utilisateur (
     prenom VARCHAR(20),
     date_naissance DATE,
     adresse_email VARCHAR(320),
-    chemin_pdp VARCHAR(50)
-    PRIMARY KEY(login);
-)
-
-Create Table Administre (
-    login VARCHAR(30),
-    id_article BIGINT,
-    PRIMARY KEY (login),
-    FOREIGN KEY(login) References Utilisateur(login),
-    PRIMARY KEY (id_article),
-    FOREIGN KEY(id_article) References Article(id_article);
-)
+    chemin_pdp VARCHAR(50),
+    PRIMARY KEY (login)
+);
 
 Create Table Article (
     titre VARCHAR(30),
@@ -32,8 +41,8 @@ Create Table Article (
     id_jeu BIGINT,
     PRIMARY KEY (id_article),
     PRIMARY KEY (id_jeu),
-    FOREIGN KEY(id_jeu) References Jeu(id_jeu);
-)
+    FOREIGN KEY(id_jeu) References Jeu(id_jeu)
+);
 
 Create Table Avis (
     titre VARCHAR(30),
@@ -46,24 +55,16 @@ Create Table Avis (
     PRIMARY KEY (id_article),
     FOREIGN KEY(id_article) References Article(id_article),
     PRIMARY KEY (login),
-    FOREIGN KEY(login) References Utilisateur(login);
-)
-
-Create Table Jeu (
-    nom VARCHAR(30),
-    prix DECIMAL(5,2),
-    synopsis VARCHAR(40),
-    id_jeu SERIAL,
-    PRIMARY KEY (id_jeu); 
-)
+    FOREIGN KEY(login) References Utilisateur(login)
+);
 
 Create Table Image (
     chemin_image VARCHAR(50),
-    id_article BIGINT
+    id_article BIGINT,
     PRIMARY KEY (chemin_image),
     PRIMARY KEY (id_article),
-    FOREIGN KEY(id_article) References Article(id_article);
-)
+    FOREIGN KEY(id_article) References Article(id_article)
+);
 
 Create Table Est_jouable_sur (
     id_jeu BIGINT,
@@ -71,8 +72,8 @@ Create Table Est_jouable_sur (
     PRIMARY KEY (id_jeu),
     FOREIGN KEY(id_jeu) References Jeu(id_jeu),
     PRIMARY KEY (nom_support),
-    FOREIGN KEY(nom_support) References Support(nom_support);
-)
+    FOREIGN KEY(nom_support) References Support(nom_support)
+);
 
 Create Table Est_categorise_par (
     id_jeu BIGINT,
@@ -80,15 +81,14 @@ Create Table Est_categorise_par (
     PRIMARY KEY (id_jeu),
     FOREIGN KEY(id_jeu) References Jeu(id_jeu),
     PRIMARY KEY (nom_categorie),
-    FOREIGN KEY(nom_categorie) References Categorie(nom_categorie);
-)
+    FOREIGN KEY(nom_categorie) References Categorie(nom_categorie)
+);
 
-Create Table Support (
-    nom_support VARCHAR(30),
-    PRIMARY KEY (nom_support);
-)
-
-Create Table Categorie (
-    nom_categorie VARCHAR(30)
-    PRIMARY KEY (nom_categorie);
-)
+Create Table Administre (
+    login VARCHAR(30),
+    id_article BIGINT,
+    PRIMARY KEY (login),
+    FOREIGN KEY(login) References Utilisateur(login),
+    PRIMARY KEY (id_article),
+    FOREIGN KEY(id_article) References Article(id_article)
+);
