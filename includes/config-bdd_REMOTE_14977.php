@@ -3,5 +3,5 @@
 define('SERVEUR', 'localhost');         //hote
 define('USER', 'phpmyadmin');                 //login, par exemple "root" ou ""
 define('PWD', 'root');                  //mot de passe, par exemple "root" ou ""
-define('DB_NAME', 'Pokedex');  //nom de la base de données
+define('DB_NAME', 'NOMDB');  //nom de la base de données
 ?>

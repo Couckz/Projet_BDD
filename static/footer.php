@@ -1,7 +1,7 @@
 <footer>
     <div class="footerLeft">
         <p class="itemFooterLeft">
-            Auteur : Malo Boudier Aebischer
+            Auteur : Malo, Alex et Camélia
         </p>
         <p>
             Contact
