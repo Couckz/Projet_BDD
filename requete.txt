@@ -1,68 +1,68 @@
 Create Table Utilisateur (
-    Role,
-    login,
-    mdp,
-    date_inscription,
-    date_derniere_connexion,
-    nom,
-    prenom,
-    date_naissance,
-    adresse_email,
-    chemin_pdp;
+    Role VARCHAR(10),
+    login VARCHAR(30),
+    mdp VARCHAR(30),
+    date_inscription DATE,
+    date_derniere_connexion DATETIME,
+    nom VARCHAR(30),
+    prenom VARCHAR(20),
+    date_naissance DATE,
+    adresse_email VARCHAR(320),
+    chemin_pdp VARCHAR(50);
 )
 
 Create Table Administre (
-    login,
-    id_article;
+    login VARCHAR(30),
+    id_article BIGINT;
 )
 
 Create Table Article (
-    titre,
-    contenu,
-    note,
-    caracteristiques,
-    date_creation,
-    date_modification,
-    id_article,
-    id_jeu;
+    titre VARCHAR(30),
+    contenu VARCHAR(500),
+    note DECIMAL(3,2),
+    caracteristiques VARCHAR(100),
+    date_creation DATEtIME,
+    date_modification DATETIME,
+    id_article SERIAL,
+    id_jeu BIGINT;
 )
 
 Create Table Avis (
-    titre,
-    texte,
-    note,
-    date_creation,
-    id_avis,
-    id_article,
-    login;
+    titre VARCHAR(30),
+    texte VARCHAR(500),
+    note DECIMAL(3,2),
+    date_creation DATETIME,
+    id_avis SERIAL,
+    id_article BIGINT,
+    login VARCHAR(30);
 )
 
 Create Table Jeu (
-    nom,
-    prix,
-    synopsis,
-    id_jeu;
+    nom VARCHAR(30),
+    prix DECIMAL(5,2),
+    synopsis VARCHAR(40),
+    id_jeu SERIAL; 
 )
 
 Create Table Image (
-    chemin_image,
-    id_article;
+    chemin_image VARCHAR(50),
+    id_article BIGINT;
 )
 
 Create Table Est_jouable_sur (
-    id_jeu,
-    nom_support;
+    id_jeu BIGINT,
+    nom_support BIGINT;
 )
 
 Create Table Est_categorise_par (
-    id_jeu,
-    nom_categorie;
+    id_jeu BIGINT,
+    nom_categorie BIGINT;
 )
 
 Create Table Support (
-    nom_support;
+    nom_support VARCHAR(30);
 )
 
 Create Table Categorie (
-    nom_categorie;
+    nom_categorie VARCHAR(30);
 )
