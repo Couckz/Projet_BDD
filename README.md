@@ -7,37 +7,11 @@ lien de lucidchart :
 
 https://lucid.app/lucidchart/f6ce4f63-d3b4-47dd-9249-d926336b7897/edit?invitationId=inv_00112649-f95d-474a-9abd-5f1490a1cad6
 
-## Modèle conceptuel (à mettre dans le compte rendu):
+## Objectifs pour le mercredi 20 mai:
 
-	Utilisateur
-		rôle (visiteur, membre, rédacteur et admin)
-		login
-		mot de passe
-		date de création du compte
-		date de dernière connexion
-		photo de profil
-
-	Article
-		titre
-		contenu
-		note
-		caractéristiques
-		date de création
-		date de modification
-
-	Jeu
-		nom
-		prix
-		date de sortie
-		synopsis
-		catégorie
-		supports
-
-	Avis
-		titre
-		texte
-		note
-		date de création
-
-
-
+### Camélia
+- [ ] page d'acceuil finie hors connexion
+### Malo
+- [ ] gestion de la connexion avec les cookies sessions
+### Alexandre
+- [ ] fais le nav
