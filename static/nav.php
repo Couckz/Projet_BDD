@@ -1,5 +1,7 @@
 <nav>
     <ul>
-        <li><a class="Acceuil" href="index.php">Acceuil</a></li>
+        <li><a class="Accueuil" href="index.php">Accueuil</a></li>
+        <li><a class="Connexion" href="index.php">Connexion</a></li>
     </ul>
+    
 </nav>
