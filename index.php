@@ -28,9 +28,27 @@ $mysqli = connectionDB();
         <main>
             <section>
             <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
-            <form action="">
-            
-            </form>
+
+            <!-- Pour le futur formulaire de recherche par nom et par catégorie : -->
+        
+            <!-- <div class="formulaire">
+                <form action="/pokedex/php/modification.php" method="POST">
+                    <div class="champ">
+                        <label for="id">Pokemon selectionné : </label>
+                        <select name="pokemon" id="">
+                        </select>
+                        <label for="id">Nombre de vue</label>
+                        <input type="text" id="nombrevue" name="nombrevue">
+                        <label for="id">Nombre attrapé</label>
+                        <input type="text" id="nombreattrap" name="nombreattrap">
+                    </div>
+                <div class="soumettre">
+                    <button type="submit" name="submit">
+                        Modifier
+                    </button>
+                </div>
+                </form>
+            </div> -->
             </section>
             
             <?php

@@ -1,8 +1,8 @@
 <nav>
     <ul>
         <li><a class="Accueuil" href="index.php">Accueuil</a></li>
-        <li><a class="Déconnexion" href="index.php">Connexion</a></li>
-        <li><a class="Rédiger" href="index.php">Connexion</a></li>
+        <li><a class="Déconnexion" href="index.php">Déconnexion</a></li>
+        <li><a class="Rédiger" href="redaction.php">Rediger</a></li>
     </ul>
     
 </nav>
