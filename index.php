@@ -26,12 +26,17 @@ $mysqli = connectionDB();
         <?php include("static/header.php"); ?>
         <?php include("static/nav.php"); ?>
         <main>
-            <?php
+            <section>
+            <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
+            <form action="">
             
+            </form>
+            </section>
+            
+            <?php
             $article = information_article($mysqli);
             affichage_article($article);
             //print_r($article); Commande de test pour afficher la structure d'un article
-            
             ?>
             
         </main>

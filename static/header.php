@@ -1,6 +1,6 @@
 <header>
     <a href="index.php">
-        <img src="images/pokeball.png" alt="logo">
+        <img src="img/site/logo.png" alt="logo">
     </a>
-    <h1>Site du JV</h1>
+    <h1>Game-Actu</h1>
 </header>
