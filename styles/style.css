@@ -96,3 +96,7 @@ footer{
     border: 2px solid black;
     margin-bottom: 30px;
 }
+
+.contenu footer p {
+    font-family: cursive ;
+}
