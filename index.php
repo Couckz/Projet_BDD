@@ -8,7 +8,9 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 require_once("./includes/constantes.php");      //constantes du site
 require_once("./includes/config-bdd.php");
 require_once("./php/functions-DB.php");
-$sql_connection = connectionDB();
+require_once("./php/functions-query.php");
+require_once("./php/functions-structures.php");
+$mysqli = connectionDB();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,9 +26,16 @@ $sql_connection = connectionDB();
         <?php include("static/header.php"); ?>
         <?php include("static/nav.php"); ?>
         <main>
+            <?php
+            
+            $article = information_article($mysqli);
+            affichage_article($article);
+            print_r($article);
+            
+            ?>
             dfvbhjr
         </main>
         <?php include("static/footer.php"); ?>
-        <?php closeDB($sql_connection); ?>
+        <?php closeDB($mysqli); ?>
     </body>
 </html>

@@ -15,3 +15,8 @@ https://lucid.app/lucidchart/f6ce4f63-d3b4-47dd-9249-d926336b7897/edit?invitatio
 - [ ] gestion de la connexion avec les cookies sessions
 ### Alexandre
 - [ ] fais le nav
+
+
+Commit du Lundi 18 mai (Camélia) : 
+
+Au dernière nouvelles, je suis en train de finir la page d'accueil hors connexion. J'ai completé la base de donnée avec qlq informations au pif qui nous permettront de dev le site. Je vous joint dans le commit la nouvelle base. 
