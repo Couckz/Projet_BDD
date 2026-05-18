@@ -5,9 +5,13 @@ function affichage_article($article){
             $titre = $lines["titre"];
             $contenu = $lines["contenu"];
             $date_creation = $lines["date_creation"];
+            $date_modification = $lines["date_modification"];
             $note = $lines["note"];
             $caracteristiques = $lines["caracteristiques"];
             $chemin_img = $lines["chemin_image"];
+            $prix = $lines["prix"];
+            $synopsis = $lines["synopsis"];
+
             echo "<div class = 'border_article'>";
             echo "<div class = 'presentation'>";
 
@@ -16,6 +20,7 @@ function affichage_article($article){
             echo "$titre";
             echo "</h2>";
             echo "<section class = 'caracteristique'>";
+            echo "$synopsis";
             echo "$caracteristiques";
             echo "</section>";
             echo "</div>";
@@ -23,6 +28,7 @@ function affichage_article($article){
             echo "<div class = 'intro2'>";
             echo "<img src='$chemin_img'>";
             echo "<p class='note'>";
+            echo "prix : $prix";
             echo "<p> Note :  ";
             echo "<p> $note/10";
             echo "</p>";
@@ -37,7 +43,8 @@ function affichage_article($article){
             echo $contenu;
             echo "<p>";
             echo "<footer class = 'fin'>";
-            echo "$date_creation";
+            echo "Date de création : $date_creation  ";
+            echo "  Modifié le : $date_modification";
             echo "</footer>";
             echo "</div>";
             echo "</div>";

@@ -30,10 +30,10 @@ $mysqli = connectionDB();
             
             $article = information_article($mysqli);
             affichage_article($article);
-            print_r($article);
+            //print_r($article); Commande de test pour afficher la structure d'un article
             
             ?>
-            dfvbhjr
+            
         </main>
         <?php include("static/footer.php"); ?>
         <?php closeDB($mysqli); ?>
