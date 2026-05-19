@@ -6,8 +6,8 @@ session_start();
         <li><a href="index.php">Accueil</a></li>
         <?php
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
+                ?><li><a href="profil.php">Profil</a></li><?php
                 ?><li><a href="php/logout.php">Déconnexion</a></li><?php
-                ?><li><a href="maj.php">Poster un avis</a></li><?php
             }else{
                 ?><li><a href="connexion.php">Connexion</a></li><?php
             }?>
