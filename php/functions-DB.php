@@ -28,7 +28,7 @@ function readDB($mysqli, $sql_input)
 {
 	//exécution de la requête $sql_input et récupération du résultat de type mysqli_result
 	$query_output = mysqli_query($mysqli, $sql_input);
-	//vérification de la requête : 
+	//vérification de la requête :
 		//si la requête est incorrect ou le nombre de ligne retourné égal à 0,
 		//on retourne un tableau vide
 		if(!$query_output || mysqli_num_rows($query_output) == 0) {

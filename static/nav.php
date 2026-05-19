@@ -1,7 +1,15 @@
+<?php
+session_start();
+?>
 <nav>
     <ul>
-        <li><a class="Accueuil" href="index.php">Accueuil</a></li>
-        <li><a class="Connexion" href="connexion.php">Connexion</a></li>
+        <li><a href="index.php">Acceuil</a></li>
+        <?php
+            if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
+                ?><li><a href="php/logout.php">Déconnexion</a></li><?php
+                ?><li><a href="maj.php">Poster un avis</a></li><?php
+            }else{
+                ?><li><a href="connexion.php">Connexion</a></li><?php
+            }?>
     </ul>
-    
 </nav>

@@ -1,38 +1,52 @@
 <?php
-session_start();
-// require_once("./includes/constantes.php");//constantes du site
-// require_once("./includes/config-bdd.php");
-// require_once("./php/functions-DB.php");
-// require_once("./php/functions_query.php");
-// require_once("./php/functions_structure.php");
+//affichage des erreurs côté PHP et côté MYSQLI
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+//Import du site
+require_once("./includes/constantes.php");      //constantes du site
+require_once("./includes/config-bdd.php");
+require_once("./php/functions-DB.php");
+require_once("./php/functions-query.php");
+require_once("./php/functions-structures.php");
 require_once("./php/login.php");
-?> 
 
-
+$sql_connection = connectionDB();
+?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/pokedex/styles/connection.css">
-</head>
-<body>
-    <?php include("static/header.php"); ?>
-    <div class="formulaire">
-        <form action="/php/login.php" method="POST">
-            <div class="champ">
-                <label for="id">Nom d'utilisateur :</label>
-                <input type="text" id="nom" name="nom">
-                <label for="mdp">Mot de passe :</label>
-                <input type="password" id="mdp" name="mdp">
+    <head>
+        <title><?php echo "$titreSite"; ?></title>
+        <meta charset="utf-8">
+        <meta name="keywords" content="jeu vidéo connexion">
+        <meta name="author" content="Malo Camelia Alexandre">
+        <link rel="icon" href="images/pokeball.png">
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+    </head>
+    <body>
+        <?php include("static/header.php"); ?>
+        <?php include("static/nav.php"); ?>
+        <main>
+            <?php
+                if(isset($_POST['btnEnvoyer'])){
+                    echo "Veuillez patienter...";
+                    login();
+                }else{
+            ?>
+            <div class="boite_questionaire">
+                <form action="#" method="post">
+                    <h3>Veuillez vous indentifier:</h3>
+                    Identifiant: <input required type="text" name="login"><br>
+                    Mot de passe: <input required type="password" name="mdp"><br>
+                    <input type="submit" name="btnEnvoyer">
+                </form>
             </div>
-        <div class="soumettre">
-            <button>
-                Envoyer
-            </button>
-        </div>
-        </form>
-    </div>
-</body>
+            <?php
+                }
+            ?>
+        </main>
+        <?php include("static/footer.php"); ?>
+        <?php closeDB($sql_connection); ?>
+    </body>
 </html>

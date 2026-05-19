@@ -49,9 +49,6 @@ nav li a:hover{
     background-color: white;
     color: black;
 }
-nav .Acceuil{
-    background-color: rgb(255, 32, 32);
-}
 
 main{
     flex: 1;

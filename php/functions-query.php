@@ -6,4 +6,13 @@ function information_article($mysqli) {
     return $result;
 }
 
+function connection($mysqli, $login, $mdp)
+{
+    $sql_query = "SELECT *
+    FROM Utilisateur
+    WHERE Utilisateur.login = '$login'
+    AND Utilisateur.mdp = '$mdp';";
+    $result = readDB($mysqli, $sql_query);
+    return $result;
+}
 ?>

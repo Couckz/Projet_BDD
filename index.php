@@ -18,7 +18,7 @@ $mysqli = connectionDB();
         <title><?php echo "$titreSite"; ?></title>
         <meta charset="utf-8">
         <meta name="keywords" content="jeu vidéo">
-        <meta name="author" content="Malo Boudier Aebischer">
+        <meta name="author" content="Malo Camelia Alexandre">
         <link rel="icon" href="images/pokeball.png">
         <link rel="stylesheet" type="text/css" href="styles/style.css">
     </head>
