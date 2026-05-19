@@ -36,10 +36,24 @@ $sql_connection = connectionDB();
             ?>
             <div class="boite_questionaire">
                 <form action="#" method="post">
-                    <h3>Veuillez vous indentifier:</h3>
-                    Identifiant: <input required type="text" name="login"><br>
-                    Mot de passe: <input required type="password" name="mdp"><br>
+                    <div class="formulaire">
+                    <div class="connexion">
+                        <div class="username">
+                        <img src="img/site/connexion.png" alt="">
+                        Identifiant: <input required type="text" name="login" placeholder="ex. xxMarieDu93xx"><br>
+                        </div>
+                        <div class="mdp">
+                        <img src="img/site/mdp.png" alt="">
+                        Mot de passe: <input required type="password" name="mdp"><br>
+                        </div>
+                    </div>
+                    <div class="log">
                     <input type="submit" name="btnEnvoyer">
+                    </div>
+                    </div>
+                    
+                    
+                    
                 </form>
             </div>
             <?php
@@ -50,3 +64,5 @@ $sql_connection = connectionDB();
         <?php closeDB($sql_connection); ?>
     </body>
 </html>
+
+<!-- <h3>Veuillez vous identifier:</h3> -->
