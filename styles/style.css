@@ -25,7 +25,7 @@ header {
     }
 
     h1 {
-        text-shadow: rgb(64, 73, 115, 0.5) 1px 2px;
+        text-shadow: rgb(64, 73, 115, 1) 1px 2px 3px;
         font-size: 3.2rem;
     }
 
@@ -159,7 +159,7 @@ footer{
     }
 
     .img_container:hover {
-        transform: scale(1.02);
+        transform: scale(1.025);
     }
 
 }
@@ -186,7 +186,7 @@ footer{
     }
 
     :hover {
-        transform: scale(1.1);
+        transform: scale(1.06);
     }
 
 }
