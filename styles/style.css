@@ -7,23 +7,28 @@ body{
 }
 
 header {
-    position: relative;
     display: flex;
     height: 100px;
     align-items: center;
     justify-content: center;
     background-color: #e7e8e9;
-}
-header img {
-    height: 100%;
-    width: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-header h1 {
-    text-shadow: rgb(64, 73, 115) 1px 2px;
-    font-size: 50px;
+
+    position: relative;
+
+    img {
+        height: 100%;
+        width: auto;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    h1 {
+        text-shadow: rgb(64, 73, 115, 0.5) 1px 2px;
+        font-size: 3.2rem;
+    }
+
 }
 
 nav{
@@ -45,6 +50,7 @@ nav li a{
     padding: 14px 16px;
     text-decoration: none;
     font-variant: small-caps;
+    transition: 0.3s;
 }
 nav li a:hover{
     background-color: white;
