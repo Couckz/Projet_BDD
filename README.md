@@ -12,7 +12,7 @@ https://lucid.app/lucidchart/f6ce4f63-d3b4-47dd-9249-d926336b7897/edit?invitatio
 ### Camélia
 - [ ] page d'acceuil finie hors connexion
 ### Malo
-- [ ] gestion de la connexion avec les cookies sessions
+- [x] gestion de la connexion avec les cookies sessions
 ### Alexandre
 - [ ] fais le nav
 
