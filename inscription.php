@@ -31,7 +31,6 @@ $sql_connection = connectionDB();
             <?php
                 if(isset($_POST['btnEnvoyer'])){
                     echo "Veuillez patienter...";
-                    login();
                 }else{
             ?>
             <form action="#" method="post">
@@ -49,7 +48,7 @@ $sql_connection = connectionDB();
                     <div class="log">
                         <input type="submit" name="btnEnvoyer">
                     </div>
-                    <p>Pas de compte? <a href="inscription.php">Créez-en un!</a></p>
+                    <p>Déjà membre? <a href="connexion.php">Identifiez vous!</a></p>
                 </div>
             </form>
             <?php

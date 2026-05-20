@@ -209,8 +209,7 @@ footer{
     gap: 15px;
 }
 
-.username,
-.mdp {
+.champ_connexion {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -219,8 +218,7 @@ footer{
     border-radius: 8px;
 }
 
-.username img,
-.mdp img {
+.champ_connexion img {
     width: 20px;
     height: 20px;
 }
