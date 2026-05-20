@@ -1,11 +1,8 @@
 <header>
-    <?php
-	$rootPath = '/' . explode('/', trim($_SERVER['SCRIPT_NAME'], '/'))[0];
-    ?>
     <a href="index.php">
         <?php
-        $rootPath = '/' . explode('/', trim($_SERVER['SCRIPT_NAME'], '/'))[0];
-        echo "<img src='$rootPath/img/site/logo.png' alt='Logo du site'>"
+            $rootPath = dirname($_SERVER['SCRIPT_NAME']);
+            echo "<img src='$rootPath/img/site/logo.png' alt='Logo du site'>"
         ?>
     </a>
     <h1>Game-Actu</h1>
