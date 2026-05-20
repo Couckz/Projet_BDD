@@ -231,20 +231,20 @@ input {
 .log {
     width: 100%;
     margin-top: 15px;
-}
 
-.log input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #4a90e2;
-    color: white;
-    transition: 0.3s;
-}
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #4a90e2;
+        color: white;
+        transition: 0.3s;
+    }
 
-.log input:hover {
-    transform:scale(1.02);
+    input:hover {
+        transform:scale(1.02);
+    }
 }
 
 .profile img{
