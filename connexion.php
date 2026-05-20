@@ -2,7 +2,7 @@
 //affichage des erreurs côté PHP et côté MYSQLI
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //Import du site
 require_once("./includes/constantes.php");      //constantes du site
@@ -49,9 +49,16 @@ $sql_connection = connectionDB();
                     <div class="log">
                         <input type="submit" name="btnEnvoyer">
                     </div>
+<<<<<<< Updated upstream
                     <p>Pas de compte? <a href="inscription.php">Créez-en un!</a></p>
                 </div>
             </form>
+=======
+                    </div>
+
+                </form>
+            </div>
+>>>>>>> Stashed changes
             <?php
                 }
             ?>

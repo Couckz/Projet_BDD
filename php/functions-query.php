@@ -1,10 +1,46 @@
 <?php
 
-function information_article($mysqli) {
-    $query = "SELECT Article.titre, Article.contenu, Article.note, Article.caracteristiques, Article.date_creation, Jeu.prix, Jeu.synopsis, Article.date_modification,  Image.chemin_image FROM Article INNER JOIN Image ON Image.id_article = Article.id_article INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu ORDER BY Article.date_creation DESC";
+function information_articles($mysqli) {
+    $query = "SELECT
+        Article.id_article,
+        Article.titre,
+        Article.contenu,
+        Article.note,
+        Article.caracteristiques,
+        Article.date_creation,
+        Jeu.prix,
+        Jeu.synopsis,
+        Article.date_modification,
+        Image.chemin_image
+    FROM Article
+    INNER JOIN Image ON Image.id_article = Article.id_article
+    INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+    ORDER BY Article.date_creation DESC";
     $result = readDB($mysqli, $query);
     return $result;
 }
+
+function information_article($mysqli, $id_article) {
+    $query = "SELECT
+        Article.id_article,
+        Article.titre,
+        Article.contenu,
+        Article.note,
+        Article.caracteristiques,
+        Article.date_creation,
+        Jeu.prix,
+        Jeu.synopsis,
+        Article.date_modification,
+        Image.chemin_image
+    FROM Article
+    INNER JOIN Image ON Image.id_article = Article.id_article
+    INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+    WHERE Article.id_article = '$id_article'
+    ORDER BY Article.date_creation DESC";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
 
 function connection($mysqli, $login, $mdp)
 {

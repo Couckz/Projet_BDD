@@ -32,7 +32,6 @@ $mysqli = connectionDB(); //création de la connexion SQL
         ?>
         <main>
             <?php
-
             $id_article = htmlspecialchars($_GET["id_article"]);
             $article = information_article($mysqli, $id_article); //on récupère un article de la BDD identifié par son ID
 
