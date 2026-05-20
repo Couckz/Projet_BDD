@@ -9,9 +9,9 @@ $rootPath = dirname($_SERVER['SCRIPT_NAME']);
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
                 ?><li><a href="<?php echo $rootPath; ?>/profil.php">Profil</a></li><?php
                 ?><li><a href="<?php echo $rootPath; ?>/php/logout.php">Déconnexion</a></li><?php
-                ?><li><a href="avis.php">Poster un avis</a></li><?php
+                ?><li><a href="<?php echo $rootPath; ?>/avis.php">Poster un avis</a></li><?php
                 if ($_SESSION['role'] == "Redacteur") {
-                    ?><li><a href="redaction.php">Rediger un article</a></li><?php
+                    ?><li><a href="<?php echo $rootPath; ?>/redaction.php">Rediger un article</a></li><?php
                 }
             } else{
                 ?><li><a href="<?php echo $rootPath; ?>/connexion.php">Connexion</a></li><?php
