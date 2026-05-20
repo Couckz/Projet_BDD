@@ -243,3 +243,9 @@ input {
     background: #4a90e2;
     color: white;
 }
+
+.profile img{
+    width: 25%;
+    height: auto;
+    border-radius: 20px;
+}
