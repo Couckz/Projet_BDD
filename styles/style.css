@@ -89,6 +89,11 @@ footer{
 
 .border_article {
 
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
     display: flex;
     flex-direction: column;
 
@@ -119,10 +124,15 @@ footer{
     .contenu {
         /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
         flex: 1 0 auto;
-
         padding: 10px;
     }
 
+    transition: 0.3s;
+
+}
+
+.border_article:hover {
+    transform: scale(1.01);
 }
 
 .presentation {
@@ -158,9 +168,7 @@ footer{
 
     }
 
-    .img_container:hover {
-        transform: scale(1.025);
-    }
+
 
 }
 
