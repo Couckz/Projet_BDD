@@ -60,5 +60,50 @@ function affichage_article($article){
     echo "</div>";
 }
 
-
+function date_to_str($date){
+    $chaine_date = substr($date, 8, 2);
+    switch(substr($date, 5, 2)){
+        case "01":
+            $chaine_date = $chaine_date." janvier ";
+            break;
+        case "02":
+            $chaine_date = $chaine_date." février ";
+            break;
+        case "03":
+            $chaine_date = $chaine_date." mars ";
+            break;
+        case "04":
+            $chaine_date = $chaine_date." avril ";
+            break;
+        case "05":
+            $chaine_date = $chaine_date." mai ";
+            break;
+        case "06":
+            $chaine_date = $chaine_date." juin ";
+            break;
+        case "07":
+            $chaine_date = $chaine_date." juillet ";
+            break;
+        case "08":
+            $chaine_date = $chaine_date." août ";
+            break;
+        case "09":
+            $chaine_date = $chaine_date." septembre ";
+            break;
+        case "10":
+            $chaine_date = $chaine_date." octobre ";
+            break;
+        case "11":
+            $chaine_date = $chaine_date." novembre ";
+            break;
+        case "12":
+            $chaine_date = $chaine_date." décembre ";
+            break;
+        default:
+            return 0;
+            break;
+    }
+    $chaine_date = $chaine_date.substr($date, 0, 4);
+    return $chaine_date;
+}
 ?>

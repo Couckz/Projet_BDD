@@ -31,7 +31,7 @@ $mysqli = connectionDB(); //création de la connexion SQL
                 <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
             </div>
             <p>
-                Membre depuis le : <?php echo $_SESSION['date_inscription']; ?>
+                Membre depuis le : <?php echo date_to_str($_SESSION['date_inscription']); ?>
             </p>
         </main>
         <?php
