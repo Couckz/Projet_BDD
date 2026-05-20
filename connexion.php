@@ -49,16 +49,9 @@ $sql_connection = connectionDB();
                     <div class="log">
                         <input type="submit" name="btnEnvoyer">
                     </div>
-<<<<<<< Updated upstream
                     <p>Pas de compte? <a href="inscription.php">Créez-en un!</a></p>
                 </div>
             </form>
-=======
-                    </div>
-
-                </form>
-            </div>
->>>>>>> Stashed changes
             <?php
                 }
             ?>
