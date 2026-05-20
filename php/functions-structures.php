@@ -37,6 +37,7 @@ function affichage_articles($articles){
                         echo "<div class = 'img_container'>";
                             echo "<a href = article.php/?id_article=$id_article>";
                                 $chemin_img = dirname($_SERVER['SCRIPT_NAME'])."/".$chemin_img;
+                                echo $chemin_img;
                                 echo "<img src='$chemin_img'>";
                             echo "</a>";
                         echo "</div>";
