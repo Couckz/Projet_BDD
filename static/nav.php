@@ -6,14 +6,16 @@ session_start();
         <li><a href="index.php">Accueil</a></li>
         <?php
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
+                $role = $_SESSION['role']
                 ?><li><a href="profil.php">Profil</a></li><?php
                 ?><li><a href="php/logout.php">Déconnexion</a></li><?php
                 ?><li><a href="avis.php">Poster un avis</a></li><?php
-
-                if($_SESSION['role'] == "Redacteur") {
-                    ?><li><a href="redaction.php">Rediger un article</a></li><?php
-                }
-            }else{
+            } else if (isset($_SESSION['connecte']) && $_SESSION['connecte'] && $role == "Redacteur") {
+                ?><li><a href="profil.php">Profil</a></li><?php
+                ?><li><a href="php/logout.php">Déconnexion</a></li><?php
+                ?><li><a href="avis.php">Poster un avis</a></li><?php
+                ?><li><a href="redaction.php">Rediger un article</a></li><?php
+            } else{
                 ?><li><a href="connexion.php">Connexion</a></li><?php
             }
             

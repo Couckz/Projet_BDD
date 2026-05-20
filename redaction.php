@@ -37,28 +37,8 @@ $sql_connection = connectionDB();
             ?>
             <div class="formulaire_article">
                 <form action="#" method="post">
-                <div class="ensemble_formulaire">
-                    Titre <input required type="text" name="title" id="title" placeholder="Titre article..."><br>
-                        <label id="titre" name="titre">Titre de l'article: </label>
-                        <select name="jeu" id="jeu">
-                        <!-- <?php
-                            // $article = recuperer_article($sql_connection);
-                            // displayForm($article);
-                        ?>   -->
-                        </select>
-                        Note <input required type="number" name="note" min="0" max="10" id="note"><br>
-                        Contenu <input required type="text" name="contenu" id="contenu"><br>
-                        Caractéristiques <input required type="text" name="caracteristique" id="caracteristique"><br>
-                
-                    <div class="boutton_article">
-                    <button type="btnsubarticle" name="btnsubarticle">
-                            Envoyer
-                    </button>
-                    </div>
-                    </div>
                     
-                    
-                    
+            
                 </form>
             </div>
             <?php

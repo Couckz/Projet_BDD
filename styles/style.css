@@ -96,7 +96,7 @@ footer{
 
     border: 2px solid black;
     border-radius: 20px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.5);
 
     /* cache ce qui dépasse hors de la bordure arrondi (utile pour le footer) */
     overflow: hidden;
@@ -181,7 +181,7 @@ footer{
         border-radius: 10px;
         border: 1px solid hsl(0, 0%, 10%);
 
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
         transition: 0.2s;
     }
 
@@ -248,13 +248,13 @@ input {
 }
 
 .profile img{
-    width: 25%;
+    width: 150px;
     height: auto;
     border-radius: 20px;
 }
 
 
-.avis_article {
+.avis {
 
     background: #FFFFFF;
     background: linear-gradient(
@@ -264,7 +264,7 @@ input {
     rgba(255, 255, 255, 0) 100%
     );
 
-    max-width: 60%;
+    width: 700px;
     border-radius: 20px;
     box-shadow: -14px 14px 4px -6px rgba(0, 0, 0, 0.5);
 
@@ -274,16 +274,18 @@ input {
         flex-direction: column;
         justify-content: space-between;
 
+        /* pour ne pas dépasser du dégrade */
         max-width: 70%;
-        padding: 20px;
-        padding-bottom: 40px;
+        padding: 1.4rem;
+        padding-bottom: 2rem;
 
         .avis_header {
-
+            display: flex;
         }
 
         .avis_pdp_img_container {
 
+            margin-right: 1rem;
             border-radius: 15px;
             box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
 

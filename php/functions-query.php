@@ -52,7 +52,7 @@ function liste_avis($mysqli, $id_article) {
         texte,
         titre,
         Utilisateur.chemin_pdp
-    FROM avis
+    FROM Avis
     INNER JOIN Utilisateur USING(login)
     WHERE id_article = '$id_article';";
 
