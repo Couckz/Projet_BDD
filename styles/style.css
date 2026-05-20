@@ -85,14 +85,14 @@ footer{
     display: grid; /* adapté pour placer des éléments en 2D */
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     grid-gap: 1rem;
+
+    .border_article:hover {
+        transform: scale(1.01);
+    }
+
 }
 
 .border_article {
-
-    a {
-        text-decoration: none;
-        color: black;
-    }
 
     display: flex;
     flex-direction: column;
@@ -107,6 +107,13 @@ footer{
     overflow: hidden;
 
     margin-bottom: 30px;
+
+    transition: 0.3s;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
 
     footer {
 
@@ -127,50 +134,43 @@ footer{
         padding: 10px;
     }
 
-    transition: 0.3s;
+    .presentation {
 
-}
-
-.border_article:hover {
-    transform: scale(1.01);
-}
-
-.presentation {
-
-    display: flex;
-    justify-content: space-between;
-
-    padding: 10px;
-
-    .img_container {
-
-        border-radius: 5px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
-
-        /* centrage de l'image */
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
 
-        /* taille du cadre */
-        width: 200px;
-        height: 160px;
+        padding: 10px;
 
-        /* ne pas déformer l'image, cacher la partie qui dépasse */
-        object-fit: cover;
-        overflow: hidden;
+        .img_container {
 
-        img {
-            height: 100%;
-            width:  auto;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+
+            /* centrage de l'image */
+            display: flex;
+            justify-content: center;
+
+            /* taille du cadre */
+            width: 200px;
+            height: 160px;
+
+            /* ne pas déformer l'image, cacher la partie qui dépasse */
+            object-fit: cover;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                width:  auto;
+            }
+
+            transition: 0.2s;
+
         }
-
-        transition: 0.2s;
 
     }
 
-
-
 }
+
 
 .tags_container {
 
@@ -275,6 +275,7 @@ input {
     width: 700px;
     border-radius: 20px;
     box-shadow: -14px 14px 4px -6px rgba(0, 0, 0, 0.5);
+    padding-bottom: 2rem;
 
     .avis_contenu {
 
