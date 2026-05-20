@@ -30,7 +30,7 @@ $mysqli = connectionDB(); //création de la connexion SQL
             <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
 
             <!-- Pour le futur formulaire de recherche par nom et par catégorie : -->
-        
+
             <!-- <div class="formulaire">
                 <form action="/pokedex/php/modification.php" method="POST">
                     <div class="champ">
@@ -50,10 +50,10 @@ $mysqli = connectionDB(); //création de la connexion SQL
                 </form>
             </div> -->
             </section>
-            
+
             <?php
-            $article = information_article($mysqli); //on récupère tout les articles en même temps depuis la BDD
-            affichage_article($article); //on affiche simplement lesdits articles
+            $articles = information_articles($mysqli); //on récupère tout les articles en même temps depuis la BDD
+            affichage_articles($articles); //on affiche simplement lesdits articles
             ?>
         </main>
         <?php

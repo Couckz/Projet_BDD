@@ -2,6 +2,11 @@
 ini_set('display_errors', 1); //active l'affichage des erreurs
 ini_set('display_startup_errors', 1); //gestion des affichages d'erreur au démarage
 error_reporting(E_ALL); //affiche toute les erreurs possible
+
+if (!isset($_GET["id_article"])) {
+    header("Location: ../index.php");
+}
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); //déclenche une erreur PHP dés qu'une requête échoue, puis transformes ces erreurs en exception
 require_once("./includes/constantes.php"); //constantes du site
 require_once("./includes/config-bdd.php"); //donnees pour la connexion
@@ -15,10 +20,10 @@ $mysqli = connectionDB(); //création de la connexion SQL
     <head>
         <title><?php echo "$titreSite"; ?></title>
         <meta charset="utf-8">
-        <meta name="keywords" content="jeu vidéo">
+        <meta name="keywords" content="jeu vidéo article">
         <meta name="author" content="Malo Camelia Alexandre">
-        <link rel="icon" href="images/.png">
-        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="icon" href="../images/pokeball.png">
+        <link rel="stylesheet" type="text/css" href="../styles/style.css">
     </head>
     <body>
         <?php
@@ -26,13 +31,19 @@ $mysqli = connectionDB(); //création de la connexion SQL
             include("static/nav.php"); //inclusion de l'onglet navigation de la page
         ?>
         <main>
-            <h2>Bonjour <?php echo $_SESSION['prenom'];?>!</h2>
-            <div class="profile">
-                <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
-            </div>
-            <p>
-                Membre depuis le : <?php echo date_to_str($_SESSION['date_inscription']); ?>
-            </p>
+            <?php
+            $id_article = htmlspecialchars($_GET["id_article"]);
+            $article = information_article($mysqli, $id_article); //on récupère un article de la BDD identifié par son ID
+
+            if (!isset($article[0])) {
+                header("Location: ../index.php");
+            }
+
+            $liste_avis = liste_avis($mysqli, $id_article);
+
+            affichage_article($article[0]); //on affiche simplement l'article
+            affichage_liste_avis($liste_avis);
+            ?>
         </main>
         <?php
             include("static/footer.php"); //inclusion du footer de la page

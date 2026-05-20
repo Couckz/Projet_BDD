@@ -2,7 +2,7 @@
 //affichage des erreurs côté PHP et côté MYSQLI
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL); 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //Import du site
 require_once("./includes/constantes.php");      //constantes du site
@@ -10,7 +10,7 @@ require_once("./includes/config-bdd.php");
 require_once("./php/functions-DB.php");
 require_once("./php/functions-query.php");
 require_once("./php/functions-structures.php");
-require_once("./php/login.php");
+require_once("./php/registration.php");
 
 $sql_connection = connectionDB();
 ?>
@@ -31,25 +31,35 @@ $sql_connection = connectionDB();
             <?php
                 if(isset($_POST['btnEnvoyer'])){
                     echo "Veuillez patienter...";
-                    login();
+                    registration();
                 }else{
             ?>
             <form action="#" method="post">
                 <div class="formulaire">
                     <div class="connexion">
                         <div class="champ_connexion">
-                            <img src="img/site/connexion.png" alt="login">
+                            Nom: <input required type="text" name="nom" placeholder="ex: Chirac"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            Prénom: <input required type="text" name="prenom" placeholder="ex: Jacques"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            Date de naissance: <input required type="date" name="date_naissance"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            email: <input required type="email" name="adresse_email" placeholder="ex: Jacques Chirac"><br>
+                        </div>
+                        <div class="champ_connexion">
                             Identifiant: <input required type="text" name="login" placeholder="ex: salextroll"><br>
                         </div>
                         <div class="champ_connexion">
-                            <img src="img/site/mdp.png" alt="mdp">
                             Mot de passe: <input required type="password" name="mdp"><br>
                         </div>
                     </div>
                     <div class="log">
                         <input type="submit" name="btnEnvoyer">
                     </div>
-                    <p>Pas de compte? <a href="inscription.php">Créez-en un!</a></p>
+                    <p>Déjà membre? <a href="connexion.php">Identifiez vous!</a></p>
                 </div>
             </form>
             <?php

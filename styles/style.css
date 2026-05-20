@@ -209,8 +209,7 @@ footer{
     gap: 15px;
 }
 
-.username,
-.mdp {
+.champ_connexion {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -219,8 +218,7 @@ footer{
     border-radius: 8px;
 }
 
-.username img,
-.mdp img {
+.champ_connexion img {
     width: 20px;
     height: 20px;
 }
@@ -233,13 +231,63 @@ input {
 .log {
     width: 100%;
     margin-top: 15px;
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #4a90e2;
+        color: white;
+        transition: 0.3s;
+    }
+
+    input:hover {
+        transform:scale(1.02);
+    }
 }
 
-.log input {
-    width: 100%;
+.profile img{
+    width: 25%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.avis_article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     padding: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #4a90e2;
-    color: white;
+
+    .avis_pdp_img_container {
+
+        border-radius: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+
+        /* centrage de l'image */
+        display: flex;
+        justify-content: center;
+
+        /* taille du cadre */
+        width: 64px;
+        height: 64px;
+
+        /* ne pas déformer l'image, cacher la partie qui dépasse */
+        object-fit: cover;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            width:  auto;
+        }
+
+        transition: 0.2s;
+
+    }
+
+    .avis_pdp_img_container:hover {
+        transform: scale(1.025);
+    }
+
 }
