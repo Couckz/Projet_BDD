@@ -28,7 +28,6 @@ $mysqli = connectionDB(); //création de la connexion SQL
         <main>
             <h2>Bonjour <?php echo $_SESSION['prenom'];?>!</h2>
             <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
-
         </main>
         <?php
             include("static/footer.php"); //inclusion du footer de la page

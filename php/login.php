@@ -6,7 +6,7 @@ function login()
     $connect = connection($sql_connection, $_POST['login'], $_POST['mdp']);
     if(empty($connect)){
         closeDB($sql_connection);
-        header("Location: http://localhost/Projet_BDD/connexion.php");
+        header("Location: connexion.php");
     }else{
         $_SESSION['login'] = $_POST['login'];
         $_SESSION['mdp'] = $_POST['mdp'];
@@ -18,10 +18,10 @@ function login()
         $_SESSION['date_naissance'] = $connect[0]['date_naissance'];
         $_SESSION['adresse_email'] = $connect[0]['adresse_email'];
         $_SESSION['chemin_pdp'] = $connect[0]['chemin_pdp'];
-        $_SESSION['chemin_pdp'] = '/Projet_BDD/' . ltrim($_SESSION['chemin_pdp'], './'); //evite les ../ camélia, sinon sa marche pas sur linux
+        $_SESSION['chemin_pdp'] = ltrim($_SESSION['chemin_pdp'], './'); //evite les ../ , sinon sa marche pas sur linux
         $_SESSION['connecte'] = true;
         closeDB($sql_connection);
-        header("Location: http://localhost/Projet_BDD/index.php");
+        header("Location: index.php");
     }
 }
 
