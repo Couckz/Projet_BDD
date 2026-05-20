@@ -178,20 +178,25 @@ function affichage_liste_avis($liste_avis) {
         $login = $avis["login"];
         $chemin_pdp = $avis["chemin_pdp"];
 
-        echo "<section class = 'avis_article'>";
+        echo "<div class = 'avis'>";
 
-            echo "<h2>$titre</h2>";
+            echo "<section class = 'avis_contenu'>";
 
-            echo "<div class = 'avis_pdp_img_container'>";
-                echo "<img src = '$chemin_pdp' alt = 'photo de profil de $login'></img>";
-            echo "</div>";
+                echo "<div class = 'avis_header'>";
+                    echo "<div class = 'avis_pdp_img_container'>";
+                        echo "<img src = '$chemin_pdp' alt = 'photo de profil de $login'></img>";
+                    echo "</div>";
+                    echo "<h2>$titre</h2>";
+                echo "</div>";
 
-            echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
+                echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
 
-            echo "<p>Note: $note/10</p>";
-            echo "$texte";
+                echo "<p>Note: $note/10</p>";
+                echo "$texte";
 
-        echo "</section>";
+            echo "</section>";
+
+        echo "</div>";
     }
 }
 
