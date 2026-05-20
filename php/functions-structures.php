@@ -167,16 +167,20 @@ function affichage_article($article) {
 
 function affichage_liste_avis($liste_avis) {
     foreach($liste_avis as $avis){
-        $date_creation = $avis["date_creation"];
+        $date_creation = explode(" ", $avis["date_creation"]);
+        $jour = $date_creation[0];
+        $heure = $date_creation[1];
         $login = $avis["login"];
         $note = $avis["note"];
         $texte = $avis["texte"];
         $titre = $avis["titre"];
 
-        echo "$titre";
-        echo "de $login, le $date_creation";
-        echo "$note/10";
+        echo "<section class = 'avis_article'>";
+        echo "<h2>$titre</h2>";
+        echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
+        echo "<p>Note: $note/10</p>";
         echo "$texte";
+        echo "</section>";
     }
 }
 
