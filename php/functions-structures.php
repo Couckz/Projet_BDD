@@ -36,6 +36,7 @@ function affichage_articles($articles){
                     echo "<div class = 'intro2'>";
                         echo "<div class = 'img_container'>";
                             echo "<a href = article.php/?id_article=$id_article>";
+                                $chemin_img = dirname($_SERVER['SCRIPT_NAME'])."/".$chemin_img;
                                 echo "<img src='$chemin_img'>";
                             echo "</a>";
                         echo "</div>";
@@ -44,7 +45,7 @@ function affichage_articles($articles){
                     echo "</div>";
 
 
-                 echo "</div>";
+                echo "</div>";
 
                 echo "<div class='contenu'>";
                     echo "<p class='texte'>";
