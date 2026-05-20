@@ -39,7 +39,7 @@ $sql_connection = connectionDB();
                     <div class="connexion">
                         <div class="champ_connexion">
                             <img src="img/site/connexion.png" alt="login">
-                            Identifiant: <input required type="text" name="login" placeholder="ex. xxMarieDu93xx"><br>
+                            Identifiant: <input required type="text" name="login" placeholder="ex: salextroll"><br>
                         </div>
                         <div class="champ_connexion">
                             <img src="img/site/mdp.png" alt="mdp">

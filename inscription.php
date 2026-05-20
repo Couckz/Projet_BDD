@@ -37,11 +37,21 @@ $sql_connection = connectionDB();
                 <div class="formulaire">
                     <div class="connexion">
                         <div class="champ_connexion">
-                            <img src="img/site/connexion.png" alt="login">
-                            Identifiant: <input required type="text" name="login" placeholder="ex. xxMarieDu93xx"><br>
+                            Nom: <input required type="text" name="nom" placeholder="ex: Chirac"><br>
                         </div>
                         <div class="champ_connexion">
-                            <img src="img/site/mdp.png" alt="mdp">
+                            Prénom: <input required type="text" name="prenom" placeholder="ex: Jacques"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            Date de naissance: <input required type="date" name="date_naissance"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            email: <input required type="email" name="adresse_email" placeholder="ex: Jacques Chirac"><br>
+                        </div>
+                        <div class="champ_connexion">
+                            Identifiant: <input required type="text" name="login" placeholder="ex: salextroll"><br>
+                        </div>
+                        <div class="champ_connexion">
                             Mot de passe: <input required type="password" name="mdp"><br>
                         </div>
                     </div>
