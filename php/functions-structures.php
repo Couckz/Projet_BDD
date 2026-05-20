@@ -170,16 +170,26 @@ function affichage_liste_avis($liste_avis) {
         $date_creation = explode(" ", $avis["date_creation"]);
         $jour = $date_creation[0];
         $heure = $date_creation[1];
-        $login = $avis["login"];
         $note = $avis["note"];
         $texte = $avis["texte"];
         $titre = $avis["titre"];
 
+        $login = $avis["login"];
+        $chemin_pdp = $avis["chemin_pdp"];
+
         echo "<section class = 'avis_article'>";
-        echo "<h2>$titre</h2>";
-        echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
-        echo "<p>Note: $note/10</p>";
-        echo "$texte";
+
+            echo "<h2>$titre</h2>";
+
+            echo "<div class = 'avis_pdp_img_container'>";
+                echo "<img src = '$chemin_pdp' alt = 'photo de profil de $login'></img>";
+            echo "</div>";
+
+            echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
+
+            echo "<p>Note: $note/10</p>";
+            echo "$texte";
+
         echo "</section>";
     }
 }

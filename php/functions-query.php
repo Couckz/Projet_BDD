@@ -50,8 +50,10 @@ function liste_avis($mysqli, $id_article) {
         login,
         note,
         texte,
-        titre
+        titre,
+        Utilisateur.chemin_pdp
     FROM avis
+    INNER JOIN Utilisateur USING(login)
     WHERE id_article = '$id_article';";
 
     $result = readDB($mysqli, $query);

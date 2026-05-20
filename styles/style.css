@@ -252,3 +252,42 @@ input {
     height: auto;
     border-radius: 20px;
 }
+
+.avis_article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    .avis_pdp_img_container {
+
+        border-radius: 15px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+
+        /* centrage de l'image */
+        display: flex;
+        justify-content: center;
+
+        /* taille du cadre */
+        width: 64px;
+        height: 64px;
+
+        /* ne pas déformer l'image, cacher la partie qui dépasse */
+        object-fit: cover;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            width:  auto;
+        }
+
+        transition: 0.2s;
+
+    }
+
+    .avis_pdp_img_container:hover {
+        transform: scale(1.025);
+    }
+
+}
