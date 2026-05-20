@@ -42,6 +42,23 @@ function information_article($mysqli, $id_article) {
 }
 
 
+function liste_avis($mysqli, $id_article) {
+
+    $query = "SELECT
+        date_creation,
+        id_avis,
+        login,
+        note,
+        texte,
+        titre
+    FROM avis
+    WHERE id_article = '$id_article';";
+
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
+
 function connection($mysqli, $login, $mdp)
 {
     $sql_query = "SELECT *

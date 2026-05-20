@@ -39,7 +39,10 @@ $mysqli = connectionDB(); //création de la connexion SQL
                 header("Location: ../index.php");
             }
 
+            $liste_avis = liste_avis($mysqli, $id_article);
+
             affichage_article($article[0]); //on affiche simplement l'article
+            affichage_liste_avis($liste_avis);
             ?>
         </main>
         <?php

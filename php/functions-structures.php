@@ -109,6 +109,7 @@ function date_to_str($date){
     $chaine_date = $chaine_date.substr($date, 0, 4);
     return $chaine_date;
 }
+
 function affichage_article($article) {
 
     $id_article = $article["id_article"];
@@ -162,6 +163,21 @@ function affichage_article($article) {
         echo "</footer>";
 
     echo "</div>";
+}
+
+function affichage_liste_avis($liste_avis) {
+    foreach($liste_avis as $avis){
+        $date_creation = $avis["date_creation"];
+        $login = $avis["login"];
+        $note = $avis["note"];
+        $texte = $avis["texte"];
+        $titre = $avis["titre"];
+
+        echo "$titre";
+        echo "de $login, le $date_creation";
+        echo "$note/10";
+        echo "$texte";
+    }
 }
 
 ?>
