@@ -254,7 +254,7 @@ input {
 }
 
 
-.avis_article {
+.avis {
 
     background: #FFFFFF;
     background: linear-gradient(
@@ -279,7 +279,7 @@ input {
         padding-bottom: 40px;
 
         .avis_header {
-
+            display: flex;
         }
 
         .avis_pdp_img_container {
