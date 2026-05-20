@@ -68,4 +68,13 @@ function connection($mysqli, $login, $mdp)
     $result = readDB($mysqli, $sql_query);
     return $result;
 }
+
+function inscription($mysqli, $nom, $prenom, $date_naissance, $adresse_email, $login, $mdp)
+{
+    $date_inscription = date("Y-m-d");
+    $date_derniere_connexion = date("Y-m-d H:i:s");
+    $sql_query = "INSERT INTO Utilisateur (Role, login, mdp, date_inscription, date_derniere_connexion, prenom, nom, date_naissance, adresse_email, chemin_pdp)
+    VALUES ('User', '$login', '$mdp', '$date_inscription', '$date_derniere_connexion', '$prenom', '$nom', '$date_naissance', '$adresse_email', '../img/photo_profil/defaut.png');";
+    writeDB($mysqli, $sql_query);
+}
 ?>

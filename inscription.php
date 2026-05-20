@@ -10,7 +10,7 @@ require_once("./includes/config-bdd.php");
 require_once("./php/functions-DB.php");
 require_once("./php/functions-query.php");
 require_once("./php/functions-structures.php");
-require_once("./php/login.php");
+require_once("./php/registration.php");
 
 $sql_connection = connectionDB();
 ?>
@@ -31,6 +31,7 @@ $sql_connection = connectionDB();
             <?php
                 if(isset($_POST['btnEnvoyer'])){
                     echo "Veuillez patienter...";
+                    registration();
                 }else{
             ?>
             <form action="#" method="post">
