@@ -11,6 +11,7 @@ require_once("./php/functions-DB.php");
 require_once("./php/functions-query.php");
 require_once("./php/functions-structures.php");
 require_once("./php/login.php");
+require_once("./php/post_avis.php");
 
 $sql_connection = connectionDB();
 ?>
@@ -28,16 +29,29 @@ $sql_connection = connectionDB();
         <?php include("static/header.php"); ?>
         <?php include("static/nav.php"); ?>
         <main>
+            <?php
+            if(isset($_POST['btnsub'])){
+                post_avis();
+            }
+            ?>
             <div class="formulaire_avis">
                 <form action="#" method="post">
                     <div class="ensemble_formulaire">
-                        
-                        Titre <input required type="text" name="Titre" placeholder="Vive Halo !"><br>
-                        Note <input required type="number" name="mdp" min="0" max="10"><br>
-                        Avis <input required type="password" name="mdp"><br>
+                    Titre <input required type="text" name="title" id="title" placeholder="Vive Halo !"><br>
+                        <label id="titre" name="titre">Titre de l'article: </label>
+                        <select name="article" id="article">
+                        <?php
+                            $article = recuperer_article($sql_connection);
+                            displayForm($article);
+                        ?>  
+                        </select>
+                        Note <input required type="number" name="note" min="0" max="10" id="note"><br>
+                        Avis <input required type="text" name="avis" id="avis"><br>
                     
                     <div class="boutton_avis">
-                    <input type="submit" name="btnEnvoyer">
+                    <button type="btnsub" name="btnsub">
+                            Envoyer
+                    </button>
                     </div>
                     </div>
                     

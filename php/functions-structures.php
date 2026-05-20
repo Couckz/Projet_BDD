@@ -61,4 +61,12 @@ function affichage_article($article){
 }
 
 
+function displayForm($article) {
+    foreach($article as $line) {
+        $nom_article = $line['titre'];
+        echo "<option value=\"$nom_article\">$nom_article</option>";
+    };
+    
+}
+
 ?>

@@ -15,4 +15,18 @@ function connection($mysqli, $login, $mdp)
     $result = readDB($mysqli, $sql_query);
     return $result;
 }
+
+function recuperer_article($mysqli) {
+    $query = "SELECT titre FROM Article";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
+function creation_avis($mysqli,  $login, $article_selectionne, $titre_avis, $avis, $note) {
+    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne'";
+    $result_id = readDB($mysqli, $query_id_article);
+    $id_article = $result_id[0]['id_article']; 
+    $insertion_query = "INSERT INTO Avis (titre, texte, note, date_creation, id_article, login) VALUES ('$titre_avis', '$avis', '$note', NOW(), '$id_article', '$login')";
+    writeDB($mysqli, $insertion_query);
+}
 ?>
