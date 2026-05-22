@@ -126,10 +126,12 @@ function affichage_article($article) {
     $synopsis = $article["synopsis"];
 
     echo "<div class = 'article'>";
+
         echo "<div class = 'presentation'>";
 
             echo "<div class = 'intro'>";
                 echo "<h2 class = 'title'>$titre</h2>";
+
                 echo "<section class = 'caracteristique'>";
 
                     echo "<div class = 'tags_container'>";
@@ -150,10 +152,9 @@ function affichage_article($article) {
                 echo "<p class='note'> Note : $note/10</p>";
             echo "</div>";
 
+        echo "</div>";
 
-            echo "</div>";
-
-        echo "<div class='contenu'>";
+        echo "<div class='content'>";
             echo "<p class='texte'>";
                 echo $contenu;
             echo "<p>";
