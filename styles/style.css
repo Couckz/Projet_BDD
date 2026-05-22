@@ -1,32 +1,39 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
+
+    --main-bg-color: hsl(0, 0%, 93%);
+    --alt-bg-color-1: hsl(0, 0%, 96%);
+    --alt-bg-color-2: hsl(230, 50%, 93%);
+    /*--main-bg-color: #8f99d4;*/
+    background-color: var(--main-bg-color);
 }
 
 header {
     display: flex;
-    height: 100px;
+    height: 120px;
     align-items: center;
     justify-content: center;
-    background-color: #9ac5f0;
+    background: linear-gradient(135deg, hsl(221, 75%, 32%), hsl(223, 90%, 60%));
 
     position: relative;
 
     img {
-        height: 100%;
+        height: 80%;
         width: auto;
 
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 10%; /* la moitié de 100% - 80%: l'image est centrée maintenant */
+        left: 1rem;
     }
 
     h1 {
-        text-shadow: rgb(64, 73, 115, 1) 1px 2px 3px;
-        font-size: 3.2rem;
+        color: white;
+        text-shadow: hsl(0, 0%, 24%) 2px 3px 5px;
+        font-size: 2.6rem;
     }
 
 }
@@ -34,13 +41,12 @@ header {
 nav{
     position: sticky;
     top: 0;
-    box-shadow: 0px 0px 10px 2px black;
     z-index: 2;
 }
 nav ul{
     list-style-type: none;
     display: flex;
-    background-color: #444444;
+    background-color: hsl(0, 0%, 10%);
     padding: 0;
     margin: 0;
 }
@@ -49,6 +55,7 @@ nav li a{
     color: white;
     padding: 14px 16px;
     text-decoration: none;
+    font-weight: 600;
     font-variant: small-caps;
     transition: 0.3s;
 }
@@ -63,7 +70,7 @@ main{
     padding-right: 8%;
     padding-top: 3%;
     padding-bottom: 3%;
-    background-color: #8f99d4;
+    background-color: var(--main-bg-color);
 }
 
 
@@ -83,25 +90,32 @@ footer{
 
 .articles_container {
     display: grid; /* adapté pour placer des éléments en 2D */
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     grid-gap: 1rem;
 
-    .border_article:hover {
+    .article:hover {
         transform: scale(1.01);
+    }
+
+   a {
+        text-decoration: none;
+        color: black;
     }
 
 }
 
-.border_article {
+.article {
 
     display: flex;
     flex-direction: column;
 
-    background-color: hsl(240, 34%, 82%);
+    height: 100%;
 
-    border: 2px solid black;
+    background-color: var(--alt-bg-color-1);
+
+    border: 1px solid hsl(0, 0%, 80%);
     border-radius: 20px;
-    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
 
     /* cache ce qui dépasse hors de la bordure arrondi (utile pour le footer) */
     overflow: hidden;
@@ -110,25 +124,7 @@ footer{
 
     transition: 0.3s;
 
-    a {
-        text-decoration: none;
-        color: black;
-    }
-
-    footer {
-
-        /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
-        flex-shrink: 0;
-
-        padding: 10px;
-
-        border-top: 2px solid hsl(0, 0%, 10%);
-
-        background-color: rgb(47, 47, 59);;
-        color: hsl(0, 0%, 95%);
-    }
-
-    .contenu {
+    .content {
         /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
         flex: 1 0 auto;
         padding: 10px;
@@ -151,16 +147,16 @@ footer{
             justify-content: center;
 
             /* taille du cadre */
-            width: 200px;
-            height: 160px;
+            width: 180px;
+            height: 140px;
 
             /* ne pas déformer l'image, cacher la partie qui dépasse */
-            object-fit: cover;
             overflow: hidden;
 
             img {
                 height: 100%;
                 width:  auto;
+                object-fit: cover;
             }
 
             transition: 0.2s;
@@ -169,25 +165,39 @@ footer{
 
     }
 
+    footer {
+
+        /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
+        flex-shrink: 0;
+
+        padding: 10px;
+
+        border-top: 1px solid hsl(0, 0%, 90%);
+
+        background-color: var(--alt-bg-color-2);
+        color: hsl(0, 0%, 38%);
+    }
+
 }
 
 
 .tags_container {
 
     display: flex;
+    flex-wrap: wrap; /* évite les sauts de ligne dans une bulle */
 
     /* pour le texte */
     color: hsl(0, 0%, 20%);
-    font-weight: bold;
+    font-weight: 600;
 
     .tag_bubble {
         margin: 5px;
         padding: 5px;
 
-        background-color: hsl(235, 22%, 90%);
+        background-color: var(--alt-bg-color-2);
 
-        border-radius: 10px;
-        border: 1px solid hsl(0, 0%, 10%);
+        border-radius: 20px;
+        border: 1px solid hsl(234, 39%, 80%);
 
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
         transition: 0.2s;
@@ -262,6 +272,12 @@ input {
 }
 
 
+.avis-article-container {
+    width: 1000px;
+    max-width: 80%;
+    margin: auto;
+}
+
 .avis {
 
     background: #FFFFFF;
@@ -275,7 +291,6 @@ input {
     width: 700px;
     border-radius: 20px;
     box-shadow: -14px 14px 4px -6px rgba(0, 0, 0, 0.5);
-    padding-bottom: 2rem;
 
     .avis_contenu {
 
