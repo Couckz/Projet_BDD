@@ -16,6 +16,7 @@ https://lucid.app/lucidchart/f6ce4f63-d3b4-47dd-9249-d926336b7897/edit?invitatio
 ### Alexandre
 - [ ] fais le nav
 
+-Modifier la base de données (pour mettre un avis de 0 à 11)
 
 Commit du Lundi 18 mai (Camélia) : 
 

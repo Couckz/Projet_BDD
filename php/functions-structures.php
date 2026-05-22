@@ -209,4 +209,19 @@ function displayForm($article) {
     
 }
 
+function display_categorie($categorie) {
+    echo "<br>";
+    foreach($categorie as $line) {
+        $nom_categorie = $line["nom_categorie"];
+        echo "<input type=\"checkbox\" name=\"categorie[]\" value=\"$nom_categorie\">$nom_categorie<br>";
+    }
+}
+
+function display_support($support) {
+    echo "<br>";
+    foreach($support as $line) {
+        $nom_support = $line["nom_support"];
+        echo "<input type=\"checkbox\" name=\"support[]\" value=\"$nom_support\">$nom_support<br>";
+    }
+}
 ?>

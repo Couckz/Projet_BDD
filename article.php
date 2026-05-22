@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 1); //active l'affichage des erreurs
 ini_set('display_startup_errors', 1); //gestion des affichages d'erreur au démarage
 error_reporting(E_ALL); //affiche toute les erreurs possible

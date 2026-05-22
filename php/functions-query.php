@@ -93,4 +93,43 @@ function inscription($mysqli, $nom, $prenom, $date_naissance, $adresse_email, $l
     VALUES ('User', '$login', '$mdp', '$date_inscription', '$date_derniere_connexion', '$prenom', '$nom', '$date_naissance', '$adresse_email', '../img/photo_profil/defaut.png');";
     writeDB($mysqli, $sql_query);
 }
+
+function recuperer_support($mysqli) {
+    $query = "SELECT nom_support FROM Support";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
+function recuperer_categorie($mysqli) {
+    $query = "SELECT nom_categorie FROM Categorie";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
+function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support) {
+    $insertion_query = "INSERT INTO Jeu (nom, prix, synopsis) VALUES ('$titre_jeu', '$prix', '$synopsis')";
+    writeDB($mysqli, $insertion_query);
+    $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
+    $result_id = readDB($mysqli, $query_id_jeu);
+    $id_jeu = $result_id[0]['id_jeu']; 
+
+    foreach($categorie as $lines) {
+        $query_categorie = "INSERT INTO Est_categorise_par (id_jeu, nom_categorie) VALUES ('$id_jeu', '$lines')";
+        writeDB($mysqli, $query_categorie);
+    }
+
+    foreach($support as $lines) {
+        $query_support = "INSERT INTO Est_jouable_sur (id_jeu, nom_support) VALUES ('$id_jeu', '$lines')";
+        writeDB($mysqli, $query_support);
+    }
+
+}
+function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristique, $date) {
+    $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
+    $result_id = readDB($mysqli, $query_id_jeu);
+    $id_jeu = $result_id[0]['id_jeu']; 
+    $insertion_query = "INSERT INTO Article (titre, contenu, note, caracteristiques, date_creation, date_modification, id_jeu)
+    VALUES ('$titre_article', '$contenu', '$note', '$caracteristique', NOW(), NOW(), '$id_jeu')";
+    writeDB($mysqli, $insertion_query);
+}
 ?>

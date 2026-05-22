@@ -1,4 +1,5 @@
 <?php
+session_start();
 //affichage des erreurs côté PHP et côté MYSQLI
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

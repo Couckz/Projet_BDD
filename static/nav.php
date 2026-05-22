@@ -1,5 +1,4 @@
 <?php
-session_start();
 $rootPath = dirname($_SERVER['SCRIPT_NAME']);
 ?>
 <nav>
