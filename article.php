@@ -42,8 +42,10 @@ $mysqli = connectionDB(); //création de la connexion SQL
 
             $liste_avis = liste_avis($mysqli, $id_article);
 
+            echo "<div class = 'avis-article-container'>";
             affichage_article($article[0]); //on affiche simplement l'article
             affichage_liste_avis($liste_avis);
+            echo "</div>";
             ?>
         </main>
         <?php

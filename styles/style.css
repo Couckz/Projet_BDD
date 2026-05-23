@@ -1,32 +1,39 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
+
+    --main-bg-color: hsl(0, 0%, 93%);
+    --alt-bg-color-1: hsl(0, 0%, 96%);
+    --alt-bg-color-2: hsl(230, 50%, 93%);
+    /*--main-bg-color: #8f99d4;*/
+    background-color: var(--main-bg-color);
 }
 
 header {
     display: flex;
-    height: 100px;
+    height: 120px;
     align-items: center;
     justify-content: center;
-    background-color: #9ac5f0;
+    background: linear-gradient(135deg, hsl(221, 75%, 32%), hsl(223, 90%, 60%));
 
     position: relative;
 
     img {
-        height: 100%;
+        height: 80%;
         width: auto;
 
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 10%; /* la moitié de 100% - 80%: l'image est centrée maintenant */
+        left: 1rem;
     }
 
     h1 {
-        text-shadow: rgb(64, 73, 115, 1) 1px 2px 3px;
-        font-size: 3.2rem;
+        color: white;
+        text-shadow: hsl(0, 0%, 24%) 2px 3px 5px;
+        font-size: 2.6rem;
     }
 
 }
@@ -34,13 +41,12 @@ header {
 nav{
     position: sticky;
     top: 0;
-    box-shadow: 0px 0px 10px 2px black;
     z-index: 2;
 }
 nav ul{
     list-style-type: none;
     display: flex;
-    background-color: #444444;
+    background-color: hsl(0, 0%, 10%);
     padding: 0;
     margin: 0;
 }
@@ -49,6 +55,7 @@ nav li a{
     color: white;
     padding: 14px 16px;
     text-decoration: none;
+    font-weight: 600;
     font-variant: small-caps;
     transition: 0.3s;
 }
@@ -63,7 +70,7 @@ main{
     padding-right: 8%;
     padding-top: 3%;
     padding-bottom: 3%;
-    background-color: #8f99d4;
+    background-color: var(--main-bg-color);
 }
 
 
@@ -83,52 +90,41 @@ footer{
 
 .articles_container {
     display: grid; /* adapté pour placer des éléments en 2D */
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     grid-gap: 1rem;
 
-    .border_article:hover {
+    .article:hover {
         transform: scale(1.01);
     }
 
-}
-
-.border_article {
-
-    display: flex;
-    flex-direction: column;
-
-    background-color: hsl(240, 34%, 82%);
-
-    border: 2px solid black;
-    border-radius: 20px;
-    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.5);
-
-    /* cache ce qui dépasse hors de la bordure arrondi (utile pour le footer) */
-    overflow: hidden;
-
-    margin-bottom: 30px;
-
-    transition: 0.3s;
-
-    a {
+   a {
         text-decoration: none;
         color: black;
     }
 
-    footer {
+}
 
-        /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
-        flex-shrink: 0;
+.article {
 
-        padding: 10px;
+    display: flex;
+    flex-direction: column;
 
-        border-top: 2px solid hsl(0, 0%, 10%);
+    height: 100%;
 
-        background-color: rgb(47, 47, 59);;
-        color: hsl(0, 0%, 95%);
-    }
+    background-color: var(--alt-bg-color-1);
 
-    .contenu {
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+
+    /* cache ce qui dépasse hors de la bordure arrondi (utile pour le footer) */
+    overflow: hidden;
+
+    margin-bottom: 1rem;
+
+    transition: 0.3s;
+
+    .content {
         /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
         flex: 1 0 auto;
         padding: 10px;
@@ -151,16 +147,16 @@ footer{
             justify-content: center;
 
             /* taille du cadre */
-            width: 200px;
-            height: 160px;
+            width: 180px;
+            height: 140px;
 
             /* ne pas déformer l'image, cacher la partie qui dépasse */
-            object-fit: cover;
             overflow: hidden;
 
             img {
                 height: 100%;
                 width:  auto;
+                object-fit: cover;
             }
 
             transition: 0.2s;
@@ -169,25 +165,39 @@ footer{
 
     }
 
+    footer {
+
+        /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
+        flex-shrink: 0;
+
+        padding: 10px;
+
+        border-top: 1px solid hsl(0, 0%, 90%);
+
+        background-color: var(--alt-bg-color-2);
+        color: hsl(0, 0%, 38%);
+    }
+
 }
 
 
 .tags_container {
 
     display: flex;
+    flex-wrap: wrap; /* évite les sauts de ligne dans une bulle */
 
     /* pour le texte */
     color: hsl(0, 0%, 20%);
-    font-weight: bold;
+    font-weight: 600;
 
     .tag_bubble {
         margin: 5px;
         padding: 5px;
 
-        background-color: hsl(235, 22%, 90%);
+        background-color: var(--alt-bg-color-2);
 
-        border-radius: 10px;
-        border: 1px solid hsl(0, 0%, 10%);
+        border-radius: 20px;
+        border: 1px solid hsl(234, 39%, 80%);
 
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
         transition: 0.2s;
@@ -262,6 +272,15 @@ input {
 }
 
 
+.avis-article-container {
+    width: 1000px;
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .avis {
 
     background: #FFFFFF;
@@ -274,10 +293,9 @@ input {
 
     width: 700px;
     border-radius: 20px;
-    box-shadow: -14px 14px 4px -6px rgba(0, 0, 0, 0.5);
-    padding-bottom: 2rem;
+    box-shadow: -7px 7px 6px -6px rgba(0, 0, 0, 0.1);
 
-    .avis_contenu {
+    .avis-contenu {
 
         display: flex;
         flex-direction: column;
@@ -287,9 +305,33 @@ input {
         max-width: 70%;
         padding: 1.4rem;
         padding-bottom: 2rem;
+        text-overflow: ellipsis;
 
         .avis_header {
             display: flex;
+            .avis-actions {
+                padding-left: 2rem;
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+
+                button {
+                    border: none;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: hsl(0, 0%, 60%);
+                    transition: 0.2s;
+                }
+
+                button:hover {
+                    filter: brightness(80%);
+                    transform:scale(1.01);
+                }
+
+                button:active {
+                    filter: brightness(60%);
+                    transform:scale(1.02);
+                }
+            }
         }
 
         .avis_pdp_img_container {
@@ -303,6 +345,8 @@ input {
             justify-content: center;
 
             /* taille du cadre */
+            /* la largeur minimale est la pour éviter l'écrasement de l'image si le titre de l'avis est trop long*/
+            min-width: 64px;
             width: 64px;
             height: 64px;
 
@@ -319,9 +363,85 @@ input {
 
         }
 
+        /* à enlever (ça donne l'impression qu'on peut cliquer sur la pdp alors qu'aucune action n'est associée à ça)
         .avis_pdp_img_container:hover {
             transform: scale(1.025);
         }
+        */
 
+    }
+}
+
+.modification-avis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    margin: auto;
+    padding: 20px;
+
+    width: 700px;
+    max-width: 80%;
+
+    border-radius: 1rem;
+    box-shadow: -7px 7px 6px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    background-color: var(--alt-bg-color-1);
+
+    label {
+        font-weight: 500;
+    }
+
+    fieldset {
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+        width: 80%;
+    }
+
+    textarea {
+        background-color: var(--alt-bg-color-2);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        border: 1.2px solid hsl(0, 0%, 80%);
+        transition: 0.2s;
+        outline: none;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        resize: none;
+    }
+
+    textarea:focus {
+        border: 1.2px solid #035dc5;
+        border-style: inset;
+    }
+
+    .huge-text-area {
+        height: 6rem;
+    }
+
+    input[type="number"] {
+        display: flex;
+        padding: 0.5rem;
+        width: 4rem;
+    }
+
+    input[type="submit"] {
+        padding: 0.5rem 2rem;
+        border: none;
+        border-radius: 8px;
+        background: #4a90e2;
+        color: white;
+        transition: 0.3s;
+        box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="submit"]:hover {
+        filter: brightness(95%);
+        transform:scale(1.01);
     }
 }

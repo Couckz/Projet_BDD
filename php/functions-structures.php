@@ -16,49 +16,49 @@ function affichage_articles($articles){
             $prix = $lines["prix"];
             $synopsis = $lines["synopsis"];
 
-            echo "<div class = 'border_article'>";
-                echo "<a href = article.php/?id_article=$id_article>";
 
-                    echo "<div class = 'presentation'>";
+            echo "<a href = article.php/?id_article=$id_article>";
+                echo "<div class = 'article'>";
 
-                        echo "<div class = 'intro'>";
-                            echo "<h2 class = 'title'>$titre</h2>";
-                            echo "<section class = 'caracteristique'>";
+                        echo "<div class = 'presentation'>";
 
-                                echo "<div class = 'tags_container'>";
-                                    foreach($caracteristiques as $caracteristique){
-                                        echo "<div class = 'tag_bubble'>$caracteristique</div>";
-                                    }
-                                echo "</div>";
+                            echo "<div class = 'intro'>";
+                                echo "<h2 class = 'title'>$titre</h2>";
+                                echo "<section class = 'caracteristique'>";
 
-                                echo "$synopsis<br/>";
-                            echo "</section>";
-                        echo "</div>";
+                                    echo "<div class = 'tags_container'>";
+                                        foreach($caracteristiques as $caracteristique){
+                                            echo "<div class = 'tag_bubble'>$caracteristique</div>";
+                                        }
+                                    echo "</div>";
 
-                        echo "<div class = 'intro2'>";
-                            echo "<div class = 'img_container'>";
-                                $chemin_img = dirname($_SERVER['SCRIPT_NAME'])."/".$chemin_img;
-                                echo "<img src='$chemin_img'>";
+                                    echo "$synopsis<br/>";
+                                echo "</section>";
                             echo "</div>";
-                            echo "<p>Prix : $prix</p>";
-                            echo "<p class='note'> Note : $note/10</p>";
+
+                            echo "<div class = 'intro2'>";
+                                echo "<div class = 'img_container'>";
+                                    $chemin_img = dirname($_SERVER['SCRIPT_NAME'])."/".$chemin_img;
+                                    echo "<img src='$chemin_img'>";
+                                echo "</div>";
+                                echo "<p>Prix : $prix</p>";
+                                echo "<p class='note'> Note : $note/10</p>";
+                            echo "</div>";
                         echo "</div>";
-                    echo "</div>";
 
-                    echo "<div class='contenu'>";
-                        echo "<p class='texte'>";
-                            echo $contenu;
-                        echo "<p>";
-                    echo "</div>";
+                        echo "<div class='content'>";
+                            echo "<p class='texte'>";
+                                echo $contenu;
+                            echo "<p>";
+                        echo "</div>";
 
-                    echo "<footer class = 'fin'>";
-                        echo "Date de création : $date_creation  ";
-                        echo "  Modifié le : $date_modification";
-                    echo "</footer>";
+                        echo "<footer class = 'fin'>";
+                            echo "Date de création : $date_creation  ";
+                            echo "  Modifié le : $date_modification";
+                        echo "</footer>";
 
-                echo "</a>";
-
-            echo "</div>";
+                echo "</div>";
+            echo "</a>";
 
     }
 
@@ -125,11 +125,13 @@ function affichage_article($article) {
     $prix = $article["prix"];
     $synopsis = $article["synopsis"];
 
-    echo "<div class = 'border_article'>";
+    echo "<div class = 'article'>";
+
         echo "<div class = 'presentation'>";
 
             echo "<div class = 'intro'>";
                 echo "<h2 class = 'title'>$titre</h2>";
+
                 echo "<section class = 'caracteristique'>";
 
                     echo "<div class = 'tags_container'>";
@@ -150,10 +152,9 @@ function affichage_article($article) {
                 echo "<p class='note'> Note : $note/10</p>";
             echo "</div>";
 
+        echo "</div>";
 
-            echo "</div>";
-
-        echo "<div class='contenu'>";
+        echo "<div class='content'>";
             echo "<p class='texte'>";
                 echo $contenu;
             echo "<p>";
@@ -165,29 +166,51 @@ function affichage_article($article) {
         echo "</footer>";
 
     echo "</div>";
+
 }
 
 function affichage_liste_avis($liste_avis) {
-    foreach($liste_avis as $avis){
-        $date_creation = explode(" ", $avis["date_creation"]);
-        $jour = $date_creation[0];
-        $heure = $date_creation[1];
-        $note = $avis["note"];
-        $texte = $avis["texte"];
-        $titre = $avis["titre"];
 
-        $login = $avis["login"];
-        $chemin_pdp = $avis["chemin_pdp"];
+    $est_connecte = isset($_SESSION['connecte']) && $_SESSION['connecte'];
+
+    foreach($liste_avis as $avis){
+
+        /* sépare date et heure */
+        $date_creation  = explode(" ", $avis["date_creation"]);
+        $jour           = $date_creation[0];
+        $heure          = $date_creation[1];
+
+        $note           = $avis["note"];
+        $texte          = $avis["texte"];
+        $titre          = $avis["titre"];
+
+        $id_avis        = $avis["id_avis"];
+        $login          = $avis["login"];
+        $chemin_pdp     = $avis["chemin_pdp"];
 
         echo "<div class = 'avis'>";
 
-            echo "<section class = 'avis_contenu'>";
+            echo "<section class = 'avis-contenu'>";
 
                 echo "<div class = 'avis_header'>";
                     echo "<div class = 'avis_pdp_img_container'>";
                         echo "<img src = '$chemin_pdp' alt = 'photo de profil de $login'></img>";
                     echo "</div>";
                     echo "<h2>$titre</h2>";
+                    if ($est_connecte and $_SESSION['login'] === $login) {
+                        echo "<div class='avis-actions'>";
+                            echo "<form action='../php/process_avis.php' method='POST'>";
+                                echo "<input type='hidden' name='id_avis' value='$id_avis'>";
+                                echo "<input type='hidden' name='action' value='suppr'>";
+                                echo "<button type='submit'>Supprimer</button>";
+                            echo "</form>";
+
+                            echo "<form action='../modifier_avis.php' method='GET'>";
+                                echo "<input type='hidden' name='id_avis' value='$id_avis'>";
+                                echo "<button type='submit'>Modifier</button>";
+                            echo "</form>";
+                        echo "</div>";
+                    }
                 echo "</div>";
 
                 echo "<p>De <i>$login</i>, le $jour, à $heure</p>";
@@ -206,7 +229,7 @@ function displayForm($article) {
         $nom_article = $line['titre'];
         echo "<option value=\"$nom_article\">$nom_article</option>";
     };
-    
+
 }
 
 function display_categorie($categorie) {
