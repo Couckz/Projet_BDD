@@ -5,9 +5,9 @@ error_reporting(E_ALL); //affiche toute les erreurs possible
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); //déclenche une erreur PHP dés qu'une requête échoue, puis transformes ces erreurs en exception
 require_once("./includes/constantes.php"); //constantes du site
 require_once("./includes/config-bdd.php"); //donnees pour la connexion
-require_once("./php/functions-DB.php"); //fonctions de connexions
-require_once("./php/functions-query.php"); //fonctions de requêtes SQL
-require_once("./php/functions-structures.php"); //fonctions de mises en pages au niveau des données obtenues de la BDD
+require_once("./php/functions-DB.php"); //functions de connexions
+require_once("./php/functions-query.php"); //functions de requêtes SQL
+require_once("./php/functions-structures.php"); //functions de mises en pages au niveau des données obtenues de la BDD
 $mysqli = connectionDB(); //création de la connexion SQL
 ?>
 <!DOCTYPE html>

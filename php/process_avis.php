@@ -32,5 +32,8 @@ if (isset($_POST['id_avis']) and isset($_POST['action'])) {
 }
 
 closeDB($mysqli);
-header("Location: ../index.php");
+
+/* retour à la page précedente */
+$previous_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
+header("Location: $previous_url");
 ?>
