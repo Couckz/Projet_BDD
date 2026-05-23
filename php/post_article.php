@@ -21,12 +21,11 @@ function post_article() {
         $nom_unique = uniqid() . "_" . $nom_original;
         $chemin_final = $dossier . $nom_unique;
         $login = $_SESSION["login"];
-        print_r($login);
         move_uploaded_file($_FILES["image_article"]["tmp_name"],$chemin_final);
         creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support);
         creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristiques, $date, $chemin_final, $login);
         closeDB($mysqli);
-        //header("Location: index.php");
+        header("Location: index.php");
     }
 }
 
