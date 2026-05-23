@@ -216,6 +216,7 @@ function recuperer_article_par_nom($mysqli, $title) {
     $result_verif = readDB($mysqli, $query_verif);
     if(empty($result_verif)) {
         print_r("Aucun article n'est à propos de ce jeu");
+        return 0;
     } else {
         $query = "SELECT
         Article.id_article,

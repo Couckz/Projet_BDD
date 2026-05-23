@@ -32,7 +32,10 @@ $mysqli = connectionDB(); //création de la connexion SQL
             if(isset($_POST['filtre_nom'])){
                 $title = filtrer_nom($mysqli);
                 $result = recuperer_article_par_nom($mysqli, $title);
-                affichage_articles($result);
+                if ($result != 0) {
+                    affichage_articles($result);
+                }
+                
             } else if (isset($_POST['filtre_cat'])){
                 $articles = filtrer_cat($mysqli);
                 $result = recuperer_article_par_categorie($mysqli, $articles);
