@@ -28,23 +28,39 @@ $mysqli = connectionDB(); //création de la connexion SQL
             include("static/nav.php"); //inclusion de l'onglet navigation de la page
         ?>
         <main>
+            <h2 class="salutation">Bonjour <?php echo $_SESSION['login'];?>!</h2>
             <?php
             if (isset($_POST['btnPhoto']) && !empty($_FILES['pp']['name'])) {
                 change_photo();
             }
             ?>
-                <form action="#" method="post" enctype="multipart/form-data">
-                    
+            <form action="#" method="post" enctype="multipart/form-data">
                 <label for="inputPdp"  class="profile" style="cursor:pointer;">
                     <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
                 </label>
-
                 <input type="file" id="inputPdp" name="pp" accept="image/*" style="display:none;">
-                <button type="submit" name="btnPhoto">Envoyer</button>
-                </form>
-            <p>
-                Membre depuis le : <?php echo date_to_str($_SESSION['date_inscription']); ?>
-            </p>
+                <br><button type="submit" name="btnPhoto">Changer</button>
+                <p class="profile">
+                    <span>
+                        Membre depuis le : <?php echo date_to_str($_SESSION['date_inscription']); ?> 
+                        <button type="submit" name="btn_date_inscription">Changer</button>
+                        <?php
+                        if (isset($_POST['btn_date_naissance'])){
+                         
+                        }
+                        ?>
+                    </span>
+                    <span>
+                        Identité : <?php echo $_SESSION['prenom'];echo " ". $_SESSION['nom']; ?> <button type="submit" name="btn_nom">Changer</button>
+                    </span>
+                    <span>
+                        Né le : <?php echo date_to_str($_SESSION['date_naissance']); ?> <button type="submit" name="btn_date_naissance">Changer</button>
+                    </span>
+                    <span>
+                        Adresse e-mail : <?php echo $_SESSION['adresse_email']; ?> <button type="submit" name="btn_adresse_email">Changer</button>
+                    </span>
+                </p>
+            </form>
         </main>
         <?php
             include("static/footer.php"); //inclusion du footer de la page

@@ -3,6 +3,7 @@
 function login()
 {
     $sql_connection = connectionDB();
+    modif_derniere_connexion($sql_connection, $_POST['login'], date("Y-m-d H:i:s"));
     $connect = connection($sql_connection, $_POST['login'], $_POST['mdp']);
     if(empty($connect)){
         closeDB($sql_connection);

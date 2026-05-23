@@ -97,7 +97,7 @@ footer{
         transform: scale(1.01);
     }
 
-   a {
+    a {
         text-decoration: none;
         color: black;
     }
@@ -266,9 +266,26 @@ input {
 }
 
 .profile img{
-    width: 150px;
+    width: 250px;
     height: auto;
     border-radius: 20px;
+}
+h2.salutation{
+    font-size: 40px;
+}
+
+p.profile{
+    flex-direction: column;
+    display: flex;
+    background-color: #b6b6b6;
+    border-radius: 10px;
+    width: fit-content;
+    font-size: 20px;
+    padding: 15px;
+}
+.profile button{
+    flex: 0 0 auto;
+    font-size: 15px;
 }
 
 

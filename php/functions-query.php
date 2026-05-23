@@ -73,6 +73,14 @@ function connection($mysqli, $login, $mdp)
     return $result;
 }
 
+function modif_derniere_connexion($mysqli, $login, $date)
+{
+    $query = "UPDATE Utilisateur
+    SET date_derniere_connexion = '$date'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
 function recuperer_article($mysqli) {
     $query = "SELECT titre FROM Article";
     $result = readDB($mysqli, $query);
