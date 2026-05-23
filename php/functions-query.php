@@ -8,6 +8,7 @@ function information_articles($mysqli) {
         Article.note,
         Article.caracteristiques,
         Article.date_creation,
+        Jeu.nom,
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
@@ -28,6 +29,7 @@ function information_article($mysqli, $id_article) {
         Article.note,
         Article.caracteristiques,
         Article.date_creation,
+        Jeu.nom,
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
@@ -165,7 +167,7 @@ function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $suppor
         writeDB($mysqli, $insertion_query);
         $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
         $result_id = readDB($mysqli, $query_id_jeu);
-        $id_jeu = $result_id[0]['id_jeu']; 
+        $id_jeu = $result_id[0]['id_jeu'];
     }
 
     foreach($categorie as $lines) {
@@ -187,14 +189,14 @@ function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, 
 
     $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
     $result_id = readDB($mysqli, $query_id_jeu);
-    $id_jeu = $result_id[0]['id_jeu']; 
+    $id_jeu = $result_id[0]['id_jeu'];
     $insertion_query = "INSERT INTO Article (titre, contenu, note, caracteristiques, date_creation, date_modification, id_jeu)
     VALUES ('$titre_article', '$contenu', '$note', '$caracteristiques', NOW(), NOW(), '$id_jeu')";
     writeDB($mysqli, $insertion_query);
 
     $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$titre_article'";
     $result_id_article = readDB($mysqli, $query_id_article);
-    $id_article = $result_id_article[0]['id_article']; 
+    $id_article = $result_id_article[0]['id_article'];
     $insertion_article_query = "INSERT INTO Image (chemin_image, id_article) VALUES ('$chemin_final', '$id_article')";
     writeDB($mysqli, $insertion_article_query);
 

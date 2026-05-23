@@ -15,6 +15,7 @@ function affichage_articles($articles){
             $chemin_img = $lines["chemin_image"];
             $prix = $lines["prix"];
             $synopsis = $lines["synopsis"];
+            $nom_jeu = $lines["nom"];
 
 
             echo "<a href = article.php/?id_article=$id_article>";
@@ -41,7 +42,8 @@ function affichage_articles($articles){
                                     $chemin_img = dirname($_SERVER['SCRIPT_NAME'])."/".$chemin_img;
                                     echo "<img src='$chemin_img'>";
                                 echo "</div>";
-                                echo "<p>Prix : $prix</p>";
+                                echo "<p>Jeu : $nom_jeu</p>";
+                                echo "<p>Prix : $prix €</p>";
                                 echo "<p class='note'> Note : $note/10</p>";
                             echo "</div>";
                         echo "</div>";
@@ -124,6 +126,7 @@ function affichage_article($article) {
     $chemin_img = $article["chemin_image"];
     $prix = $article["prix"];
     $synopsis = $article["synopsis"];
+    $nom_jeu = $article["nom"];
 
     echo "<div class = 'article'>";
 
@@ -148,7 +151,8 @@ function affichage_article($article) {
                 echo "<div class = 'img_container'>";
                     echo "<img src='../$chemin_img'>";
                 echo "</div>";
-                echo "<p>Prix : $prix</p>";
+                echo "<p>Jeu : $nom_jeu</p>";
+                echo "<p>Prix : $prix €</p>";
                 echo "<p class='note'> Note : $note/10</p>";
             echo "</div>";
 
