@@ -9,7 +9,7 @@ $rootPath = dirname($_SERVER['SCRIPT_NAME']);
                 ?><li><a href="<?php echo $rootPath; ?>/profil.php">Profil</a></li><?php
                 ?><li><a href="<?php echo $rootPath; ?>/php/logout.php">Déconnexion</a></li><?php
                 ?><li><a href="<?php echo $rootPath; ?>/avis.php">Poster un avis</a></li><?php
-                if ($_SESSION['role'] == "Redacteur") {
+                if ($_SESSION['role'] == "Redacteur" || $_SESSION['role'] == "Admin"  ) {
                     ?><li><a href="<?php echo $rootPath; ?>/redaction.php">Rediger un article</a></li><?php
                 }
             } else{
