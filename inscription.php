@@ -48,7 +48,7 @@ $sql_connection = connectionDB();
                             Date de naissance: <input required type="date" name="date_naissance"><br>
                         </div>
                         <div class="champ_connexion">
-                            email: <input required type="email" name="adresse_email" placeholder="ex: Jacques Chirac"><br>
+                            email: <input required type="email" name="adresse_email" placeholder="ex: david.goodenough@gmail.com"><br>
                         </div>
                         <div class="champ_connexion">
                             Identifiant: <input required type="text" name="login" placeholder="ex: salextroll"><br>

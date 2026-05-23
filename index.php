@@ -19,7 +19,7 @@ $mysqli = connectionDB(); //création de la connexion SQL
         <meta charset="utf-8">
         <meta name="keywords" content="jeu vidéo">
         <meta name="author" content="Malo Camelia Alexandre">
-        <link rel="icon" href="images/pokeball.png">
+        <link rel="icon" href=<?php echo "$iconeSite"; ?>>
         <link rel="stylesheet" type="text/css" href="styles/style.css">
     </head>
     <body>

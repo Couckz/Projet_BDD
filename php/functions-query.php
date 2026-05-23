@@ -81,11 +81,34 @@ function modif_derniere_connexion($mysqli, $login, $date)
     writeDB($mysqli, $query);
 }
 
+function modif_nom($mysqli, $login, $nom, $prenom){
+    $query = "UPDATE Utilisateur
+    SET nom = '$nom', prenom = '$prenom'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
+function modif_mail($mysqli, $login, $mail){
+    $query = "UPDATE Utilisateur
+    SET adresse_email = '$mail'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
+function modif_naissance($mysqli, $login, $date){
+    $query = "UPDATE Utilisateur
+    SET date_naissance = '$date'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
 function recuperer_article($mysqli) {
     $query = "SELECT titre FROM Article";
     $result = readDB($mysqli, $query);
     return $result;
 }
+
+
 
 function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis, $note) {
 
