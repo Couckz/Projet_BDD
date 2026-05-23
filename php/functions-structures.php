@@ -205,7 +205,7 @@ function affichage_liste_avis($liste_avis) {
                                 echo "<button type='submit'>Supprimer</button>";
                             echo "</form>";
 
-                            echo "<form action='../php/modifier_avis.php' method='GET'>";
+                            echo "<form action='../modifier_avis.php' method='GET'>";
                                 echo "<input type='hidden' name='id_avis' value='$id_avis'>";
                                 echo "<button type='submit'>Modifier</button>";
                             echo "</form>";
