@@ -33,7 +33,7 @@ $sql_connection = connectionDB();
             <?php
             if(isset($_POST['btnsub_article'])){
                 post_article();
-             }
+            }
             ?>
 
                 <div class="formulaire_article">
@@ -53,9 +53,9 @@ $sql_connection = connectionDB();
                         <?php
                             $categorie = recuperer_categorie($sql_connection);
                             display_categorie($categorie);
-                        ?> 
+                        ?>
                         </div>
-                         
+                
                         
                         <br>
                         
@@ -64,7 +64,7 @@ $sql_connection = connectionDB();
                             <?php
                             $support = recuperer_support($sql_connection);
                             display_support($support);
-                        ?>  
+                        ?>
                         </div>
                         
 

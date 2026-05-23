@@ -9,6 +9,7 @@ require_once("./includes/config-bdd.php"); //donnees pour la connexion
 require_once("./php/functions-DB.php"); //functions de connexions
 require_once("./php/functions-query.php"); //functions de requêtes SQL
 require_once("./php/functions-structures.php"); //functions de mises en pages au niveau des données obtenues de la BDD
+require_once("./php/change_photo.php"); //functions de changement de l'image de profil
 $mysqli = connectionDB(); //création de la connexion SQL
 ?>
 <!DOCTYPE html>
@@ -27,10 +28,20 @@ $mysqli = connectionDB(); //création de la connexion SQL
             include("static/nav.php"); //inclusion de l'onglet navigation de la page
         ?>
         <main>
-            <h2>Bonjour <?php echo $_SESSION['prenom'];?>!</h2>
-            <div class="profile">
-                <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
-            </div>
+            <?php
+            if (isset($_POST['btnPhoto']) && !empty($_FILES['pp']['name'])) {
+                change_photo();
+            }
+            ?>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    
+                <label for="inputPdp"  class="profile" style="cursor:pointer;">
+                    <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
+                </label>
+
+                <input type="file" id="inputPdp" name="pp" accept="image/*" style="display:none;">
+                <button type="submit" name="btnPhoto">Envoyer</button>
+                </form>
             <p>
                 Membre depuis le : <?php echo date_to_str($_SESSION['date_inscription']); ?>
             </p>

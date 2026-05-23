@@ -77,7 +77,7 @@ function recuperer_article($mysqli) {
     return $result;
 }
 
-function creation_avis($mysqli,  $login, $article_selectionne, $titre_avis, $avis, $note) {
+function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis, $note) {
 
     /* pour éviter des erreurs lorsque le texte contient des apostrophes etc */
     $titre_avis = mysqli_real_escape_string($mysqli, $titre_avis);
@@ -200,5 +200,12 @@ function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, 
 
     $query_administre = "INSERT INTO Administre (login, id_article) VALUES ('$login', '$id_article')";
     writeDB($mysqli, $query_administre);
+}
+
+function modif_pp($mysqli, $login, $path){
+    $query = "UPDATE Utilisateur
+    SET chemin_pdp = '$path'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
 }
 ?>
