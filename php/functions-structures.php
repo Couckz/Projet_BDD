@@ -240,6 +240,13 @@ function display_categorie($categorie) {
     }
 }
 
+function display_categorie_selection($categorie) {
+    foreach($categorie as $line) {
+        $nom_categorie = $line["nom_categorie"];
+        echo "<option value=\"$nom_categorie\">$nom_categorie</option>";
+    }
+}
+
 function display_support($support) {
     echo "<br>";
     foreach($support as $line) {

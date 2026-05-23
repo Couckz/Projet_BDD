@@ -8,7 +8,8 @@ require_once("./includes/constantes.php"); //constantes du site
 require_once("./includes/config-bdd.php"); //donnees pour la connexion
 require_once("./php/functions-DB.php"); //functions de connexions
 require_once("./php/functions-query.php"); //functions de requêtes SQL
-require_once("./php/functions-structures.php"); //functions de mises en pages au niveau des données obtenues de la BDD
+require_once("./php/functions-structures.php"); //functions de mises en pages au niveau des données obtenues de la BD
+require_once("./php/filtre.php");
 $mysqli = connectionDB(); //création de la connexion SQL
 ?>
 <!DOCTYPE html>
@@ -27,35 +28,52 @@ $mysqli = connectionDB(); //création de la connexion SQL
             include("static/nav.php"); //inclusion de l'onglet navigation de la page
         ?>
         <main>
+            <?php
+            if(isset($_POST['filtre_nom'])){
+                $title = filtrer_nom($mysqli);
+                $result = recuperer_article_par_nom($mysqli, $title);
+                affichage_articles($result);
+            } else if (isset($_POST['filtre_cat'])){
+                $articles = filtrer_cat($mysqli);
+                $result = recuperer_article_par_categorie($mysqli, $articles);
+                affichage_articles($result);
+                
+            } else {
+                $articles = information_articles($mysqli); //on récupère tout les articles en même temps depuis la BDD
+                affichage_articles($articles); //on affiche simplement lesdits articles
+            }
+            
+            
+            ?>
             <section>
             <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
 
-            <!-- Pour le futur formulaire de recherche par nom et par catégorie : -->
-
-            <!-- <div class="formulaire">
-                <form action="/pokedex/php/modification.php" method="POST">
+            <div class="formulaire">
+                <form action="#" method="POST">
                     <div class="champ">
-                        <label for="id">Pokemon selectionné : </label>
-                        <select name="pokemon" id="">
+                        Titre <input required type="text" name="title" id="title" placeholder="Mario"><br>
+                        Categorie:
+                        <select name="categorie" id="categorie">
+                            <?php
+                            $categorie = recuperer_categorie($mysqli);
+                            display_categorie_selection($categorie);
+                            ?>
                         </select>
-                        <label for="id">Nombre de vue</label>
-                        <input type="text" id="nombrevue" name="nombrevue">
-                        <label for="id">Nombre attrapé</label>
-                        <input type="text" id="nombreattrap" name="nombreattrap">
                     </div>
                 <div class="soumettre">
-                    <button type="submit" name="submit">
-                        Modifier
+                    <button type="filtre_cat" name="filtre_cat">
+                        Filtrer par categorie
+                    </button>
+                    <button type="filtre_nom" name="filtre_nom">
+                        Filtrer par nom
                     </button>
                 </div>
                 </form>
-            </div> -->
+            </div>
             </section>
 
-            <?php
-            $articles = information_articles($mysqli); //on récupère tout les articles en même temps depuis la BDD
-            affichage_articles($articles); //on affiche simplement lesdits articles
-            ?>
+            
+            
         </main>
         <?php
             include("static/footer.php"); //inclusion du footer de la page

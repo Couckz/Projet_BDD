@@ -70,11 +70,11 @@ $avis = $avis[0];
 			</form>
 		</main>
         <?php include("static/footer.php"); ?>
-        <?php closeDB($sql_connection); ?>
+        <?php closeDB($mysqli); ?>
 	</body>
 </html>
 
 
-<?php
-closeDB($mysqli);
-?>
+<!-- <?php
+// closeDB($sql_connection);
+?> -->

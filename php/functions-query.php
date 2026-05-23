@@ -208,4 +208,53 @@ function modif_pp($mysqli, $login, $path){
     WHERE Utilisateur.login = '$login';";
     writeDB($mysqli, $query);
 }
+
+function recuperer_article_par_nom($mysqli, $title) {
+    $query_verif = "SELECT nom FROM Jeu WHERE nom = '$title'";
+    $result_verif = readDB($mysqli, $query_verif);
+    if(empty($result_verif)) {
+        print_r("Aucun article n'est à propos de ce jeu");
+    } else {
+        $query = "SELECT
+        Article.id_article,
+        Article.titre,
+        Article.contenu,
+        Article.note,
+        Article.caracteristiques,
+        Article.date_creation,
+        Jeu.prix,
+        Jeu.synopsis,
+        Article.date_modification,
+        Image.chemin_image
+        FROM Article
+        INNER JOIN Image ON Image.id_article = Article.id_article
+        INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+        WHERE Jeu.nom = '$title'
+        ORDER BY Article.date_creation DESC ";
+        $result = readDB($mysqli, $query);
+        return $result;
+    }
+}
+
+function recuperer_article_par_categorie($mysqli, $categorie) {
+    $query = "SELECT
+        Article.id_article,
+        Article.titre,
+        Article.contenu,
+        Article.note,
+        Article.caracteristiques,
+        Article.date_creation,
+        Jeu.prix,
+        Jeu.synopsis,
+        Article.date_modification,
+        Image.chemin_image
+        FROM Article
+        INNER JOIN Image ON Image.id_article = Article.id_article
+        INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu 
+        WHERE Est_categorise_par.nom_categorie = '$categorie'
+        ORDER BY Article.date_creation DESC ";
+        $result = readDB($mysqli, $query);
+        return $result;
+}
 ?>
