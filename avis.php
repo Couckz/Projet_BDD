@@ -44,7 +44,7 @@ $sql_connection = connectionDB();
                         <?php
                             $article = recuperer_article($sql_connection);
                             displayForm($article);
-                        ?>  
+                        ?>
                         </select>
                         Note <input required type="number" name="note" min="0" max="10" id="note"><br>
                         Avis <input required type="text" name="avis" id="avis"><br>
