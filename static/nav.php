@@ -6,7 +6,7 @@ $rootPath = dirname($_SERVER['SCRIPT_NAME']);
         <li><a href="index.php">Accueil</a></li>
         <?php
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
-                ?><li><a href="<?php echo $rootPath; ?>/profil.php">Profil</a></li><?php
+                ?><li><a href="<?php echo $rootPath; ?>/profil_prive.php">Profil</a></li><?php
                 ?><li><a href="<?php echo $rootPath; ?>/php/logout.php">Déconnexion</a></li><?php
                 ?><li><a href="<?php echo $rootPath; ?>/avis.php">Poster un avis</a></li><?php
                 if ($_SESSION['role'] == "Redacteur" || $_SESSION['role'] == "Admin"  ) {
