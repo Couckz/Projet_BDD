@@ -236,7 +236,8 @@ function recuperer_article_par_nom($mysqli, $title) {
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
-        Image.chemin_image
+        Image.chemin_image,
+        Jeu.nom
         FROM Article
         INNER JOIN Image ON Image.id_article = Article.id_article
         INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
@@ -257,6 +258,7 @@ function recuperer_article_par_categorie($mysqli, $categorie) {
         Article.date_creation,
         Jeu.prix,
         Jeu.synopsis,
+        Jeu.nom,
         Article.date_modification,
         Image.chemin_image
         FROM Article
