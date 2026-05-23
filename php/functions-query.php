@@ -78,6 +78,11 @@ function recuperer_article($mysqli) {
 }
 
 function creation_avis($mysqli,  $login, $article_selectionne, $titre_avis, $avis, $note) {
+
+    /* pour éviter des erreurs lorsque le texte contient des apostrophes etc */
+    $titre_avis = mysqli_real_escape_string($mysqli, $titre_avis);
+    $avis = mysqli_real_escape_string($mysqli, $avis);
+
     $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne';";
     $result_id = readDB($mysqli, $query_id_article);
     $id_article = $result_id[0]['id_article'];
