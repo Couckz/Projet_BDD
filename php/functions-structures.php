@@ -171,17 +171,36 @@ function affichage_article($article) {
 
 function affichage_liste_avis($liste_avis) {
     foreach($liste_avis as $avis){
-        $date_creation = explode(" ", $avis["date_creation"]);
-        $jour = $date_creation[0];
-        $heure = $date_creation[1];
-        $note = $avis["note"];
-        $texte = $avis["texte"];
-        $titre = $avis["titre"];
 
-        $login = $avis["login"];
-        $chemin_pdp = $avis["chemin_pdp"];
+        /* sépare date et heure */
+        $date_creation  = explode(" ", $avis["date_creation"]);
+        $jour           = $date_creation[0];
+        $heure          = $date_creation[1];
+
+        $note           = $avis["note"];
+        $texte          = $avis["texte"];
+        $titre          = $avis["titre"];
+
+        $id_avis        = $avis["id_avis"];
+        $login          = $avis["login"];
+        $chemin_pdp     = $avis["chemin_pdp"];
 
         echo "<div class = 'avis'>";
+
+            if (isset($_SESSION['connecte']) && $_SESSION['connecte'] && $_SESSION['login'] === $login) {
+                echo "<div class='actions-avis'>";
+                    echo "<form action='../php/process_avis.php' method='POST'>";
+                        echo "<input type='hidden' name='id_avis' value='$id_avis'>";
+                        echo "<input type='hidden' name='action' value='suppr'>";
+                        echo "<button type='submit'>Supprimer</button>";
+                    echo "</form>";
+
+                    echo "<form action='../php/modifier_avis.php' method='GET'>";
+                        echo "<input type='hidden' name='id_avis' value='$id_avis'>";
+                        echo "<button type='submit'>Modifier</button>";
+                    echo "</form>";
+                echo "</div>";
+            }
 
             echo "<section class = 'avis_contenu'>";
 
