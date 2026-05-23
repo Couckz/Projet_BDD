@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : lun. 18 mai 2026 à 12:10
+-- Généré le : sam. 23 mai 2026 à 10:27
 -- Version du serveur : 8.0.44
 -- Version de PHP : 8.3.30
 
@@ -37,9 +37,7 @@ CREATE TABLE `Administre` (
 --
 
 INSERT INTO `Administre` (`login`, `id_article`) VALUES
-('Aleex', 1),
-('Aleex', 2),
-('Aleex', 3);
+('Aleex', 18);
 
 -- --------------------------------------------------------
 
@@ -50,7 +48,7 @@ INSERT INTO `Administre` (`login`, `id_article`) VALUES
 CREATE TABLE `Article` (
   `titre` varchar(30) DEFAULT NULL,
   `contenu` varchar(500) DEFAULT NULL,
-  `note` decimal(3,2) DEFAULT NULL,
+  `note` decimal(4,2) DEFAULT NULL,
   `caracteristiques` varchar(100) DEFAULT NULL,
   `date_creation` datetime DEFAULT NULL,
   `date_modification` datetime DEFAULT NULL,
@@ -63,9 +61,7 @@ CREATE TABLE `Article` (
 --
 
 INSERT INTO `Article` (`titre`, `contenu`, `note`, `caracteristiques`, `date_creation`, `date_modification`, `id_article`, `id_jeu`) VALUES
-('Starfield', 'Jeu d\'aventure dans l\'espace', 4.00, 'Violence, pegi 16', '2026-05-12 12:44:48', '2026-05-15 12:44:48', 1, 1),
-('Mario odyssey', 'Jouez au nouveau jeu mario en 3D Super mario odyssey où l\'on doit parcourir le monde pour sauver la princesse Peach', 5.00, 'Pegi 7, combat', '2026-05-03 12:45:38', '2026-05-08 12:45:38', 2, 2),
-('Zelda', 'Jeu d\'aventure. Découvrez la nouvelle aventure de Link pour sauver la princesse Zelda', 3.00, 'Violence, pegi 12, fantastique', '2026-05-03 12:47:13', '2026-05-29 12:47:13', 3, 3);
+('nouveau jeu uncharted', 'Un bon jeu', 10.00, 'Pegi 18', '2026-05-23 12:26:56', '2026-05-23 12:26:56', 18, 38);
 
 -- --------------------------------------------------------
 
@@ -76,7 +72,7 @@ INSERT INTO `Article` (`titre`, `contenu`, `note`, `caracteristiques`, `date_cre
 CREATE TABLE `Avis` (
   `titre` varchar(30) DEFAULT NULL,
   `texte` varchar(500) DEFAULT NULL,
-  `note` decimal(3,2) DEFAULT NULL,
+  `note` decimal(4,2) DEFAULT NULL,
   `date_creation` datetime DEFAULT NULL,
   `id_avis` bigint NOT NULL,
   `id_article` bigint DEFAULT NULL,
@@ -88,8 +84,7 @@ CREATE TABLE `Avis` (
 --
 
 INSERT INTO `Avis` (`titre`, `texte`, `note`, `date_creation`, `id_avis`, `id_article`, `login`) VALUES
-('Avis mario odyssey', 'J\'ai vraiment beaucoup aimé ce jeu, il est à l\'image de ses prédécesseurs ! ', 4.00, '2026-05-07 12:50:46', 1, 2, 'Cookie'),
-('Zelda', 'Le jeu était bien mais je regrette que les jeux zelda aient moins de scénario qu\'avant..', 4.00, '2026-05-03 12:52:13', 2, 3, 'Maalo');
+('Vive uncharted', 'ce jeu est incroyable', 10.00, '2026-05-23 12:27:14', 11, 18, 'Aleex');
 
 -- --------------------------------------------------------
 
@@ -126,9 +121,7 @@ CREATE TABLE `Est_categorise_par` (
 --
 
 INSERT INTO `Est_categorise_par` (`id_jeu`, `nom_categorie`) VALUES
-(2, 'Fantastique'),
-(3, 'Fantastique'),
-(1, 'Violence');
+(38, 'Violence');
 
 -- --------------------------------------------------------
 
@@ -146,9 +139,7 @@ CREATE TABLE `Est_jouable_sur` (
 --
 
 INSERT INTO `Est_jouable_sur` (`id_jeu`, `nom_support`) VALUES
-(2, 'Switch'),
-(3, 'Switch'),
-(1, 'Xbox');
+(38, 'PS5');
 
 -- --------------------------------------------------------
 
@@ -157,7 +148,7 @@ INSERT INTO `Est_jouable_sur` (`id_jeu`, `nom_support`) VALUES
 --
 
 CREATE TABLE `Image` (
-  `chemin_image` varchar(50) NOT NULL,
+  `chemin_image` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_article` bigint DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -166,9 +157,7 @@ CREATE TABLE `Image` (
 --
 
 INSERT INTO `Image` (`chemin_image`, `id_article`) VALUES
-('img/article/starfield.png', 1),
-('img/article/mario.png', 2),
-('img/article/zelda.png', 3);
+('img/article/6a1180f024389_uncharted.png', 18);
 
 -- --------------------------------------------------------
 
@@ -188,9 +177,7 @@ CREATE TABLE `Jeu` (
 --
 
 INSERT INTO `Jeu` (`nom`, `prix`, `synopsis`, `id_jeu`) VALUES
-('Starfield', 80.00, 'Jeu d\'aventure dans l\'espace ', 1),
-('Mario', 70.00, 'Jeu mario 3D', 2),
-('Zelda botw', 70.00, 'Affronter Ganon dans une aventure épique', 3);
+('Uncharted 4', 70.00, 'nouvelle aventure de Drake', 38);
 
 -- --------------------------------------------------------
 
@@ -318,19 +305,19 @@ ALTER TABLE `Utilisateur`
 -- AUTO_INCREMENT pour la table `Article`
 --
 ALTER TABLE `Article`
-  MODIFY `id_article` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_article` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `Avis`
 --
 ALTER TABLE `Avis`
-  MODIFY `id_avis` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_avis` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `Jeu`
 --
 ALTER TABLE `Jeu`
-  MODIFY `id_jeu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jeu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Contraintes pour les tables déchargées

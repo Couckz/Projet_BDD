@@ -37,16 +37,17 @@ $sql_connection = connectionDB();
             ?>
 
                 <div class="formulaire_article">
-                <form action="#" method="post">
+                <form action="#" method="post" enctype="multipart/form-data">
                     <div class="ensemble_formulaire_article">
                     Titre de l'article <input required type="text" name="title_article" id="title_article" placeholder="Vive Halo !"><br>
                     Note <input required type="number" name="note_jeu" min="0" id="note_jeu"><br>
-                    Contenu <input required type="text" name="content" id="content" placeholder="Le jeu est dans l'ensemble [...]"><br>
+                    Contenu <input required type="text" name="content" id="content" placeholder="Critique du jeu.."><br>
+                    Caracteristiques <input required type="text" name="car" id="car" placeholder="Pegi 18"><br>
                     Titre du jeu <input required type="text" name="title_jeu" id="title_jeu" placeholder="Zelda Breath of the wild"><br>
                     Prix <input required type="number" name="prix" min="0" id="prix"><br>
                     Date de sortie <input required type="date" name="sortie" min="0" id="sortie"><br>
-                    Synopsis <input required type="text" name="synopsis" id="synopsis" placeholder="Résumé"><br>
-                    
+                    Synopsis <input required type="text" name="synopsis" id="synopsis" placeholder="Résumé du jeu"><br>
+                    Insérer l'image de la jaquette <input type="file" name="image_article">
                         <div class="liste_categorie">
                         <label for="">Catégorie</label>
                         <?php

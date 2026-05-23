@@ -107,29 +107,51 @@ function recuperer_categorie($mysqli) {
 }
 
 function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support) {
-    $insertion_query = "INSERT INTO Jeu (nom, prix, synopsis) VALUES ('$titre_jeu', '$prix', '$synopsis')";
-    writeDB($mysqli, $insertion_query);
-    $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
-    $result_id = readDB($mysqli, $query_id_jeu);
-    $id_jeu = $result_id[0]['id_jeu']; 
+    $titre_jeu = mysqli_real_escape_string($mysqli, $titre_jeu);
+    $query_verif = "SELECT id_jeu FROM Jeu WHERE nom = '$titre_jeu'";
+    $result_verif = readDB($mysqli, $query_verif);
+
+    if(!empty($result_verif)) {
+        $id_jeu = $result_verif[0]['id_jeu'];
+    } else {
+        $insertion_query = "INSERT INTO Jeu (nom, prix, synopsis) VALUES ('$titre_jeu', '$prix', '$synopsis')";
+        writeDB($mysqli, $insertion_query);
+        $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
+        $result_id = readDB($mysqli, $query_id_jeu);
+        $id_jeu = $result_id[0]['id_jeu']; 
+    }
 
     foreach($categorie as $lines) {
-        $query_categorie = "INSERT INTO Est_categorise_par (id_jeu, nom_categorie) VALUES ('$id_jeu', '$lines')";
+        $query_categorie = "INSERT IGNORE INTO Est_categorise_par (id_jeu, nom_categorie) VALUES ('$id_jeu', '$lines')";
         writeDB($mysqli, $query_categorie);
     }
 
     foreach($support as $lines) {
-        $query_support = "INSERT INTO Est_jouable_sur (id_jeu, nom_support) VALUES ('$id_jeu', '$lines')";
+        $query_support = "INSERT IGNORE INTO Est_jouable_sur (id_jeu, nom_support) VALUES ('$id_jeu', '$lines')";
         writeDB($mysqli, $query_support);
     }
-
 }
-function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristique, $date) {
+
+function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristique, $date, $chemin_final, $login) {
+    $titre_article = mysqli_real_escape_string($mysqli, $titre_article);
+    $contenu = mysqli_real_escape_string($mysqli, $contenu);
+    $caracteristiques = mysqli_real_escape_string($mysqli, $caracteristique);
+    $titre_jeu = mysqli_real_escape_string($mysqli, $titre_jeu);
+
     $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
     $result_id = readDB($mysqli, $query_id_jeu);
     $id_jeu = $result_id[0]['id_jeu']; 
     $insertion_query = "INSERT INTO Article (titre, contenu, note, caracteristiques, date_creation, date_modification, id_jeu)
-    VALUES ('$titre_article', '$contenu', '$note', '$caracteristique', NOW(), NOW(), '$id_jeu')";
+    VALUES ('$titre_article', '$contenu', '$note', '$caracteristiques', NOW(), NOW(), '$id_jeu')";
     writeDB($mysqli, $insertion_query);
+
+    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$titre_article'";
+    $result_id_article = readDB($mysqli, $query_id_article);
+    $id_article = $result_id_article[0]['id_article']; 
+    $insertion_article_query = "INSERT INTO Image (chemin_image, id_article) VALUES ('$chemin_final', '$id_article')";
+    writeDB($mysqli, $insertion_article_query);
+
+    $query_administre = "INSERT INTO Administre (login, id_article) VALUES ('$login', '$id_article')";
+    writeDB($mysqli, $query_administre);
 }
 ?>

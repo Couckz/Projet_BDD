@@ -14,10 +14,19 @@ function post_article() {
         $synopsis = $_POST["synopsis"];
         $categorie = $_POST["categorie"];
         $support = $_POST["support"];
+        $caracteristiques = $_POST["car"];
+        $image = $_FILES['image_article'];
+        $dossier = "img/article/";
+        $nom_original = basename($_FILES["image_article"]["name"]);
+        $nom_unique = uniqid() . "_" . $nom_original;
+        $chemin_final = $dossier . $nom_unique;
+        $login = $_SESSION["login"];
+        print_r($login);
+        move_uploaded_file($_FILES["image_article"]["tmp_name"],$chemin_final);
         creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support);
-        creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $synopsis, $date);
+        creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristiques, $date, $chemin_final, $login);
         closeDB($mysqli);
-        header("Location: index.php");
+        //header("Location: index.php");
     }
 }
 
