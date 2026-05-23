@@ -112,13 +112,21 @@ function recuperer_article($mysqli) {
 
 function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis, $note) {
 
+    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne';";
+    $result_id = readDB($mysqli, $query_id_article);
+    $id_article = $result_id[0]['id_article'];
+
+    // vérification de l'unicité de l'avis pour cet utilisateur
+    $query_nb_avis = "SELECT COUNT(*) as nb_avis FROM Avis WHERE login = '$login' AND id_article = '$id_article';";
+    $nb_avis = readDB($mysqli, $query_nb_avis);
+    if ($nb_avis[0]['nb_avis'] > 0) {
+        return;
+    }
+
     /* pour éviter des erreurs lorsque le texte contient des apostrophes etc */
     $titre_avis = mysqli_real_escape_string($mysqli, $titre_avis);
     $avis = mysqli_real_escape_string($mysqli, $avis);
 
-    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne';";
-    $result_id = readDB($mysqli, $query_id_article);
-    $id_article = $result_id[0]['id_article'];
     $insertion_query = "INSERT INTO Avis (titre, texte, note, date_creation, id_article, login) VALUES ('$titre_avis', '$avis', '$note', NOW(), '$id_article', '$login');";
     writeDB($mysqli, $insertion_query);
 }
@@ -287,7 +295,7 @@ function recuperer_article_par_categorie($mysqli, $categorie) {
         FROM Article
         INNER JOIN Image ON Image.id_article = Article.id_article
         INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
-        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu 
+        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
         WHERE Est_categorise_par.nom_categorie = '$categorie'
         ORDER BY Article.date_creation DESC ";
         $result = readDB($mysqli, $query);
