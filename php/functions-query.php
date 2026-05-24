@@ -25,15 +25,15 @@ function information_articles($mysqli) {
 
 function recuperer_supports_jeu($mysqli, $id_jeu) {
     $query = "SELECT nom_support
-              FROM Est_jouable_sur
-              WHERE id_jeu = '$id_jeu'";
+    FROM Est_jouable_sur
+    WHERE id_jeu = '$id_jeu'";
     return readDB($mysqli, $query);
 }
 
 function recuperer_categories_jeu($mysqli, $id_jeu) {
     $query = "SELECT nom_categorie
-              FROM Est_categorise_par
-              WHERE id_jeu = '$id_jeu'";
+    FROM Est_categorise_par
+    WHERE id_jeu = '$id_jeu'";
     return readDB($mysqli, $query);
 }
 
