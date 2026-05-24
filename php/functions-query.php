@@ -91,21 +91,58 @@ function modif_derniere_connexion($mysqli, $login, $date)
     writeDB($mysqli, $query);
 }
 
+function modif_nom($mysqli, $login, $nom, $prenom){
+    $query = "UPDATE Utilisateur
+    SET nom = '$nom', prenom = '$prenom'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
+function modif_mail($mysqli, $login, $mail){
+    $query = "UPDATE Utilisateur
+    SET adresse_email = '$mail'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
+function modif_naissance($mysqli, $login, $date){
+    $query = "UPDATE Utilisateur
+    SET date_naissance = '$date'
+    WHERE Utilisateur.login = '$login';";
+    writeDB($mysqli, $query);
+}
+
 function recuperer_article($mysqli) {
     $query = "SELECT titre FROM Article";
     $result = readDB($mysqli, $query);
     return $result;
 }
 
+function get_article_via_avis($mysqli, $id_avis){
+    $query = "SELECT id_article
+    FROM Avis
+    WHERE id_avis='$id_avis'";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
+
 function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis, $note) {
+
+    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne';";
+    $result_id = readDB($mysqli, $query_id_article);
+    $id_article = $result_id[0]['id_article'];
+
+    // vérification de l'unicité de l'avis pour cet utilisateur
+    $query_nb_avis = "SELECT COUNT(*) as nb_avis FROM Avis WHERE login = '$login' AND id_article = '$id_article';";
+    $nb_avis = readDB($mysqli, $query_nb_avis);
+    if ($nb_avis[0]['nb_avis'] > 0) {
+        return;
+    }
 
     /* pour éviter des erreurs lorsque le texte contient des apostrophes etc */
     $titre_avis = mysqli_real_escape_string($mysqli, $titre_avis);
     $avis = mysqli_real_escape_string($mysqli, $avis);
 
-    $query_id_article = "SELECT id_article FROM Article WHERE Article.titre = '$article_selectionne';";
-    $result_id = readDB($mysqli, $query_id_article);
-    $id_article = $result_id[0]['id_article'];
     $insertion_query = "INSERT INTO Avis (titre, texte, note, date_creation, id_article, login) VALUES ('$titre_avis', '$avis', '$note', NOW(), '$id_article', '$login');";
     writeDB($mysqli, $insertion_query);
 }

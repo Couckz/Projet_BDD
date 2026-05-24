@@ -18,8 +18,10 @@ $login	= $_SESSION['login'];
 
 if (isset($_POST['id_avis']) and isset($_POST['action'])) {
 
-	$id_avis	= $_POST['id_avis'];
-	$action		= $_POST['action'];
+	$id_avis = $_POST['id_avis'];
+	$action	= $_POST['action'];
+
+	$id_article = get_article_via_avis($mysqli, $id_avis)[0]['id_article'];
 
 	if ($action == 'suppr') {
 		supprimer_avis($mysqli, $login, $id_avis);
@@ -34,6 +36,8 @@ if (isset($_POST['id_avis']) and isset($_POST['action'])) {
 closeDB($mysqli);
 
 /* retour à la page précedente */
-$previous_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
-header("Location: $previous_url");
+header("Location: ../article.php/?id_article=" . $id_article);
+
+exit();
+
 ?>
