@@ -108,7 +108,13 @@ function recuperer_article($mysqli) {
     return $result;
 }
 
-
+function get_article_via_avis($mysqli, $id_avis){
+    $query = "SELECT id_article
+    FROM Avis
+    WHERE id_avis='$id_avis'";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
 
 function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis, $note) {
 
