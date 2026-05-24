@@ -20,9 +20,9 @@ if (!isset($_GET['id_avis'])) {
 
 $mysqli	= connectionDB();
 
-$login	= $_SESSION['login'];
+$login = $_SESSION['login'];
 
-$avis	= recuperer_avis($mysqli, $_GET['id_avis']);
+$avis = recuperer_avis($mysqli, $_GET['id_avis']);
 
 if (!isset($avis[0]) or $avis[0]['login'] != $_SESSION['login']) {
 	header("Location: index.php");

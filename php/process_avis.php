@@ -24,7 +24,7 @@ if (isset($_POST['id_avis']) and isset($_POST['action'])) {
 	$id_article = get_article_via_avis($mysqli, $id_avis)[0]['id_article'];
 
 	if ($action == 'suppr') {
-		supprimer_avis($mysqli, $login, $id_avis);
+		supprimer_avis($mysqli, $id_avis);
 	}
 
 	if ($action == 'modif') {

@@ -213,18 +213,20 @@ function affichage_liste_avis($liste_avis) {
                         echo "<img src = '$chemin_pdp' alt = 'photo de profil de $login'></img>";
                     echo "</div>";
                     echo "<h2>$titre</h2>";
-                    if ($est_connecte and $_SESSION['login'] === $login) {
+                    if ($est_connecte and ($_SESSION['login'] === $login) || $_SESSION['role'] === "Admin") {
                         echo "<div class='avis-actions'>";
+
                             echo "<form action='../php/process_avis.php' method='POST'>";
                                 echo "<input type='hidden' name='id_avis' value='$id_avis'>";
                                 echo "<input type='hidden' name='action' value='suppr'>";
                                 echo "<button type='submit'>Supprimer</button>";
                             echo "</form>";
-
+                            if ($est_connecte and ($_SESSION['login'] === $login)){
                             echo "<form action='../modifier_avis.php' method='GET'>";
                                 echo "<input type='hidden' name='id_avis' value='$id_avis'>";
                                 echo "<button type='submit'>Modifier</button>";
                             echo "</form>";
+                            }
                         echo "</div>";
                     }
                 echo "</div>";

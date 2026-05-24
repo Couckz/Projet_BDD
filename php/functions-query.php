@@ -212,10 +212,9 @@ function modifier_avis($mysqli, $login, $id_avis, $nouveau_titre, $nouveau_texte
     writeDB($mysqli, $query);
 }
 
-function supprimer_avis($mysqli, $login, $id_avis) {
+function supprimer_avis($mysqli, $id_avis) {
     $query  = " DELETE FROM Avis
-                WHERE id_avis = '$id_avis'
-                AND login = '$login';";
+                WHERE id_avis = '$id_avis';";
     writeDB($mysqli, $query);
 }
 
