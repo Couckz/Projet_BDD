@@ -12,19 +12,54 @@ function information_articles($mysqli) {
         Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
+        Jeu.id_jeu,
         Article.date_modification,
-        Image.chemin_image,
-        Est_jouable_sur.nom_support,
-        Est_categorise_par.nom_categorie
+        Image.chemin_image
     FROM Article
     INNER JOIN Image ON Image.id_article = Article.id_article
     INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
-    INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
-    INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
     ORDER BY Article.date_creation DESC";
     $result = readDB($mysqli, $query);
     return $result;
 }
+
+function recuperer_supports_jeu($mysqli, $id_jeu) {
+    $query = "SELECT nom_support
+              FROM Est_jouable_sur
+              WHERE id_jeu = '$id_jeu'";
+    return readDB($mysqli, $query);
+}
+
+function recuperer_categories_jeu($mysqli, $id_jeu) {
+    $query = "SELECT nom_categorie
+              FROM Est_categorise_par
+              WHERE id_jeu = '$id_jeu'";
+    return readDB($mysqli, $query);
+}
+
+function information_articles_complet($mysqli) {
+    $articles = information_articles($mysqli);
+    $resultat = [];
+
+    foreach($articles as $article) {
+        $id_jeu = $article["id_jeu"];
+        $supports = recuperer_supports_jeu($mysqli, $id_jeu);
+        $categories = recuperer_categories_jeu($mysqli, $id_jeu);
+        $liste_supports = [];
+        foreach($supports as $support) {
+            $liste_supports[] = $support["nom_support"];
+        }
+        $liste_categories = [];
+        foreach($categories as $categorie) {
+            $liste_categories[] = $categorie["nom_categorie"];
+        }
+        $article["supports"] = $liste_supports;
+        $article["categories"] = $liste_categories;
+        $resultat[] = $article;
+    }
+    return $resultat;
+}
+
 
 function information_article($mysqli, $id_article) {
     $query = "SELECT
@@ -39,14 +74,10 @@ function information_article($mysqli, $id_article) {
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
-        Image.chemin_image,
-        Est_jouable_sur.nom_support,
-        Est_categorise_par.nom_categorie
+        Image.chemin_image
     FROM Article
     INNER JOIN Image ON Image.id_article = Article.id_article
     INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
-    INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
-    INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
     WHERE Article.id_article = '$id_article'
     ORDER BY Article.date_creation DESC";
     $result = readDB($mysqli, $query);
@@ -265,41 +296,62 @@ function modif_pp($mysqli, $login, $path){
     writeDB($mysqli, $query);
 }
 
-function recuperer_article_par_nom($mysqli, $title) {
-    $query_verif = "SELECT nom FROM Jeu WHERE nom = '$title'";
+function recuperer_article_par_nom_complet($mysqli, $title) {
+    $query_verif = "SELECT nom
+                    FROM Jeu
+                    WHERE nom = '$title'";
     $result_verif = readDB($mysqli, $query_verif);
     if(empty($result_verif)) {
         print_r("Aucun article n'est à propos de ce jeu");
         return 0;
     } else {
         $query = "SELECT
-        Article.id_article,
-        Article.titre,
-        Article.contenu,
-        Article.note,
-        Article.caracteristiques,
-        Article.date_creation,
-        Jeu.nom,
-        Jeu.sortie,
-        Jeu.prix,
-        Jeu.synopsis,
-        Article.date_modification,
-        Image.chemin_image,
-        Est_jouable_sur.nom_support,
-        Est_categorise_par.nom_categorie
+            Article.id_article,
+            Article.titre,
+            Article.contenu,
+            Article.note,
+            Article.caracteristiques,
+            Article.date_creation,
+            Jeu.nom,
+            Jeu.sortie,
+            Jeu.prix,
+            Jeu.synopsis,
+            Jeu.id_jeu,
+            Article.date_modification,
+            Image.chemin_image
         FROM Article
-        INNER JOIN Image ON Image.id_article = Article.id_article
-        INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
-        INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
-        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
+        INNER JOIN Image
+            ON Image.id_article = Article.id_article
+        INNER JOIN Jeu
+            ON Article.id_jeu = Jeu.id_jeu
         WHERE Jeu.nom = '$title'
-        ORDER BY Article.date_creation DESC ";
-        $result = readDB($mysqli, $query);
-        return $result;
+        ORDER BY Article.date_creation DESC";
+        $articles = readDB($mysqli, $query);
+        $resultat = [];
+        foreach($articles as $article) {
+            $id_jeu = $article["id_jeu"];
+            // supports
+            $supports = recuperer_supports_jeu($mysqli, $id_jeu);
+            $liste_supports = [];
+            foreach($supports as $support) {
+                $liste_supports[] = $support["nom_support"];
+            }
+            // catégories
+            $categories = recuperer_categories_jeu($mysqli, $id_jeu);
+            $liste_categories = [];
+            foreach($categories as $categorie) {
+                $liste_categories[] = $categorie["nom_categorie"];
+            }
+            // ajout dans l'article
+            $article["supports"] = $liste_supports;
+            $article["categories"] = $liste_categories;
+            $resultat[] = $article;
+        }
+        return $resultat;
     }
 }
 
-function recuperer_article_par_categorie($mysqli, $categorie) {
+function recuperer_article_par_categorie_complet($mysqli, $categorie) {
     $query = "SELECT
         Article.id_article,
         Article.titre,
@@ -311,19 +363,40 @@ function recuperer_article_par_categorie($mysqli, $categorie) {
         Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
+        Jeu.id_jeu,
         Article.date_modification,
-        Image.chemin_image,
-        Est_jouable_sur.nom_support,
-        Est_categorise_par.nom_categorie
-        FROM Article
-        INNER JOIN Image ON Image.id_article = Article.id_article
-        INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
-        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu 
-        INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
-        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
-        WHERE Est_categorise_par.nom_categorie = '$categorie'
-        ORDER BY Article.date_creation DESC ";
-        $result = readDB($mysqli, $query);
-        return $result;
+        Image.chemin_image
+    FROM Article
+    INNER JOIN Image
+        ON Image.id_article = Article.id_article
+    INNER JOIN Jeu
+        ON Article.id_jeu = Jeu.id_jeu
+    INNER JOIN Est_categorise_par
+        ON Est_categorise_par.id_jeu = Jeu.id_jeu
+    WHERE Est_categorise_par.nom_categorie = '$categorie'
+    ORDER BY Article.date_creation DESC";
+    $articles = readDB($mysqli, $query);
+    $resultat = [];
+    foreach($articles as $article) {
+        $id_jeu = $article["id_jeu"];
+        // supports
+        $supports = recuperer_supports_jeu($mysqli, $id_jeu);
+        $liste_supports = [];
+        foreach($supports as $support) {
+            $liste_supports[] = $support["nom_support"];
+        }
+        // catégories
+        $categories = recuperer_categories_jeu($mysqli, $id_jeu);
+        $liste_categories = [];
+        foreach($categories as $categorie_ligne) {
+            $liste_categories[] = $categorie_ligne["nom_categorie"];
+        }
+        // ajout dans l'article
+        $article["supports"] = $liste_supports;
+        $article["categories"] = $liste_categories;
+        $resultat[] = $article;
+    }
+
+    return $resultat;
 }
 ?>

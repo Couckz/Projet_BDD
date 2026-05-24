@@ -31,18 +31,18 @@ $mysqli = connectionDB(); //création de la connexion SQL
             <?php
             if(isset($_POST['filtre_nom'])){
                 $title = filtrer_nom($mysqli);
-                $result = recuperer_article_par_nom($mysqli, $title);
+                $result = recuperer_article_par_nom_complet($mysqli, $title);
                 if ($result != 0) {
                     affichage_articles($result);
                 }
                 
             } else if (isset($_POST['filtre_cat'])){
                 $articles = filtrer_cat($mysqli);
-                $result = recuperer_article_par_categorie($mysqli, $articles);
+                $result = recuperer_article_par_categorie_complet($mysqli, $articles);
                 affichage_articles($result);
                 
             } else {
-                $articles = information_articles($mysqli); //on récupère tout les articles en même temps depuis la BDD
+                $articles = information_articles_complet($mysqli); //on récupère tout les articles en même temps depuis la BDD
                 affichage_articles($articles); //on affiche simplement lesdits articles
             }
             
@@ -54,7 +54,7 @@ $mysqli = connectionDB(); //création de la connexion SQL
             <div class="formulaire">
                 <form action="#" method="POST">
                     <div class="champ">
-                        Titre <input required type="text" name="title" id="title" placeholder="Mario"><br>
+                        Titre <input type="text" name="title" id="title" placeholder="Mario"><br>
                         Categorie:
                         <select name="categorie" id="categorie">
                             <?php

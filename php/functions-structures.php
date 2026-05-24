@@ -1,7 +1,6 @@
 <?php
 
 function affichage_articles($articles){
-    print_r($articles);
     echo "<div class = 'articles_container'>";
 
     foreach($articles as $lines){
@@ -17,7 +16,7 @@ function affichage_articles($articles){
             $synopsis = $lines["synopsis"];
             $nom_jeu = $lines["nom"];
             $date_sortie = $lines["sortie"];
-            $supports = $lines["nom_support"];
+            
             
 
 
@@ -48,7 +47,15 @@ function affichage_articles($articles){
                                 echo "<p>Jeu : $nom_jeu</p>";
                                 echo "<p>Prix : $prix €</p>";
                                 echo "<p>Date de sortie : $date_sortie</p>";
-                                echo "<p>Supports : $supports</p>";
+                                echo "<p> Supports : </p>";
+                                foreach($lines["supports"] as $support){
+                                    echo "$support ";
+                                }
+
+                                echo "<p> Categories : </p>";
+                                foreach($lines["categories"] as $cat){
+                                    echo "$cat ";
+                                }
                                 echo "<p class='note'> Note : $note/10</p>";
                             echo "</div>";
                         echo "</div>";
