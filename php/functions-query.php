@@ -103,6 +103,14 @@ function liste_avis($mysqli, $id_article) {
     return $result;
 }
 
+function info_user($mysqli, $login)
+{
+    $sql_query = "SELECT login, Role, date_inscription, date_derniere_connexion, chemin_pdp
+    FROM Utilisateur
+    WHERE Utilisateur.login = '$login';";
+    $result = readDB($mysqli, $sql_query);
+    return $result;
+}
 
 function connection($mysqli, $login, $mdp)
 {
