@@ -44,6 +44,8 @@ $mysqli = connectionDB(); //création de la connexion SQL
 
             echo "<div class = 'avis-article-container'>";
             affichage_article($article[0]); //on affiche simplement l'article
+            $note = get_note_moyenne($mysqli, $id_article);
+            affichage_note_moyenne($note);
             affichage_liste_avis($liste_avis);
             echo "</div>";
             ?>

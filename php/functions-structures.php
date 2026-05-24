@@ -272,4 +272,11 @@ function display_support($support) {
         echo "<input type=\"checkbox\" name=\"support[]\" value=\"$nom_support\">$nom_support<br>";
     }
 }
+
+function affichage_note_moyenne($moyenne) {
+    foreach($moyenne as $line) {
+        $moy = $line["moyenne"];
+        echo "note moyenne donnée par les utilisateurs : $moy";
+    }
+}
 ?>

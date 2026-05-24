@@ -398,4 +398,10 @@ function recuperer_article_par_categorie_complet($mysqli, $categorie) {
 
     return $resultat;
 }
+
+function get_note_moyenne($mysqli, $id_article) {
+    $query = "SELECT AVG(note) as moyenne FROM Avis WHERE id_article = '$id_article'";
+    $result = readDB($mysqli, $query);
+    return $result;
+}
 ?>

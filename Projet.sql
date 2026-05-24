@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : sam. 23 mai 2026 à 10:27
+-- Généré le : dim. 24 mai 2026 à 11:00
 -- Version du serveur : 8.0.44
 -- Version de PHP : 8.3.30
 
@@ -37,7 +37,8 @@ CREATE TABLE `Administre` (
 --
 
 INSERT INTO `Administre` (`login`, `id_article`) VALUES
-('Aleex', 18);
+('Cookie', 20),
+('Cookie', 21);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,8 @@ CREATE TABLE `Article` (
 --
 
 INSERT INTO `Article` (`titre`, `contenu`, `note`, `caracteristiques`, `date_creation`, `date_modification`, `id_article`, `id_jeu`) VALUES
-('nouveau jeu uncharted', 'Un bon jeu', 10.00, 'Pegi 18', '2026-05-23 12:26:56', '2026-05-23 12:26:56', 18, 38);
+('Le nouveau jeu Zelda', 'Un excellent jeu', 10.00, 'pegi 7', '2026-05-23 20:03:14', '2026-05-23 20:03:14', 20, 40),
+('Nouveau jeu Uncharted', 'Un très bon jeu', 7.00, 'Pegi 18', '2026-05-23 20:10:32', '2026-05-23 20:10:32', 21, 41);
 
 -- --------------------------------------------------------
 
@@ -84,7 +86,7 @@ CREATE TABLE `Avis` (
 --
 
 INSERT INTO `Avis` (`titre`, `texte`, `note`, `date_creation`, `id_avis`, `id_article`, `login`) VALUES
-('Vive uncharted', 'ce jeu est incroyable', 10.00, '2026-05-23 12:27:14', 11, 18, 'Aleex');
+('Vive Zelda', 'meilleur jeu', 7.00, '2026-05-24 12:43:26', 14, 20, 'Aleex');
 
 -- --------------------------------------------------------
 
@@ -121,7 +123,9 @@ CREATE TABLE `Est_categorise_par` (
 --
 
 INSERT INTO `Est_categorise_par` (`id_jeu`, `nom_categorie`) VALUES
-(38, 'Violence');
+(40, 'Fantastique'),
+(41, 'Palpitant'),
+(41, 'Violence');
 
 -- --------------------------------------------------------
 
@@ -139,7 +143,9 @@ CREATE TABLE `Est_jouable_sur` (
 --
 
 INSERT INTO `Est_jouable_sur` (`id_jeu`, `nom_support`) VALUES
-(38, 'PS5');
+(41, 'PS5'),
+(40, 'Switch'),
+(41, 'Xbox');
 
 -- --------------------------------------------------------
 
@@ -157,7 +163,8 @@ CREATE TABLE `Image` (
 --
 
 INSERT INTO `Image` (`chemin_image`, `id_article`) VALUES
-('img/article/6a1180f024389_uncharted.png', 18);
+('img/article/6a11ebe2149e8_zelda.png', 20),
+('img/article/6a11ed9843ab1_uncharted.png', 21);
 
 -- --------------------------------------------------------
 
@@ -169,15 +176,17 @@ CREATE TABLE `Jeu` (
   `nom` varchar(30) DEFAULT NULL,
   `prix` decimal(5,2) DEFAULT NULL,
   `synopsis` varchar(40) DEFAULT NULL,
-  `id_jeu` bigint NOT NULL
+  `id_jeu` bigint NOT NULL,
+  `sortie` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `Jeu`
 --
 
-INSERT INTO `Jeu` (`nom`, `prix`, `synopsis`, `id_jeu`) VALUES
-('Uncharted 4', 70.00, 'nouvelle aventure de Drake', 38);
+INSERT INTO `Jeu` (`nom`, `prix`, `synopsis`, `id_jeu`, `sortie`) VALUES
+('Zelda breath of the wild', 10.00, 'Affrontez ganon', 40, '2026-05-04'),
+('Uncharted 4', 70.00, 'Nouvelle aventure de Drake', 41, '2026-05-05');
 
 -- --------------------------------------------------------
 
@@ -222,8 +231,8 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`Role`, `login`, `mdp`, `date_inscription`, `date_derniere_connexion`, `nom`, `prenom`, `date_naissance`, `adresse_email`, `chemin_pdp`) VALUES
-('Redacteur', 'Aleex', '456', '2026-05-03', '2026-05-06 12:58:30', 'dsljeconnaispastonnom', 'Alexandre ', '2026-03-01', 'alex@gmail.com', '../img/photo_profil/pdp3.png'),
-('Admin', 'Cookie', '987', '2026-05-03', '2026-05-07 12:36:58', 'Bensemmane', 'Camélia', '2006-05-08', 'bens@gmail.com', '../img/photo_profil/pdp2.png'),
+('Redacteur', 'Aleex', '456', '2026-05-03', '2026-05-24 12:42:50', 'dsljeconnaispastonnom', 'Alexandre ', '2026-03-01', 'alex@gmail.com', 'img/photo_profil/Aleex.png'),
+('Admin', 'Cookie', '987', '2026-05-03', '2026-05-24 12:41:49', 'Bensemmane', 'Camélia', '2006-05-08', 'bens@gmail.com', '../img/photo_profil/pdp2.png'),
 ('User', 'Maalo', '1234', '2026-05-04', '2026-05-12 12:19:12', 'Boudier', 'Malo', '2006-08-01', 'malo@gmail.com', '../img/photo_profil/pdp1.png');
 
 --
@@ -305,19 +314,19 @@ ALTER TABLE `Utilisateur`
 -- AUTO_INCREMENT pour la table `Article`
 --
 ALTER TABLE `Article`
-  MODIFY `id_article` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_article` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `Avis`
 --
 ALTER TABLE `Avis`
-  MODIFY `id_avis` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_avis` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `Jeu`
 --
 ALTER TABLE `Jeu`
-  MODIFY `id_jeu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_jeu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Contraintes pour les tables déchargées
