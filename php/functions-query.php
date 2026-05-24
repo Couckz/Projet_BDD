@@ -9,13 +9,18 @@ function information_articles($mysqli) {
         Article.caracteristiques,
         Article.date_creation,
         Jeu.nom,
+        Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
-        Image.chemin_image
+        Image.chemin_image,
+        Est_jouable_sur.nom_support,
+        Est_categorise_par.nom_categorie
     FROM Article
     INNER JOIN Image ON Image.id_article = Article.id_article
     INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+    INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
+    INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
     ORDER BY Article.date_creation DESC";
     $result = readDB($mysqli, $query);
     return $result;
@@ -30,13 +35,18 @@ function information_article($mysqli, $id_article) {
         Article.caracteristiques,
         Article.date_creation,
         Jeu.nom,
+        Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
-        Image.chemin_image
+        Image.chemin_image,
+        Est_jouable_sur.nom_support,
+        Est_categorise_par.nom_categorie
     FROM Article
     INNER JOIN Image ON Image.id_article = Article.id_article
     INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+    INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
+    INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
     WHERE Article.id_article = '$id_article'
     ORDER BY Article.date_creation DESC";
     $result = readDB($mysqli, $query);
@@ -102,7 +112,6 @@ function creation_avis($mysqli, $login, $article_selectionne, $titre_avis, $avis
 
 
 function recuperer_avis($mysqli, $id_avis) {
-
     $query = "SELECT
         date_creation,
         id_avis,
@@ -163,7 +172,7 @@ function recuperer_categorie($mysqli) {
     return $result;
 }
 
-function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support) {
+function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support, $date) {
     $titre_jeu = mysqli_real_escape_string($mysqli, $titre_jeu);
     $query_verif = "SELECT id_jeu FROM Jeu WHERE nom = '$titre_jeu'";
     $result_verif = readDB($mysqli, $query_verif);
@@ -171,7 +180,7 @@ function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $suppor
     if(!empty($result_verif)) {
         $id_jeu = $result_verif[0]['id_jeu'];
     } else {
-        $insertion_query = "INSERT INTO Jeu (nom, prix, synopsis) VALUES ('$titre_jeu', '$prix', '$synopsis')";
+        $insertion_query = "INSERT INTO Jeu (nom, prix, synopsis, sortie) VALUES ('$titre_jeu', '$prix', '$synopsis', '$date')";
         writeDB($mysqli, $insertion_query);
         $query_id_jeu = "SELECT id_jeu FROM Jeu WHERE Jeu.nom = '$titre_jeu'";
         $result_id = readDB($mysqli, $query_id_jeu);
@@ -189,7 +198,7 @@ function creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $suppor
     }
 }
 
-function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristique, $date, $chemin_final, $login) {
+function creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristique, $chemin_final, $login) {
     $titre_article = mysqli_real_escape_string($mysqli, $titre_article);
     $contenu = mysqli_real_escape_string($mysqli, $contenu);
     $caracteristiques = mysqli_real_escape_string($mysqli, $caracteristique);
@@ -233,14 +242,19 @@ function recuperer_article_par_nom($mysqli, $title) {
         Article.note,
         Article.caracteristiques,
         Article.date_creation,
+        Jeu.nom,
+        Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
         Article.date_modification,
         Image.chemin_image,
-        Jeu.nom
+        Est_jouable_sur.nom_support,
+        Est_categorise_par.nom_categorie
         FROM Article
         INNER JOIN Image ON Image.id_article = Article.id_article
         INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
+        INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
+        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
         WHERE Jeu.nom = '$title'
         ORDER BY Article.date_creation DESC ";
         $result = readDB($mysqli, $query);
@@ -256,15 +270,20 @@ function recuperer_article_par_categorie($mysqli, $categorie) {
         Article.note,
         Article.caracteristiques,
         Article.date_creation,
+        Jeu.nom,
+        Jeu.sortie,
         Jeu.prix,
         Jeu.synopsis,
-        Jeu.nom,
         Article.date_modification,
-        Image.chemin_image
+        Image.chemin_image,
+        Est_jouable_sur.nom_support,
+        Est_categorise_par.nom_categorie
         FROM Article
         INNER JOIN Image ON Image.id_article = Article.id_article
         INNER JOIN Jeu ON Article.id_jeu = Jeu.id_jeu
         INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu 
+        INNER JOIN Est_jouable_sur ON Est_jouable_sur.id_jeu = Jeu.id_jeu
+        INNER JOIN Est_categorise_par ON Est_categorise_par.id_jeu = Jeu.id_jeu
         WHERE Est_categorise_par.nom_categorie = '$categorie'
         ORDER BY Article.date_creation DESC ";
         $result = readDB($mysqli, $query);

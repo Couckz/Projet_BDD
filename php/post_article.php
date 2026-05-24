@@ -22,8 +22,8 @@ function post_article() {
         $chemin_final = $dossier . $nom_unique;
         $login = $_SESSION["login"];
         move_uploaded_file($_FILES["image_article"]["tmp_name"],$chemin_final);
-        creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support);
-        creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristiques, $date, $chemin_final, $login);
+        creation_jeu($mysqli, $titre_jeu, $prix, $synopsis, $categorie, $support, $date);
+        creation_article($mysqli, $titre_article, $titre_jeu, $note, $contenu, $caracteristiques, $chemin_final, $login);
         closeDB($mysqli);
         header("Location: index.php");
     }
