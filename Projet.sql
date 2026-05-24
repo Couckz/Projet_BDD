@@ -231,7 +231,7 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`Role`, `login`, `mdp`, `date_inscription`, `date_derniere_connexion`, `nom`, `prenom`, `date_naissance`, `adresse_email`, `chemin_pdp`) VALUES
-('Redacteur', 'Aleex', '456', '2026-05-03', '2026-05-24 12:42:50', 'dsljeconnaispastonnom', 'Alexandre ', '2026-03-01', 'alex@gmail.com', 'img/photo_profil/Aleex.png'),
+('Redacteur', 'Aleex', '456', '2026-05-03', '2026-05-24 12:42:50', 'dsljeconnaispastonnom', 'Alexandre ', '2026-03-01', 'alex@gmail.com', '../img/photo_profil/Aleex.png'),
 ('Admin', 'Cookie', '987', '2026-05-03', '2026-05-24 12:41:49', 'Bensemmane', 'Camélia', '2006-05-08', 'bens@gmail.com', '../img/photo_profil/pdp2.png'),
 ('User', 'Maalo', '1234', '2026-05-04', '2026-05-12 12:19:12', 'Boudier', 'Malo', '2006-08-01', 'malo@gmail.com', '../img/photo_profil/pdp1.png');
 
