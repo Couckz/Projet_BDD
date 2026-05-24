@@ -412,4 +412,10 @@ function get_note_moyenne($mysqli, $id_article) {
     $result = readDB($mysqli, $query);
     return $result;
 }
+
+function est_administre_par($mysqli, $login, $id_article) {
+    $query = "SELECT id_article FROM Administre WHERE login = '$login' AND id_article ='$id_article'";
+    $result = readDB($mysqli, $query);
+    return !empty($result); //true si administre l'article, false sinon
+}
 ?>

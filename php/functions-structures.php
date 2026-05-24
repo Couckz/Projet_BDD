@@ -127,7 +127,7 @@ function date_to_str($date){
 }
 
 function affichage_article($article) {
-
+    $mysqli = connectionDB();
     $id_article = $article["id_article"];
     $titre = $article["titre"];
     $contenu = $article["contenu"];
@@ -139,50 +139,92 @@ function affichage_article($article) {
     $prix = $article["prix"];
     $synopsis = $article["synopsis"];
     $nom_jeu = $article["nom"];
+    $est_connecte = isset($_SESSION['connecte']) && $_SESSION['connecte'];
+    $login = $_SESSION["login"];
+    $role = $_SESSION["role"];
 
-    echo "<div class = 'article'>";
+    echo "<div class='article'>";
 
-        echo "<div class = 'presentation'>";
+        echo "<div class='presentation'>";
 
-            echo "<div class = 'intro'>";
-                echo "<h2 class = 'title'>$titre</h2>";
+            // ACTIONS ADMIN
+            if ($est_connecte && $role === "Admin") {
 
-                echo "<section class = 'caracteristique'>";
+                echo "<div class='article-actions'>";
 
-                    echo "<div class = 'tags_container'>";
+                    echo "<form action='../php/process_articles.php' method='POST'>";
+                        echo "<input type='hidden' name='id_article' value='$id_article'>";
+                        echo "<input type='hidden' name='action' value='suppr'>";
+                        echo "<button type='submit'>Supprimer</button>";
+                    echo "</form>";
+
+                    echo "<form action='../modifier_article.php' method='GET'>";
+                        echo "<input type='hidden' name='id_article' value='$id_article'>";
+                        echo "<button type='submit'>Modifier</button>";
+                    echo "</form>";
+
+                echo "</div>";
+            }
+
+            if ($est_connecte && $role === "Redacteur") {
+                if (est_administre_par($mysqli, $login, $id_article)) {
+                    echo "<div class='article-actions'>";
+                    echo "<form action='../php/process_articles.php' method='POST'>";
+                        echo "<input type='hidden' name='id_article' value='$id_article'>";
+                        echo "<input type='hidden' name='action' value='suppr'>";
+                        echo "<button type='submit'>Supprimer</button>";
+                    echo "</form>";
+                    echo "<form action='../modifier_article.php' method='GET'>";
+                        echo "<input type='hidden' name='id_article' value='$id_article'>";
+                        echo "<button type='submit'>Modifier</button>";
+                    echo "</form>";
+                    echo "</div>";
+                }
+                
+            }
+
+            // INTRO
+            echo "<div class='intro'>";
+                echo "<h2 class='title'>$titre</h2>";
+
+                echo "<section class='caracteristique'>";
+
+                    echo "<div class='tags_container'>";
                         foreach($caracteristiques as $caracteristique){
-                            echo "<div class = 'tag_bubble'>$caracteristique</div>";
+                            echo "<div class='tag_bubble'>$caracteristique</div>";
                         }
                     echo "</div>";
 
                     echo "$synopsis<br/>";
+
                 echo "</section>";
             echo "</div>";
 
-            echo "<div class = 'intro2'>";
-                echo "<div class = 'img_container'>";
+            // INFO JEU
+            echo "<div class='intro2'>";
+                echo "<div class='img_container'>";
                     echo "<img src='../$chemin_img'>";
                 echo "</div>";
+
                 echo "<p>Jeu : $nom_jeu</p>";
                 echo "<p>Prix : $prix €</p>";
-                echo "<p class='note'> Note : $note/10</p>";
+                echo "<p class='note'>Note : $note/10</p>";
             echo "</div>";
 
         echo "</div>";
 
+        // CONTENU
         echo "<div class='content'>";
-            echo "<p class='texte'>";
-                echo $contenu;
-            echo "<p>";
+            echo "<p class='texte'>$contenu</p>";
         echo "</div>";
 
-        echo "<footer class = 'fin'>";
-            echo "Date de création : $date_creation  ";
-            echo "  Modifié le : $date_modification";
+        // FOOTER
+        echo "<footer class='fin'>";
+            echo "Date de création : $date_creation ";
+            echo "Modifié le : $date_modification";
         echo "</footer>";
 
     echo "</div>";
-
 }
 
 function affichage_liste_avis($liste_avis) {
