@@ -3,7 +3,7 @@ $rootPath = dirname($_SERVER['SCRIPT_NAME']);
 ?>
 <nav>
     <ul>
-        <li><a href="index.php">Accueil</a></li>
+        <li><a href="<?php echo $rootPath; ?>/index.php">Accueil</a></li>
         <?php
             if(isset($_SESSION['connecte']) && $_SESSION['connecte']){
                 ?><li><a href="<?php echo $rootPath; ?>/profil_prive.php">Profil</a></li><?php
