@@ -42,8 +42,8 @@ $sql_connection = connectionDB();
                 <hr/>
 
                 <fieldset class="sameline">
-                    <label id="titre" for="article" name="titre">Article visé : </label>
-                    <select name="article" id="article">
+                    <label id="titre" for="article" name="titre" required>Article visé : </label>
+                    <select name="article" id="article" required>
                     <?php
                         $article = recuperer_article($sql_connection);
                         displayForm($article);
