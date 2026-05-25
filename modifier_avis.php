@@ -9,12 +9,12 @@ require_once(__DIR__."/php/functions-query.php"); //functions de requêtes SQL
 require_once(__DIR__."/php/functions-structures.php"); //functions de mises en pages au niveau des données obtenues de la BDD
 
 if (!isset($_SESSION['connecte']) or !$_SESSION['connecte']) {
-    header("Location: connexion.php");
+    header("Location: ./connexion.php");
     exit();
 }
 
 if (!isset($_GET['id_avis'])) {
-	header("Location: index.php");
+	header("Location: ./index.php");
 	exit();
 }
 
@@ -25,7 +25,7 @@ $login	= $_SESSION['login'];
 $avis	= recuperer_avis($mysqli, $_GET['id_avis']);
 
 if (!isset($avis[0]) or $avis[0]['login'] != $_SESSION['login']) {
-	header("Location: index.php");
+	header("Location: ./index.php");
 	exit();
 }
 

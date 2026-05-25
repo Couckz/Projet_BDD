@@ -14,6 +14,12 @@ require_once("./php/functions-structures.php");
 require_once("./php/login.php");
 require_once("./php/post_avis.php");
 
+if (!isset($_SESSION['connecte']) or !$_SESSION['connecte']) {
+    header("Location: ./connexion.php");
+    exit();
+}
+
+
 $sql_connection = connectionDB();
 ?>
 <!DOCTYPE html>

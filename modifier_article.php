@@ -7,11 +7,11 @@ require_once(__DIR__."/includes/config-bdd.php");
 require_once(__DIR__."/php/functions-structures.php");
 
 if (!isset($_SESSION['connecte']) || !$_SESSION['connecte']) {
-    header("Location: connexion.php");
+    header("Location: ./connexion.php");
     exit();
 }
 if (!isset($_GET['id_article'])) {
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 }
 
@@ -20,7 +20,7 @@ $id_article = $_GET['id_article'];
 $article = information_article($mysqli, $id_article);
 
 if (!isset($article[0])) {
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 }
 

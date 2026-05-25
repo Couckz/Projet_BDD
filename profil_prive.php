@@ -13,6 +13,11 @@ require_once("./php/change_photo.php"); //functions de changement de l'image de 
 require_once("./php/changement_profil.php"); //functions de changement des infos users
 $mysqli = connectionDB(); //création de la connexion SQL
 
+if (!isset($_SESSION['connecte']) or !$_SESSION['connecte']) {
+    header("Location: ./connexion.php");
+    exit();
+}
+
 if (isset($_POST['btn_nom_modif'])) {
     change_nom();
     $_SESSION['nom'] = $_POST['nom'];
