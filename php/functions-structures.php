@@ -16,7 +16,7 @@ function affichage_articles($articles){
             $synopsis = $lines["synopsis"];
             $nom_jeu = $lines["nom"];
             $date_sortie = $lines["sortie"];
-            
+
 
             echo "<a href = article.php/?id_article=$id_article>";
                 echo "<div class = 'article'>";
@@ -45,15 +45,17 @@ function affichage_articles($articles){
                                 echo "<p>Jeu : $nom_jeu</p>";
                                 echo "<p>Prix : $prix €</p>";
                                 echo "<p>Date de sortie : $date_sortie</p>";
-                                echo "<p> Supports : </p>";
+                                echo "<p> Supports :";
                                 foreach($lines["supports"] as $support){
-                                    echo "$support ";
+                                    echo " $support";
                                 }
+                                echo "</p>";
 
-                                echo "<p> Categories : </p>";
+                                echo "<p> Categories :";
                                 foreach($lines["categories"] as $cat){
-                                    echo "$cat ";
+                                    echo " $cat";
                                 }
+                                echo "</p>";
                                 echo "<p class='note'> Note : $note/10</p>";
                             echo "</div>";
                         echo "</div>";
@@ -142,7 +144,7 @@ function affichage_article($article) {
     $supports = recuperer_supports_jeu($mysqli, $id_jeu);
     $categories = recuperer_categories_jeu($mysqli, $id_jeu);
     $est_connecte = isset($_SESSION['connecte']) && $_SESSION['connecte'];
-    
+
     echo "<div class='article'>";
         echo "<div class='presentation'>";
             if ($est_connecte && $_SESSION["role"] === "Admin") {
@@ -195,10 +197,13 @@ function affichage_article($article) {
                 foreach($supports as $support) {
                     echo $support["nom_support"] . " ";
                 }
-                echo "<p>Catégories :</p>";
+
+                echo "<p>Catégories : ";
                 foreach($categories as $categorie) {
                     echo $categorie["nom_categorie"] . " ";
                 }
+                echo "</p>";
+
                 echo "<p class='note'>Note : $note/10</p>";
             echo "</div>";
         echo "</div>";
@@ -319,7 +324,9 @@ function display_support($support) {
 function affichage_note_moyenne($moyenne) {
     foreach($moyenne as $line) {
         $moy = $line["moyenne"];
-        echo "note moyenne donnée par les utilisateurs : $moy";
+        if (is_numeric($moy)) {
+            echo "Note moyenne donnée par les utilisateurs : " . number_format($moy, 2) . " / 10";
+        }
     }
 }
 ?>

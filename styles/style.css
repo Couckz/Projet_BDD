@@ -90,7 +90,7 @@ footer{
 
 .articles_container {
     display: grid; /* adapté pour placer des éléments en 2D */
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     grid-gap: 1rem;
 
     .article:hover {
@@ -127,7 +127,7 @@ footer{
     .content {
         /* source: https://stackoverflow.com/questions/16679146/force-footer-on-bottom-on-pages-with-little-content */
         flex: 1 0 auto;
-        padding: 10px;
+        padding: 1rem;
     }
 
     .presentation {
@@ -135,7 +135,7 @@ footer{
         display: flex;
         justify-content: space-between;
 
-        padding: 10px;
+        padding: 1rem;
 
         .img_container {
 
@@ -190,9 +190,11 @@ footer{
     color: hsl(0, 0%, 20%);
     font-weight: 600;
 
+    margin-bottom: 1rem;
+
     .tag_bubble {
-        margin: 5px;
-        padding: 5px;
+        margin: 0.3rem;
+        padding: 0.25rem 0.5rem;
 
         background-color: var(--alt-bg-color-2);
 
@@ -212,6 +214,7 @@ footer{
 .formulaire {
     display: flex;
     flex-direction: column;
+
     align-items: center;
     width: fit-content;
     margin: 40px auto;
@@ -219,6 +222,65 @@ footer{
     border: 1px solid #ccc;
     border-radius: 10px;
     background: white;
+    box-shadow: -7px 7px 6px -6px rgba(0, 0, 0, 0.1);
+
+    form {
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-bottom: 1rem;
+
+        input {
+            border: 1px solid hsl(230, 90%, 60%, 0%);
+            border-radius: 5px;
+            margin-left: 0.25rem;
+            padding: 0.2rem;
+            background: var(--alt-bg-color-2);
+            margin-bottom: 0.5rem;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            filter: brightness(105%);
+            border: 1px solid hsl(230, 90%, 60%);
+        }
+
+        select {
+            border:0;
+            border-radius: 5px;
+            margin-left: 0.25rem;
+            margin-bottom: 0.25rem;
+            background:transparent;
+            height: 1.5rem;
+            border:1px solid #d8d8d8;
+        }
+
+        button{
+            font-size: 0.8rem;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+            box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.15);
+            background-color: hsl(230, 90%, 60%);
+            color: hsl(0, 0%, 90%);
+            transition: 0.15s;
+        }
+
+        button:hover {
+            filter: brightness(98%);
+            transform:scale(1.01);
+        }
+
+        button:active {
+            filter: brightness(96%);
+            transform:scale(1.02);
+        }
+
+    }
 }
 
 .connexion {
@@ -272,7 +334,7 @@ h1.salutation{
 
     display: flex;
     flex-direction: column;
-    
+
     justify-content: center;
     width: 1000px;
     margin: auto;
@@ -473,14 +535,15 @@ h1.salutation{
     }
 }
 
-.modification-avis {
+.redaction-article-avis {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 
     margin: auto;
-    padding: 20px;
+    padding: 1.25rem;
+    padding-bottom: 3rem;
 
     width: 700px;
     max-width: 80%;
@@ -490,21 +553,55 @@ h1.salutation{
     border: 1px solid #ccc;
     background-color: var(--alt-bg-color-1);
 
+    hr {
+        width: 90%;
+        color: hsl(0, 0%, 100%);
+        filter: brightness(120%);
+    }
+
     label {
         font-weight: 500;
+    }
+
+    select {
+        background-color: var(--alt-bg-color-2);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+
+        margin-left: 0.25rem;
+        margin-bottom: 0.25rem;
+
+        height: 1.5rem;
+        border:1px solid #d8d8d8;
     }
 
     fieldset {
         border: none;
         display: flex;
-        flex-direction: column;
         gap: 0.5rem;
+
+        /* parfois on veut que le label soit sur la même ligne */
+        .sameline {
+            align-items: start;
+            flex-direction: row;
+        }
+
+        div {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+    }
+
+    fieldset:not(.sameline) {
         align-items: center;
         width: 80%;
+        flex-direction: column;
     }
 
     textarea {
         background-color: var(--alt-bg-color-2);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
         border-radius: 0.5rem;
         padding: 0.5rem;
         border: 1.2px solid hsl(0, 0%, 80%);

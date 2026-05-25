@@ -85,7 +85,7 @@ if (isset($_POST['btn_date_naissance_modif'])) {
                             <?php
                                 if (isset($_POST['btn_date_naissance'])){?>
                                     <input required type="date" name="date_naissance"><br>
-                                    <button type="submit" name="btn_date_naissance_modif">Confirmer</button><?php
+                                    <button class="confirmation-button" type="submit" name="btn_date_naissance_modif">Confirmer</button><?php
                                 }
                             ?>
                         </span>
@@ -95,7 +95,7 @@ if (isset($_POST['btn_date_naissance_modif'])) {
                             <?php
                                 if (isset($_POST['btn_adresse_email'])){?>
                                     <input required type="email" name="adresse_email" placeholder="ex: david.goodenough@gmail.com"><br>
-                                    <button type="submit" name="btn_adresse_email_modif">Confirmer</button><?php
+                                    <button class="confirmation-button" type="submit" name="btn_adresse_email_modif">Confirmer</button><?php
                                 }
                             ?>
                         </span>

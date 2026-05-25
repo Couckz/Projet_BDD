@@ -307,7 +307,7 @@ function modif_pp($mysqli, $login, $path){
 function recuperer_article_par_nom_complet($mysqli, $title) {
     $query_verif = "SELECT nom
                     FROM Jeu
-                    WHERE nom = '$title'";
+                    WHERE nom LIKE '%$title%'";
     $result_verif = readDB($mysqli, $query_verif);
     if(empty($result_verif)) {
         print_r("Aucun article n'est à propos de ce jeu");
@@ -332,7 +332,7 @@ function recuperer_article_par_nom_complet($mysqli, $title) {
             ON Image.id_article = Article.id_article
         INNER JOIN Jeu
             ON Article.id_jeu = Jeu.id_jeu
-        WHERE Jeu.nom = '$title'
+        WHERE Jeu.nom LIKE '%$title%'
         ORDER BY Article.date_creation DESC";
         $articles = readDB($mysqli, $query);
         $resultat = [];
@@ -435,7 +435,7 @@ function modifier_article( $mysqli, $id_article, $titre_article, $note, $contenu
     $query_jeu = "UPDATE Jeu SET nom = '$titre_jeu', prix = '$prix', synopsis = '$synopsis', sortie = '$date_sortie' WHERE id_jeu = '$id_jeu' ";
     writeDB($mysqli, $query_jeu);
 
-    if (!empty($chemin_image)) { 
+    if (!empty($chemin_image)) {
         $chemin_image = mysqli_real_escape_string($mysqli, $chemin_image);
         $query_image = "UPDATE Image SET chemin_image = '$chemin_image' WHERE id_article = '$id_article'";
         writeDB($mysqli, $query_image);

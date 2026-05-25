@@ -3,7 +3,7 @@ session_start();
 //affichage des erreurs côté PHP et côté MYSQLI
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //Import du site
 require_once("./includes/constantes.php");      //constantes du site
@@ -36,49 +36,84 @@ $sql_connection = connectionDB();
             }
             ?>
 
-                <div class="formulaire_article">
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <div class="ensemble_formulaire_article">
-                    Titre de l'article <input required type="text" name="title_article" id="title_article" placeholder="Vive Halo !"><br>
-                    Note <input required type="number" name="note_jeu" min="0" id="note_jeu"><br>
-                    Contenu <input required type="text" name="content" id="content" placeholder="Critique du jeu.."><br>
-                    Caracteristiques <input required type="text" name="car" id="car" placeholder="Pegi 18"><br>
-                    Titre du jeu <input required type="text" name="title_jeu" id="title_jeu" placeholder="Zelda Breath of the wild"><br>
-                    Prix <input required type="number" name="prix" min="0" id="prix"><br>
-                    Date de sortie <input required type="date" name="sortie" min="0" id="sortie"><br>
-                    Synopsis <input required type="text" name="synopsis" id="synopsis" placeholder="Résumé du jeu"><br>
-                    Insérer l'image de la jaquette <input type="file" name="image_article">
-                        <div class="liste_categorie">
-                        <label for="">Catégorie</label>
+            <form class = "redaction-article-avis" action="#" method="post" enctype="multipart/form-data">
+
+                <h1>Rédigez un article</h1>
+
+                <hr/>
+
+                <fieldset>
+                    <label for="title_jeu" name="titre">Titre du jeu</label>
+                    <textarea required name="title_jeu" id="title_jeu" placeholder="Zelda Breath of the wild"></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <label for="sortie">Synopsis</label>
+                    <textarea class = "huge-text-area" name="synopsis" id="synopsis" maxlength="500" placeholder="Résumé du jeu..." required></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <label for="image_article">Insérez l'image de la jaquette : </label>
+                    <input type="file" name="image_article" id="image_article">
+                </fieldset>
+
+                <fieldset class = "sameline">
+                    <label for="sortie">Date de sortie : </label>
+                    <input required type="date" id="sortie" name="sortie" min="0" id="sortie">
+                </fieldset>
+
+                <fieldset class = "sameline">
+                    <label for="prix">Prix (€) : </label>
+                    <input required type="number" name="prix" min="0" id="prix" placeholder = "10">
+                </fieldset>
+
+                <fieldset class="sameline">
+                    <div class="liste_support">
+                        <label for="">Support(s)</label>
+                        <?php
+                        $support = recuperer_support($sql_connection);
+                        display_support($support);
+                    ?>
+                    </div>
+                    <div class="liste_categorie">
+                        <label>Catégorie(s) du jeu</label>
                         <?php
                             $categorie = recuperer_categorie($sql_connection);
                             display_categorie($categorie);
                         ?>
-                        </div>
-                
-                        
-                        <br>
-                        
-                        <div class="liste_support">
-                            <label for="">Support</label>
-                            <?php
-                            $support = recuperer_support($sql_connection);
-                            display_support($support);
-                        ?>
-                        </div>
-                        
+                    </div>
+                </fieldset>
 
-                    
-                        
-                    <div class="boutton_avis">
-                    <button type="btnsub_article" name="btnsub_article">
-                            Envoyer
-                    </button>
-                    </div>
-                    </div>
+                <hr/>
+
+                <fieldset>
+                    <label for="title_article">Titre de l'article</label>
+                    <textarea name="title_article" id="title_article" maxlength="30" placeholder="Vive Halo !" required></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <label for="content">Contenu de l'article</label>
+                    <textarea class = "huge-text-area" name="content" id="content" maxlength="500" placeholder="Critique du jeu..." required></textarea>
+                </fieldset>
+
+               <fieldset class = "sameline">
+                    <label for="note_jeu">Note : </label>
+                    <input type="number" name="note_jeu" id="note_jeu" min="0" max="10" placeholder="0" required>
+                </fieldset>
+
+                <fieldset class = "sameline">
+                    <label for="car">Caractéristiques : </label>
+                    <input required type="text" name="car" id="car" placeholder="Pegi 18">
+                </fieldset>
+
+                <hr/>
+
+                <input name="btnsub_article" type="submit"></input>
+
                 </form>
+            </div>
         </main>
-        
+
         <?php include("static/footer.php"); ?>
         <?php closeDB($sql_connection); ?>
     </body>

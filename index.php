@@ -28,6 +28,34 @@ $mysqli = connectionDB(); //création de la connexion SQL
             include("static/nav.php"); //inclusion de l'onglet navigation de la page
         ?>
         <main>
+
+            <section>
+
+                <div class="formulaire">
+                    <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
+                    <form action="#" method="POST">
+                        <div class="champ">
+                            Titre : <input type="text" name="title" id="title" placeholder="Mario"><br>
+                            Catégorie :
+                            <select name="categorie" id="categorie">
+                                <?php
+                                $categorie = recuperer_categorie($mysqli);
+                                display_categorie_selection($categorie);
+                                ?>
+                            </select>
+                        </div>
+                    <div class="soumettre">
+                        <button type="filtre_cat" name="filtre_cat">
+                            Filtrer par categorie
+                        </button>
+                        <button type="filtre_nom" name="filtre_nom">
+                            Filtrer par nom
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </section>
+
             <?php
             if(isset($_POST['filtre_nom'])){
                 $title = filtrer_nom($mysqli);
@@ -35,48 +63,20 @@ $mysqli = connectionDB(); //création de la connexion SQL
                 if ($result != 0) {
                     affichage_articles($result);
                 }
-                
+
             } else if (isset($_POST['filtre_cat'])){
                 $articles = filtrer_cat($mysqli);
                 $result = recuperer_article_par_categorie_complet($mysqli, $articles);
                 affichage_articles($result);
-                
+
             } else {
                 $articles = information_articles_complet($mysqli); //on récupère tout les articles en même temps depuis la BDD
                 affichage_articles($articles); //on affiche simplement lesdits articles
             }
-            
-            
+
+
             ?>
-            <section>
-            <h3>Vous êtes perdus ? Recherchez votre jeu préféré :</h3>
 
-            <div class="formulaire">
-                <form action="#" method="POST">
-                    <div class="champ">
-                        Titre <input type="text" name="title" id="title" placeholder="Mario"><br>
-                        Categorie:
-                        <select name="categorie" id="categorie">
-                            <?php
-                            $categorie = recuperer_categorie($mysqli);
-                            display_categorie_selection($categorie);
-                            ?>
-                        </select>
-                    </div>
-                <div class="soumettre">
-                    <button type="filtre_cat" name="filtre_cat">
-                        Filtrer par categorie
-                    </button>
-                    <button type="filtre_nom" name="filtre_nom">
-                        Filtrer par nom
-                    </button>
-                </div>
-                </form>
-            </div>
-            </section>
-
-            
-            
         </main>
         <?php
             include("static/footer.php"); //inclusion du footer de la page

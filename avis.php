@@ -3,7 +3,7 @@ session_start();
 //affichage des erreurs côté PHP et côté MYSQLI
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 //Import du site
 require_once("./includes/constantes.php");      //constantes du site
@@ -35,34 +35,43 @@ $sql_connection = connectionDB();
                 post_avis();
             }
             ?>
-            <div class="formulaire_avis">
-                <form action="#" method="post">
-                    <div class="ensemble_formulaire">
-                    Titre <input required type="text" name="title" id="title" placeholder="Vive Halo !"><br>
-                        <label id="titre" name="titre">Titre de l'article: </label>
-                        <select name="article" id="article">
-                        <?php
-                            $article = recuperer_article($sql_connection);
-                            displayForm($article);
-                        ?>
-                        </select>
-                        Note <input required type="number" name="note" min="0" max="10" id="note"><br>
-                        Avis <input required type="text" name="avis" id="avis"><br>
-                    
-                    <div class="boutton_avis">
-                    <button type="btnsub" name="btnsub">
-                            Envoyer
-                    </button>
-                    </div>
-                    </div>
-                    
-                    
-                    
+            <form class = "redaction-article-avis" action="#" method="post">
+
+                <h1>Donnez votre avis</h1>
+
+                <hr/>
+
+                <fieldset class="sameline">
+                    <label id="titre" for="article" name="titre">Article visé : </label>
+                    <select name="article" id="article">
+                    <?php
+                        $article = recuperer_article($sql_connection);
+                        displayForm($article);
+                    ?>
+                    </select>
+                </fieldset>
+
+               <fieldset class = "sameline">
+                    <label for="note">Note</label>
+                    <input type="number" name="note" id="note" min="0" max="10" placeholder="0" required>
+                </fieldset>
+
+                <fieldset>
+                    <label for="title">Titre de l'avis</label>
+                    <textarea name="title" id="title" maxlength="30" placeholder="Vive Halo !" required></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <label for="avis">Contenu de l'avis</label>
+                    <textarea class = "huge-text-area" name="avis" id="avis" maxlength="500" required></textarea>
+                </fieldset>
+
+                <hr/>
+
+                <input name="btnsub" type="submit"></input>
+
                 </form>
             </div>
-            <?php
-                
-            ?>
         </main>
         <?php include("static/footer.php"); ?>
         <?php closeDB($sql_connection); ?>

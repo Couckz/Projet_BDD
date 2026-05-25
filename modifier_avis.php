@@ -46,10 +46,17 @@ $avis = $avis[0];
 		<?php include("static/header.php"); ?>
 		<?php include("static/nav.php"); ?>
 		<main>
-			<form class="modification-avis" action="php/process_avis.php" method="POST">
+			<form class="redaction-article-avis" action="php/process_avis.php" method="POST">
 				<h1>Modifiez votre avis</h1>
 				<input type="hidden" name="id_avis" value="<?php echo htmlspecialchars($avis['id_avis']); ?>">
 				<input type="hidden" name="action" value="modif">
+
+				<hr/>
+
+				<fieldset class="sameline">
+					<label for="note">Note donnée</label>
+					<input type="number" name="note" id="note" min="0" max="10" value="<?php echo htmlspecialchars($avis['note']); ?>">
+				</fieldset>
 
 				<fieldset>
 					<label for="titre">Titre de l'avis</label>
@@ -61,10 +68,7 @@ $avis = $avis[0];
 					<textarea class = "huge-text-area" name="texte" id="texte" maxlength="500" required><?php echo htmlspecialchars($avis['texte']); ?></textarea>
 				</fieldset>
 
-				<fieldset>
-					<label for="note">Note donnée</label>
-					<input type="number" name="note" id="note" min="0" max="10" value="<?php echo htmlspecialchars($avis['note']); ?>">
-				</fieldset>
+				<hr/>
 
 				<input type="submit"></input>
 			</form>
