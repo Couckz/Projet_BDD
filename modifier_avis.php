@@ -20,9 +20,9 @@ if (!isset($_GET['id_avis'])) {
 
 $mysqli	= connectionDB();
 
-$login = $_SESSION['login'];
+$login	= $_SESSION['login'];
 
-$avis = recuperer_avis($mysqli, $_GET['id_avis']);
+$avis	= recuperer_avis($mysqli, $_GET['id_avis']);
 
 if (!isset($avis[0]) or $avis[0]['login'] != $_SESSION['login']) {
 	header("Location: index.php");
@@ -39,7 +39,7 @@ $avis = $avis[0];
         <meta charset="utf-8">
         <meta name="keywords" content="jeu vidéo modification avis">
         <meta name="author" content="Malo Camelia Alexandre">
-        <link rel="icon" href=<?php echo "$iconeSite"; ?>>
+        <link rel="icon" href="images/pokeball.png">
         <link rel="stylesheet" type="text/css" href="styles/style.css">
     </head>
     <body>
@@ -76,5 +76,5 @@ $avis = $avis[0];
 
 
 <!-- <?php
-// closeDB($sql_connection);
+closeDB($mysqli);
 ?> -->

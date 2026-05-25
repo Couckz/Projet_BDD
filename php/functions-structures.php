@@ -17,8 +17,6 @@ function affichage_articles($articles){
             $nom_jeu = $lines["nom"];
             $date_sortie = $lines["sortie"];
             
-            
-
 
             echo "<a href = article.php/?id_article=$id_article>";
                 echo "<div class = 'article'>";
@@ -147,12 +145,9 @@ function affichage_article($article) {
 
         echo "<div class='presentation'>";
 
-            // ACTIONS ADMIN
             if ($est_connecte && $role === "Admin") {
-
                 echo "<div class='article-actions'>";
-
-                    echo "<form action='../php/process_articles.php' method='POST'>";
+                    echo "<form action='../php/process_article.php' method='POST'>";
                         echo "<input type='hidden' name='id_article' value='$id_article'>";
                         echo "<input type='hidden' name='action' value='suppr'>";
                         echo "<button type='submit'>Supprimer</button>";
@@ -169,7 +164,7 @@ function affichage_article($article) {
             if ($est_connecte && $role === "Redacteur") {
                 if (est_administre_par($mysqli, $login, $id_article)) {
                     echo "<div class='article-actions'>";
-                    echo "<form action='../php/process_articles.php' method='POST'>";
+                    echo "<form action='../php/process_article.php' method='POST'>";
                         echo "<input type='hidden' name='id_article' value='$id_article'>";
                         echo "<input type='hidden' name='action' value='suppr'>";
                         echo "<button type='submit'>Supprimer</button>";
@@ -182,43 +177,30 @@ function affichage_article($article) {
                 }
                 
             }
-
-            // INTRO
+            
             echo "<div class='intro'>";
                 echo "<h2 class='title'>$titre</h2>";
-
                 echo "<section class='caracteristique'>";
-
                     echo "<div class='tags_container'>";
                         foreach($caracteristiques as $caracteristique){
                             echo "<div class='tag_bubble'>$caracteristique</div>";
                         }
                     echo "</div>";
-
                     echo "$synopsis<br/>";
-
                 echo "</section>";
             echo "</div>";
-
-            // INFO JEU
             echo "<div class='intro2'>";
                 echo "<div class='img_container'>";
                     echo "<img src='../$chemin_img'>";
                 echo "</div>";
-
                 echo "<p>Jeu : $nom_jeu</p>";
                 echo "<p>Prix : $prix €</p>";
                 echo "<p class='note'>Note : $note/10</p>";
             echo "</div>";
-
         echo "</div>";
-
-        // CONTENU
         echo "<div class='content'>";
             echo "<p class='texte'>$contenu</p>";
         echo "</div>";
-
-        // FOOTER
         echo "<footer class='fin'>";
             echo "Date de création : $date_creation ";
             echo "Modifié le : $date_modification";

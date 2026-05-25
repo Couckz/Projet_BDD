@@ -69,6 +69,7 @@ function information_article($mysqli, $id_article) {
         Article.note,
         Article.caracteristiques,
         Article.date_creation,
+        Article.id_jeu,
         Jeu.nom,
         Jeu.sortie,
         Jeu.prix,
@@ -418,4 +419,51 @@ function est_administre_par($mysqli, $login, $id_article) {
     $result = readDB($mysqli, $query);
     return !empty($result); //true si administre l'article, false sinon
 }
+
+function modifier_article( $mysqli, $id_article, $titre_article, $note, $contenu, $caracteristiques, $titre_jeu, $prix, $date_sortie, $synopsis, $categories, $supports, $chemin_image) {
+    $titre_article = mysqli_real_escape_string($mysqli, $titre_article);
+    $contenu = mysqli_real_escape_string($mysqli, $contenu);
+    $caracteristiques = mysqli_real_escape_string($mysqli, $caracteristiques);
+    $titre_jeu = mysqli_real_escape_string($mysqli, $titre_jeu);
+    $prix = mysqli_real_escape_string($mysqli, $prix);
+    $synopsis = mysqli_real_escape_string($mysqli, $synopsis);
+    $query_id_jeu = "SELECT id_jeu FROM Article WHERE id_article = '$id_article' ";
+    $result_id_jeu = readDB($mysqli, $query_id_jeu);
+    $id_jeu = $result_id_jeu[0]['id_jeu'];
+    $query_article = " UPDATE Article SET titre = '$titre_article', contenu = '$contenu', note = '$note', caracteristiques = '$caracteristiques', date_modification = NOW() WHERE id_article = '$id_article'";
+    writeDB($mysqli, $query_article);
+    $query_jeu = "UPDATE Jeu SET nom = '$titre_jeu', prix = '$prix', synopsis = '$synopsis', sortie = '$date_sortie' WHERE id_jeu = '$id_jeu' ";
+    writeDB($mysqli, $query_jeu);
+
+    if (!empty($chemin_image)) { 
+        $chemin_image = mysqli_real_escape_string($mysqli, $chemin_image);
+        $query_image = "UPDATE Image SET chemin_image = '$chemin_image' WHERE id_article = '$id_article'";
+        writeDB($mysqli, $query_image);
+    }
+
+    $query_delete_categories = "DELETE FROM Est_categorise_par WHERE id_jeu = '$id_jeu'";
+    writeDB($mysqli, $query_delete_categories);
+    foreach($categories as $categorie) {
+        $categorie = mysqli_real_escape_string($mysqli, $categorie);
+        $query_insert_categorie = "INSERT INTO Est_categorise_par (id_jeu, nom_categorie) VALUES ('$id_jeu', '$categorie')";
+        writeDB($mysqli, $query_insert_categorie);
+    }
+
+    $query_delete_supports = "DELETE FROM Est_jouable_sur WHERE id_jeu = '$id_jeu'";
+    writeDB($mysqli, $query_delete_supports);
+
+    foreach($supports as $support) {
+        $support = mysqli_real_escape_string($mysqli, $support);
+        $query_insert_support = "INSERT INTO Est_jouable_sur (id_jeu, nom_support) VALUES ('$id_jeu', '$support') ";
+        writeDB($mysqli, $query_insert_support);
+    }
+}
+
+function supprimer_article($mysqli, $id_article) {
+    writeDB($mysqli, "DELETE FROM Avis WHERE id_article = '$id_article'");
+    writeDB($mysqli, "DELETE FROM Image WHERE id_article = '$id_article'");
+    writeDB($mysqli, "DELETE FROM Administre WHERE id_article = '$id_article'");
+    writeDB($mysqli, "DELETE FROM Article WHERE id_article = '$id_article'");
+}
+
 ?>
