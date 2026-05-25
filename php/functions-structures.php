@@ -250,7 +250,8 @@ function affichage_liste_avis($liste_avis) {
 
                 echo "<div class = 'avis_header'>";
                     echo "<div class = 'avis_pdp_img_container'>";
-                        echo "<a href='../profil_public.php/?login=$login'><img src = '../$chemin_pdp' alt = 'photo de profil de $login'></a>";
+                        $rootPath = dirname($_SERVER['SCRIPT_NAME']);
+                        echo "<a href='../profil_public.php/?login=$login'><img src = '$rootPath/img/$chemin_pdp' alt = 'photo de profil de $login'></a>";
                     echo "</div>";
                     echo "<h2>$titre</h2>";
                     if ($est_connecte and ($_SESSION['login'] === $login) || $_SESSION['role'] === "Admin") {

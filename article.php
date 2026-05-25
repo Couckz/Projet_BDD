@@ -23,7 +23,7 @@ $mysqli = connectionDB(); //création de la connexion SQL
         <meta charset="utf-8">
         <meta name="keywords" content="jeu vidéo article">
         <meta name="author" content="Malo Camelia Alexandre">
-        <link rel="icon" href=<?php echo "$iconeSite"; ?>>
+        <link rel="icon" href=<?php echo dirname($_SERVER['SCRIPT_NAME'])."/img/site/icone.png"?>>
         <link rel="stylesheet" type="text/css" href="../styles/style.css">
     </head>
     <body>

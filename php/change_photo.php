@@ -3,7 +3,7 @@ function change_photo()
 {
         $mysqli = connectionDB();
         $image = $_FILES['pp'];
-        $dossier = "img/photo_profil/";
+        $dossier = "../img/photo_profil/";
         $nom_original = basename($_FILES["pp"]["name"]);
         $extension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
         $nom_unique = $_SESSION["login"] . "." . $extension;
