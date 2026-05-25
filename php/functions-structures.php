@@ -146,37 +146,44 @@ function affichage_article($article) {
     $est_connecte = isset($_SESSION['connecte']) && $_SESSION['connecte'];
 
     echo "<div class='article'>";
+
         echo "<div class='presentation'>";
-            if ($est_connecte && $_SESSION["role"] === "Admin") {
-                echo "<div class='article-actions'>";
-                    echo "<form action='../php/process_article.php' method='POST'>";
-                        echo "<input type='hidden' name='id_article' value='$id_article'>";
-                        echo "<input type='hidden' name='action' value='suppr'>";
-                        echo "<button type='submit'>Supprimer</button>";
-                    echo "</form>";
-                    echo "<form action='../modifier_article.php' method='GET'>";
-                        echo "<input type='hidden' name='id_article' value='$id_article'>";
-                        echo "<button type='submit'>Modifier</button>";
-                    echo "</form>";
-                echo "</div>";
-            }
-            if ($est_connecte && $_SESSION["role"] === "Redacteur") {
-                if (est_administre_par($mysqli, $_SESSION["login"], $id_article)) {
-                    echo "<div class='article-actions'>";
-                        echo "<form action='../php/process_article.php' method='POST'>";
-                            echo "<input type='hidden' name='id_article' value='$id_article'>";
-                            echo "<input type='hidden' name='action' value='suppr'>";
-                            echo "<button type='submit'>Supprimer</button>";
-                        echo "</form>";
-                        echo "<form action='../modifier_article.php' method='GET'>";
-                            echo "<input type='hidden' name='id_article' value='$id_article'>";
-                            echo "<button type='submit'>Modifier</button>";
-                        echo "</form>";
-                    echo "</div>";
-                }
-            }
+
             echo "<div class='intro'>";
-                echo "<h2 class='title'>$titre</h2>";
+
+              echo "<div class = 'article-titre-et-actions'>";
+                    echo "<h2 class='title'>$titre</h2>";
+
+                    if ($est_connecte && $_SESSION["role"] === "Admin") {
+                        echo "<div class='article-actions'>";
+                            echo "<form action='../php/process_article.php' method='POST'>";
+                                echo "<input type='hidden' name='id_article' value='$id_article'>";
+                                echo "<input type='hidden' name='action' value='suppr'>";
+                                echo "<button type='submit'>Supprimer</button>";
+                            echo "</form>";
+                            echo "<form action='../modifier_article.php' method='GET'>";
+                                echo "<input type='hidden' name='id_article' value='$id_article'>";
+                                echo "<button type='submit'>Modifier</button>";
+                            echo "</form>";
+                        echo "</div>";
+                    }
+                    if ($est_connecte && $_SESSION["role"] === "Redacteur") {
+                        if (est_administre_par($mysqli, $_SESSION["login"], $id_article)) {
+                            echo "<div class='article-actions'>";
+                                echo "<form action='../php/process_article.php' method='POST'>";
+                                    echo "<input type='hidden' name='id_article' value='$id_article'>";
+                                    echo "<input type='hidden' name='action' value='suppr'>";
+                                    echo "<button type='submit'>Supprimer</button>";
+                                echo "</form>";
+                                echo "<form action='../modifier_article.php' method='GET'>";
+                                    echo "<input type='hidden' name='id_article' value='$id_article'>";
+                                    echo "<button type='submit'>Modifier</button>";
+                                echo "</form>";
+                            echo "</div>";
+                        }
+                    }
+                echo "</div>";
+
                 echo "<section class='caracteristique'>";
                     echo "<div class='tags_container'>";
                         foreach($caracteristiques as $caracteristique) {
@@ -243,7 +250,7 @@ function affichage_liste_avis($liste_avis) {
 
                 echo "<div class = 'avis_header'>";
                     echo "<div class = 'avis_pdp_img_container'>";
-                        echo "<a href='../profil_public.php/?login=$login'><img src = '$chemin_pdp' alt = 'photo de profil de $login'></a>";
+                        echo "<a href='../profil_public.php/?login=$login'><img src = '../$chemin_pdp' alt = 'photo de profil de $login'></a>";
                     echo "</div>";
                     echo "<h2>$titre</h2>";
                     if ($est_connecte and ($_SESSION['login'] === $login) || $_SESSION['role'] === "Admin") {

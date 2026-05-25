@@ -101,9 +101,9 @@ $sql_connection = connectionDB();
                     <input type="number" name="note_jeu" id="note_jeu" min="0" max="10" placeholder="0" required>
                 </fieldset>
 
-                <fieldset class = "sameline">
-                    <label for="car">Caractéristiques : </label>
-                    <input required type="text" name="car" id="car" placeholder="Pegi 18">
+                <fieldset>
+                    <label for="car">Caractéristiques (séparées par des virgules)</label>
+                    <input required type="text" name="car" id="car" placeholder="Pegi 18, Aventure">
                 </fieldset>
 
                 <hr/>

@@ -57,49 +57,21 @@ foreach($supports_article as $sup) {
 <?php include("static/header.php"); ?>
 <?php include("static/nav.php"); ?>
 <main>
-    <form class="modification-article" action="php/process_article.php" method="POST" enctype="multipart/form-data">
+    <form class="redaction-article-avis" action="php/process_article.php" method="POST" enctype="multipart/form-data">
     <h1>Modifier votre article</h1>
     <input type="hidden" name="id_article" value="<?php echo htmlspecialchars($article['id_article']); ?>">
     <input type="hidden" name="action" value="modif">
 
-    <fieldset>
-        <label for="titre_article">Titre de l'article</label>
-        <input type="text" id="titre_article" name="titre_article" maxlength="100" required value="<?php echo htmlspecialchars($article['titre']); ?>">
-    </fieldset>
-
-    <fieldset>
-        <label for="note">Note</label>
-        <input type="number" id="note" name="note" min="0" max="10" required value="<?php echo htmlspecialchars($article['note']); ?>">
-    </fieldset>
-
-    <fieldset>
-        <label for="contenu">Contenu</label>
-        <textarea class="huge-text-area" id="contenu" name="contenu" maxlength="5000" required><?php echo htmlspecialchars($article['contenu']); ?></textarea>
-    </fieldset>
-
-    <fieldset>
-        <label for="caracteristiques"> Caractéristiques (séparées par des virgules)</label>
-        <input type="text" id="caracteristiques" name="caracteristiques" required value="<?php echo htmlspecialchars($article['caracteristiques']); ?>">
-    </fieldset>
+    <hr/>
 
     <fieldset>
         <label for="titre_jeu">Titre du jeu</label>
-        <input type="text" id="titre_jeu" name="titre_jeu" required value="<?php echo htmlspecialchars($article['nom']); ?>">
-    </fieldset>
-
-    <fieldset>
-        <label for="prix">Prix</label>
-        <input type="number" step="0.01" id="prix" name="prix" required value="<?php echo htmlspecialchars($article['prix']); ?>">
-    </fieldset>
-
-    <fieldset>
-        <label for="date_sortie">Date de sortie</label>
-        <input type="date" id="date_sortie" name="date_sortie" required value="<?php echo htmlspecialchars($article['sortie']); ?>">
+        <textarea type="text" id="titre_jeu" name="titre_jeu" required><?php echo htmlspecialchars($article['nom']); ?></textarea>
     </fieldset>
 
     <fieldset>
         <label for="synopsis">Synopsis</label>
-        <textarea id="synopsis" name="synopsis" maxlength="1000"required><?php echo htmlspecialchars($article['synopsis']); ?></textarea>
+        <textarea class="huge-text-area" id="synopsis" name="synopsis" maxlength="1000"required><?php echo htmlspecialchars($article['synopsis']); ?></textarea>
     </fieldset>
 
     <fieldset>
@@ -110,49 +82,79 @@ foreach($supports_article as $sup) {
     </fieldset>
 
     <fieldset>
-    <legend>Catégories</legend>
+        <label for="date_sortie">Date de sortie</label>
+        <input type="date" id="date_sortie" name="date_sortie" required value="<?php echo htmlspecialchars($article['sortie']); ?>">
+    </fieldset>
 
-    <?php
-    foreach($categories as $cat) {
-    ?>
-    <label>
-        <input type="checkbox" name="categorie[]" value="<?php echo $cat['nom_categorie']; ?>"
-            <?php
-            if (in_array($cat['nom_categorie'], $categories_selectionnees)) {
-                echo "checked";
-            }
-            ?>
-            >
-        <?php echo $cat['nom_categorie']; ?>
-        </label>
-        <br>
-    <?php
-    }
-    ?>
+    <fieldset>
+        <label for="prix">Prix</label>
+        <input type="number" step="0.01" id="prix" name="prix" required value="<?php echo htmlspecialchars($article['prix']); ?>">
+    </fieldset>
 
-</fieldset>
+    <fieldset class="sameline">
+            <div class="liste_support">
+                <label>Catégories du jeu</label>
 
-<fieldset>
-    <legend>Supports</legend>
-    <?php
-    foreach($supports as $sup) {
-    ?>
-    <label>
-    <input type="checkbox" name="support[]" value="<?php echo $sup['nom_support']; ?>"
-    <?php
-    if (in_array($sup['nom_support'], $supports_selectionnes)) {
-        echo "checked"; 
-    }
-    ?>>
-    <?php echo $sup['nom_support']; ?>
-    </label>
-    <br>
-    <?php
-    }
-    ?>
+                <?php
+                echo "<br>";
+                foreach($categories as $cat) {
+                    $nom_categorie = $cat["nom_categorie"];
+                    echo "<input type=\"checkbox\" name=\"categorie[]\" value=\"$nom_categorie\"";
+                    if (in_array($nom_categorie, $categories_selectionnees)) {
+                        echo "checked";
+                    }
+                    echo ">$nom_categorie";
+                    echo "<br>";
+                }
+                ?>
+            </div>
 
-</fieldset>
-    <button type="submit"> Modifier l'article </button>
+            <div class="liste_categorie">
+
+
+                <label>Supports</label>
+
+                <?php
+                echo "<br>";
+                foreach($supports as $sup) {
+                    $nom_support = $sup["nom_support"];
+                    echo "<input type=\"checkbox\" name=\"support[]\" value=\"$nom_support\"";
+                    if (in_array($nom_support, $supports_selectionnes)) {
+                        echo "checked";
+                    }
+                    echo ">$nom_support";
+                    echo "<br>";
+                }
+                ?>
+                </label>
+            </div>
+    </fieldset>
+
+    <hr/>
+
+    <fieldset class="sameline">
+        <label for="note">Note</label>
+        <input type="number" id="note" name="note" min="0" max="10" required value="<?php echo htmlspecialchars($article['note']); ?>">
+    </fieldset>
+
+    <fieldset>
+        <label for="titre_article">Titre de l'article</label>
+        <textarea id="titre_article" name="titre_article" maxlength="100" required><?php echo htmlspecialchars($article['titre']); ?></textarea>
+    </fieldset>
+
+    <fieldset>
+        <label for="contenu">Contenu de l'article</label>
+        <textarea class="huge-text-area" id="contenu" name="contenu" maxlength="5000" required><?php echo htmlspecialchars($article['contenu']); ?></textarea>
+    </fieldset>
+
+    <fieldset>
+        <label for="caracteristiques"> Caractéristiques (séparées par des virgules)</label>
+        <input type="text" id="caracteristiques" name="caracteristiques" required value="<?php echo htmlspecialchars($article['caracteristiques']); ?>">
+    </fieldset>
+
+    <hr/>
+
+    <input type="submit"></input>
 </form>
 </main>
 <?php include("static/footer.php"); ?>
