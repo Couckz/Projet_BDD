@@ -126,63 +126,58 @@ function date_to_str($date){
 
 function affichage_article($article) {
     $mysqli = connectionDB();
-    $id_article = $article["id_article"];
-    $titre = $article["titre"];
-    $contenu = $article["contenu"];
-    $date_creation = $article["date_creation"];
+    $id_article  = $article["id_article"];
+    $titre  = $article["titre"];
+    $contenu  = $article["contenu"];
+    $date_creation  = $article["date_creation"];
     $date_modification = $article["date_modification"];
     $note = $article["note"];
-    $caracteristiques = explode(",", $article["caracteristiques"]);
+    $caracteristiques  = explode(",", $article["caracteristiques"]);
     $chemin_img = $article["chemin_image"];
     $prix = $article["prix"];
     $synopsis = $article["synopsis"];
     $nom_jeu = $article["nom"];
+    $date_sortie  = $article["sortie"];
+    $id_jeu = $article["id_jeu"];
+    $supports = recuperer_supports_jeu($mysqli, $id_jeu);
+    $categories = recuperer_categories_jeu($mysqli, $id_jeu);
     $est_connecte = isset($_SESSION['connecte']) && $_SESSION['connecte'];
-    $login = $_SESSION["login"];
-    $role = $_SESSION["role"];
-
+    
     echo "<div class='article'>";
-
         echo "<div class='presentation'>";
-
-            if ($est_connecte && $role === "Admin") {
+            if ($est_connecte && $_SESSION["role"] === "Admin") {
                 echo "<div class='article-actions'>";
                     echo "<form action='../php/process_article.php' method='POST'>";
                         echo "<input type='hidden' name='id_article' value='$id_article'>";
                         echo "<input type='hidden' name='action' value='suppr'>";
                         echo "<button type='submit'>Supprimer</button>";
                     echo "</form>";
-
                     echo "<form action='../modifier_article.php' method='GET'>";
                         echo "<input type='hidden' name='id_article' value='$id_article'>";
                         echo "<button type='submit'>Modifier</button>";
                     echo "</form>";
-
                 echo "</div>";
             }
-
-            if ($est_connecte && $role === "Redacteur") {
-                if (est_administre_par($mysqli, $login, $id_article)) {
+            if ($est_connecte && $_SESSION["role"] === "Redacteur") {
+                if (est_administre_par($mysqli, $_SESSION["login"], $id_article)) {
                     echo "<div class='article-actions'>";
-                    echo "<form action='../php/process_article.php' method='POST'>";
-                        echo "<input type='hidden' name='id_article' value='$id_article'>";
-                        echo "<input type='hidden' name='action' value='suppr'>";
-                        echo "<button type='submit'>Supprimer</button>";
-                    echo "</form>";
-                    echo "<form action='../modifier_article.php' method='GET'>";
-                        echo "<input type='hidden' name='id_article' value='$id_article'>";
-                        echo "<button type='submit'>Modifier</button>";
-                    echo "</form>";
+                        echo "<form action='../php/process_article.php' method='POST'>";
+                            echo "<input type='hidden' name='id_article' value='$id_article'>";
+                            echo "<input type='hidden' name='action' value='suppr'>";
+                            echo "<button type='submit'>Supprimer</button>";
+                        echo "</form>";
+                        echo "<form action='../modifier_article.php' method='GET'>";
+                            echo "<input type='hidden' name='id_article' value='$id_article'>";
+                            echo "<button type='submit'>Modifier</button>";
+                        echo "</form>";
                     echo "</div>";
                 }
-                
             }
-            
             echo "<div class='intro'>";
                 echo "<h2 class='title'>$titre</h2>";
                 echo "<section class='caracteristique'>";
                     echo "<div class='tags_container'>";
-                        foreach($caracteristiques as $caracteristique){
+                        foreach($caracteristiques as $caracteristique) {
                             echo "<div class='tag_bubble'>$caracteristique</div>";
                         }
                     echo "</div>";
@@ -195,6 +190,15 @@ function affichage_article($article) {
                 echo "</div>";
                 echo "<p>Jeu : $nom_jeu</p>";
                 echo "<p>Prix : $prix €</p>";
+                echo "<p>Date de sortie : $date_sortie</p>";
+                echo "<p>Supports :</p>";
+                foreach($supports as $support) {
+                    echo $support["nom_support"] . " ";
+                }
+                echo "<p>Catégories :</p>";
+                foreach($categories as $categorie) {
+                    echo $categorie["nom_categorie"] . " ";
+                }
                 echo "<p class='note'>Note : $note/10</p>";
             echo "</div>";
         echo "</div>";
@@ -205,8 +209,8 @@ function affichage_article($article) {
             echo "Date de création : $date_creation ";
             echo "Modifié le : $date_modification";
         echo "</footer>";
-
     echo "</div>";
+    closeDB($mysqli);
 }
 
 function affichage_liste_avis($liste_avis) {
