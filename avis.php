@@ -39,8 +39,8 @@ $sql_connection = connectionDB();
                 <form action="#" method="post">
                     <div class="ensemble_formulaire">
                     Titre <input required type="text" name="title" id="title" placeholder="Vive Halo !"><br>
-                        <label id="titre" name="titre">Titre de l'article: </label>
-                        <select name="article" id="article">
+                        <label required id="titre" name="titre">Titre de l'article: </label>
+                        <select required name="article" id="article">
                         <?php
                             $article = recuperer_article($sql_connection);
                             displayForm($article);
