@@ -62,7 +62,7 @@ if (isset($_POST['btn_date_naissance_modif'])) {
 
                     <div>
                         <label for="inputPdp" style="cursor:pointer;">
-                            <img src="<?php echo $_SESSION['chemin_pdp']; ?>" alt="photo de profil">
+                            <img src="<?php echo str_replace("../", "", $_SESSION['chemin_pdp']); ?>" alt="photo de profil">
                         </label>
                         <input type="file" id="inputPdp" name="pp" accept="image/*" style="display:none;">
                         <br><button class="modification-button" type="submit" name="btnPhoto">Changer</button>
